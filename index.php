@@ -1,25 +1,23 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>JS Issue Tracker</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  </head>
-  <body onload="fetchIssues()">
+<?php include("includes/header.php"); ?>
+
+<body>
 <div class="container">
-    <div class="jumbotron">
+  <h3>Task Manager</h3>
+    <button class="btn btn-success btn-lg sticky-right" onclick="showTaskManager()"><i class="fa fa-plus  m-right-5" id="add-task-icon" ></i> Add Task</button>
+    <div class="jumbotron" id="task-manager" data-show="false" style="display:none;">
         <h3>Add New Issue:</h3>
-        <form id="issueInputForm">
+        <form id="task_form" action="process.php" method="POST">
+          <div class="form-group">
+            <label for="issueDescInput">Name</label>
+            <input type="text" class="form-control" id="name_input" placeholder="Name...">
+          </div>
             <div class="form-group">
             <label for="issueDescInput">Description</label>
-            <input type="text" class="form-control" id="issueDescInput" placeholder="Describe the issue ...">
+            <input type="text" class="form-control" id="description_input" placeholder="Describe the issue ...">
             </div>
             <div class="form-group">
             <label for="issueSeverityInput">Severity</label>
-                <select class="form-control" id="issueSeverityInput">
+                <select class="form-control"  id="severity_input">
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
                 <option value="High">High</option>
@@ -27,7 +25,7 @@
             </div>
             <div class="form-group">
             <label for="issueAssignedToInput">Assigned To</label>
-            <input type="text" class="form-control" id="issueAssignedToInput" placeholder="Enter responsible ...">
+            <input type="text" class="form-control" id="assigned_to_input" placeholder="Enter responsible ...">
             </div>
             <button type="submit" class="btn btn-primary">Add</button>
         </form>
@@ -41,9 +39,6 @@
         <div class="footer">
     </div>
 </div>
-<script src="main.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="http://chancejs.com/chance.min.js"></script>
-  </body>
-</html>
+</body>
+
+<?php include("includes/footer.php"); ?>
