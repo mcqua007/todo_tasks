@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php include("config.php"); ?>
-<?php include("process.php"); ?>
+
 <html>
   <head>
     <meta charset="utf-8">
