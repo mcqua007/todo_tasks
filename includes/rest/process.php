@@ -1,8 +1,8 @@
 <?php
 // process.php
 
-$errors         = array();      // array to hold validation errors
-$data           = array();      // array to pass back data
+$errors = array();      // array to hold validation errors
+$data = array();      // array to pass back data
 
 
 // if any of these variables don't exist, add an error to our $errors array

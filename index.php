@@ -6,7 +6,7 @@
     <button class="btn btn-success btn-lg sticky-right" onclick="showTaskManager()"><i class="fa fa-plus  m-right-5" id="add-task-icon" ></i> Add Task</button>
     <div class="jumbotron" id="task-manager" data-show="false" style="display:none;">
         <h3>Add New Issue:</h3>
-        <form id="task_form" action="process.php" method="POST">
+        <form id="task_form">
           <div class="form-group">
             <label for="issueDescInput">Name</label>
             <input type="text" class="form-control" id="name_input" placeholder="Name...">

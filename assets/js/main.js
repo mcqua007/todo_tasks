@@ -1,6 +1,8 @@
 $(function(){
    //process the form for task manager
    $("#task_form").submit(function(event){
+     // stop the form from submitting the normal way and refreshing the page
+      event.preventDefault();
       //grab form data
       var formData = {
         'name' : $('#name_input').val(),
@@ -8,21 +10,19 @@ $(function(){
         'severity' : $('#severity_input').val(),
         'assigned' : $('#assigned_to_input').val()
       }
-
+      console.log(formData);
       //process the task form
 
       $.ajax({
         type: 'POST',
         url: 'includes/rest/process.php',
         data: formData,
-        dataType: 'json',  //type of data we expect back grom the server
-        encode: true
+        success: function() {alert("success!"); }
       }).done(function(data) {
         console.log(data); //test if data is being called back
       });
 
-      // stop the form from submitting the normal way and refreshing the page
-       event.preventDefault();
+
    });
 
 }); //end document ready
