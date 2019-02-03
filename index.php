@@ -2,14 +2,14 @@
 
 <body>
 <div class="container">
-  <h3>Task Manager</h3>
+  <h3 style="margin-top:20px;">Task Manager</h3>
     <button class="btn btn-success btn-lg sticky-right" onclick="showTaskManager()"><i class="fa fa-plus  m-right-5" id="add-task-icon" ></i> Add Task</button>
-    <div class="jumbotron" id="task-manager" data-show="false" style="display:none;">
+    <div class="jumbotron" id="task-manager" data-show="false" style="display:none; margin-top:50px;">
         <h3>Add New Issue:</h3>
         <form id="task_form">
           <div class="form-group">
-            <label for="issueDescInput">Name</label>
-            <input type="text" class="form-control" id="name_input" placeholder="Name...">
+            <label for="issueDescInput">Title</label>
+            <input type="text" class="form-control" id="title_input" placeholder="Title...">
           </div>
             <div class="form-group">
             <label for="issueDescInput">Description</label>
@@ -30,12 +30,10 @@
             <button type="submit" class="btn btn-primary">Add</button>
         </form>
         </div>
-        <div class="row">
-        <div class="col-lg-12">
-            <div id="issuesList">
+
+            <div class="row" id="todoList">
             </div>
-        </div>
-        </div>
+
         <div class="footer">
     </div>
 </div>
