@@ -14,8 +14,6 @@ $(function(){
         'severity' : $('#severity_input').val(),
         'assigned' : $('#assigned_to_input').val()
       }
-      console.log(formData);
-      //process the task form
 
       $.ajax({
         type: 'POST',
@@ -24,14 +22,12 @@ $(function(){
         //success: function() {alert("success!"); }
       }).done(function(data) {
 
-         $('input[type="text"], textarea').val('');
+         $('input[type="text"], textarea').val('');//reset form input to an epty value
 
         console.log(data); //test if data is being called back
         //return same data entered in JSON, use data to buld a card, that shows up on the page
         //build card in javascript
          var response = JSON.parse(data);
-         console.log(response.severity);
-
 
         var htmlBadge = "";
 
@@ -44,7 +40,7 @@ $(function(){
         else {
         htmlBadge =" <span class='badge  badge-danger' style='float:right; width:20%; padding:5px; '>High</span>";
         }
-        htmlInput = "<div class='input-group mb-3'  style='padding:10px;'><input type='text' class='form-control' placeholder='To do' aria-label='Recipient's username' aria-describedby='button-addon2'><div class='input-group-append'><button class='btn btn-outline-secondary' type='button' id='todo-button-" + response.id +"'><i class='fa fa-plus'></i></button></div></div>";
+        htmlInput = "<div class='input-group mb-3'  style='padding:10px;'><input type='text' class='form-control' placeholder='To do' id='todo-input-" + response.id +"' aria-describedby='button-addon2'><div class='input-group-append'><button class='btn btn-outline-secondary' type='button' id='todo-button-" + response.id +"' onclick='addToDo(" + response.id + ", )'><i class='fa fa-plus'></i></button></div></div>";
 
         var html ="<div class='col-sm-12 col-md-3 col-xl-4 animated fadeInRight' id='todo-card-"+ response.id +"' style='margin-top:10px;' data-id='"+ response.id +"'><div class='col-xs-12 card'><div style='width:100%; padding:10px;'><span class='card-title' style='width:70%; margin:10px; font-weight:700; font-size:16px; text-transform:uppercase;'>" + response.title + "</span>" + htmlBadge + "</div><div class='card-body'><p class='card-subtitle mb-2 text-muted'>"+ response.description + "</p><div id='todo-" + response.id +"'></div></div>" + htmlInput + "</div></div>";
         $("#todoList").append(html);
@@ -60,6 +56,26 @@ $(function(){
 
 }); //end document ready
 
+
+
+function addToDo(id){
+ // need to post to php and then grab id that way
+  var todoInput = $("#todo-input-" + id).val();
+
+  $.post('includes/rest/addToDo.php', {data: todoInput, taskId: id}).done(function(data){
+      console.log(data);
+     var data = JSON.parse(data);
+
+     var todoHtml = "<div style='width:100%;' id='todo-row-" + data.id + "'><div class='form-check'><input type='checkbox' data-id='" + data.id + "' onclick='setCheckBox(" + data.id + ")' class='form-check-input'><label class='form-check-label' id='todo-label-" + data.id + "'>" + todoInput + "</label></div></div>";
+     $("#todo-" + id).append(todoHtml);
+     $('input[type="text"], textarea').val('');//reset form input to an epty value
+  });
+}
+
+function setCheckBox(id){
+
+  $("#todo-label-" + id).addClass("grey");
+}
 function showTaskManager(){
 
   var visible = $("#task-manager").attr("data-show");

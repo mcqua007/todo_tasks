@@ -13,7 +13,7 @@
           </div>
             <div class="form-group">
             <label for="issueDescInput">Description</label>
-            <input type="text" class="form-control" id="description_input" placeholder="Describe the issue ...">
+            <input type="text" class="form-control" id="description_input" placeholder="Describe the issue...">
             </div>
             <div class="form-group">
             <label for="issueSeverityInput">Severity</label>
@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
             <label for="issueAssignedToInput">Assigned To</label>
-            <input type="text" class="form-control" id="assigned_to_input" placeholder="Enter responsible ...">
+            <input type="text" class="form-control" id="assigned_to_input" placeholder="Assign To...">
             </div>
             <button type="submit" class="btn btn-primary">Add</button>
         </form>
