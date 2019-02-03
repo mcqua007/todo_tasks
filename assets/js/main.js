@@ -131,9 +131,8 @@ function addToDo(id) {
     }
     if(data.success == false){
       console.error(data);
-      
-      //show there is an error to the user
       var errorText = "<div class='error-todo-text animated fadeIn'>"+ data.errors.todo + "</div>";
+
 
       $("#todo-"+ id).append(errorText);
 
@@ -148,7 +147,7 @@ function addToDo(id) {
 
 function setCheckBox(id) {
   var checked = $("#todo-checkbox-" + id).attr("data-checked");
-  console.log(checked);
+
 
   if(checked == "true"){
       console.log(checked);
@@ -159,10 +158,11 @@ function setCheckBox(id) {
        todoId: id
      }).done(function(data) {
        console.log(data);
-     }
+     });
+
   }
   else if(checked == "false"){
-      console.log(checked);
+
     $("#todo-checkbox-" + id).attr("data-checked", "true");
     $("#todo-label-" + id).addClass("grey");
 
@@ -170,7 +170,7 @@ function setCheckBox(id) {
       todoId: id
     }).done(function(data) {
       console.error(data);
-    }
+    });
   }
 
 }

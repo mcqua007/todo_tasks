@@ -29,7 +29,7 @@ $data = array();      // array to pass back data
         // DO ALL YOUR FORM PROCESSING HERE
         // THIS CAN BE WHATEVER YOU WANT TO DO (LOGIN, SAVE, UPDATE, WHATEVER)
 
-      $taskId = $_POST['todoId'];
+      $todoId = $_POST['todoId'];
 
 
       $todoQuery = mysqli_query($con, "UPDATE todos SET completed = '1' WHERE id = '$todoId'");
