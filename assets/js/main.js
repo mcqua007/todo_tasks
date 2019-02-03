@@ -148,6 +148,7 @@ function addToDo(id) {
 function setCheckBox(id) {
   var checked = $("#todo-checkbox-" + id).attr("data-checked");
 
+  //!!!!!somehow unseting or unchecking is noe unseting in database and returning success false
   if(checked == "true"){
       console.log(checked);
      $("#todo-checkbox-" + id).attr("data-checked", "false");
@@ -155,10 +156,10 @@ function setCheckBox(id) {
 
      $.post('includes/rest/completeToDo.php', {
        todoId: id,
-       completed: 0
+       completed: "0"
      }).done(function(data) {
        var response = JSON.parse(data);
-
+        console.log(response.success );
        if(response.success == false){
          console.error(data);
        }
@@ -175,7 +176,7 @@ function setCheckBox(id) {
 
     $.post('includes/rest/completeToDo.php', {
       todoId: id,
-      completed: 1
+      completed: "1"
     }).done(function(data) {
       var response = JSON.parse(data);
 
