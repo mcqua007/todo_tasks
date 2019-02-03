@@ -23,6 +23,9 @@ $(function(){
         data: formData
         //success: function() {alert("success!"); }
       }).done(function(data) {
+
+         $('input[type="text"], textarea').val('');
+
         console.log(data); //test if data is being called back
         //return same data entered in JSON, use data to buld a card, that shows up on the page
         //build card in javascript
@@ -63,7 +66,7 @@ function showTaskManager(){
   console.log(visible);
 
   if(visible == "false"){
-    console.log("show");
+    $("html, body").animate({ scrollTop: 0 }, "slow");
     $("#task-manager").show("slow");
     $("#task-manager").attr("data-show", "true");
 
@@ -71,7 +74,7 @@ function showTaskManager(){
     $("#add-task-icon").addClass("fa-minus");
   }
   else{
-    console.log("hide");
+
     $("#task-manager").hide("slow");
       $("#task-manager").attr("data-show", "false");
 

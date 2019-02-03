@@ -2,8 +2,8 @@
 
 <body>
 <div class="container">
-  <h3 style="margin-top:20px;">Task Manager</h3>
-    <button class="btn btn-success btn-lg sticky-right" onclick="showTaskManager()"><i class="fa fa-plus  m-right-5" id="add-task-icon" ></i> Add Task</button>
+  <h3 style="margin-top:30px;">Task Manager</h3>
+    <button class="btn btn-success btn-lg sticky-right" onclick="showTaskManager()"><i class="fa fa-plus  m-right-5" id="add-task-icon" ></i><span class="add-task-text"> Add Task </span></button>
     <div class="jumbotron" id="task-manager" data-show="false" style="display:none; margin-top:50px;">
         <h3>Add New Issue:</h3>
         <form id="task_form">
@@ -31,7 +31,7 @@
         </form>
         </div>
 
-            <div class="row" id="todoList" style="margin-bottom:20px;">
+            <div class="row" id="todoList" style="margin-top:20px; margin-bottom:20px;">
             </div>
 
         <div class="footer">
