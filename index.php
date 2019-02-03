@@ -31,7 +31,7 @@
         </form>
         </div>
 
-            <div class="row" id="todoList">
+            <div class="row" id="todoList" style="margin-bottom:20px;">
             </div>
 
         <div class="footer">
