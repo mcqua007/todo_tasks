@@ -33,6 +33,7 @@ $(function(){
 
         var htmlBadge = "";
 
+      // Conditional for severity badge level
 
         if (response.severity == "low"){
           htmlBadge = "<span class='badge  badge-success' style='float:right; width:20%; padding:5px; '>Low</span>";
@@ -57,12 +58,22 @@ $(function(){
         var htmlButtonGroup = "<div class='btn-group' role='group' aria-label='Basic example'><button type='button' class='btn btn-outline-primary'><i class='fa fa-microphone'></i></button><button type='button' class='btn btn-outline-danger'><i class='fa fa-picture-o'></i></button>" + menuButton + " </div>";
 
 
-        var html ="<div class='col-sm-12 col-md-3 col-xl-4 task-wrap animated fadeInRight'  id='todo-card-wrap-"+ response.id +"' data-id='"+ response.id +"'><div class='col-xs-12 card card-shadow' id='todo-card-"+ response.id +"'>" + htmlButtonGroup + "<div style='width:100%; padding:10px;'><span class='card-title' style='width:70%; margin:10px; font-weight:700; font-size:16px; text-transform:uppercase;'>" + response.title + "</span>" + htmlBadge + "</div><div class='card-body'><p class='card-subtitle mb-2 text-muted'>"+ response.description + "</p><div id='todo-" + response.id +"'></div></div>" + htmlInput + "</div><div id='todo-card-back-"+ response.id +"' class='' style='display:none;'><h3>Info</h3></div></div>";
+        var html = "<div class='col-sm-12 col-md-3 col-xl-4 task-wrap animated fadeInRight'  id='todo-card-wrap-"+ response.id +"' data-id='"+ response.id +"'>";
+        html += "<div class='col-xs-12 card card-shadow' id='todo-card-"+ response.id +"'>" + htmlButtonGroup + "<div style='width:100%; padding:10px;'>";
+        html += "<span class='card-title' style='width:70%; margin:10px; font-weight:700; font-size:16px; text-transform:uppercase;'>" + response.title + "</span>" + htmlBadge + "</div>";
+        html += "<div class='card-body'><p class='card-subtitle mb-2 text-muted'>"+ response.description + "</p>";
+        html += "<div id='todo-" + response.id +"'></div>";
+        html += "</div>" + htmlInput + "</div>";
+        html += "<div id='todo-card-back-"+ response.id +"' class='' style='display:none;'>";
+        html += "<h3>Info</h3>";
+        html += " </div>";
+        html += "</div>";
+
         $("#todoList").append(html);
 
         //remove fadeIn right after its done animating so it wont animate when sorting
         setTimeout(function(){
-          $("#todo-card-wrap"+ response.id).removeClass("fadeInRight");
+          $("#todo-card-wrap-"+ response.id).removeClass("fadeInRight");
         }, 600);
       });
 

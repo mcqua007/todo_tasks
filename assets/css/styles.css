@@ -20,7 +20,31 @@
 .task-wrap{
   margin-top: 10px;
 }
+.severity-badge{
+  float:right;
+  width:20%;
+  padding:5px;
+}
 
+.completed-badge{
+  float:right;
+  width:40%;
+  padding:5px;
+}
+
+.card-completed{
+  position: relative;
+  display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1.5px solid #19B05D;
+    border-radius: .25rem;
+}
 .rotate180{
   -webkit-animation: rotateY 1s 1 linear;
  animation: rotateY 1s 1 linear;
