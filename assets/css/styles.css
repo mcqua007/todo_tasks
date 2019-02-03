@@ -38,7 +38,13 @@
   margin-left: 5px;
   margin-top: 5px;
 }
-
+.error-todo-text{
+  color: #c53434;
+  font-size: 13px;
+  margin-left: 5px;
+  margin-top: 5px;
+  margin-bottom:-22px;
+}
 .card-completed{
   position: relative;
   display: -ms-flexbox;
