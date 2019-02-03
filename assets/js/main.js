@@ -46,7 +46,7 @@ $(function(){
 
         var menuButton ="<div class='btn-group'>";
           menuButton += "<button class='btn btn-outline-secondary dropdown-toggle' type='button' id='btnGroupDrop1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> more </button>";
-          menuButton += "<div class='dropdown-menu' aria-labelledby='btnGroupDrop1'>";
+          menuButton += "<div class='dropdown-menu dropdown-menu-right' aria-labelledby='btnGroupDrop1'>";
           menuButton += "<button class='dropdown-item' type='button' onclick='completeTask(" + response.id +")'> <i class='fa fa-check' style='margin-right:5px;'></i>Completed</button>";
           menuButton += "<button class='dropdown-item' type='button' onclick='deleteTask(" + response.id +")'> <i class='fa fa-trash' style='margin-right:8px;'></i>Delete</button>";
           menuButton += "<button class='dropdown-item' type='button'> <i class='fa fa-info' style=' margin-right:8px; margin-left: 5px;'></i>Info</button>";
@@ -57,7 +57,7 @@ $(function(){
         var htmlButtonGroup = "<div class='btn-group' role='group' aria-label='Basic example'><button type='button' class='btn btn-outline-primary'><i class='fa fa-microphone'></i></button><button type='button' class='btn btn-outline-danger'><i class='fa fa-picture-o'></i></button>" + menuButton + " </div>";
 
 
-        var html ="<div class='col-sm-12 col-md-3 col-xl-4 animated fadeInRight'  id='todo-card-wrap"+ response.id +"' style='margin-top:10px;' data-id='"+ response.id +"'><div class='col-xs-12 card card-shadow' id='todo-card-"+ response.id +"'>" + htmlButtonGroup + "<div style='width:100%; padding:10px;'><span class='card-title' style='width:70%; margin:10px; font-weight:700; font-size:16px; text-transform:uppercase;'>" + response.title + "</span>" + htmlBadge + "</div><div class='card-body'><p class='card-subtitle mb-2 text-muted'>"+ response.description + "</p><div id='todo-" + response.id +"'></div></div>" + htmlInput + "</div><div id='todo-card-back-"+ response.id +"' class='' style='display:none;'><h3>Info</h3></div></div>";
+        var html ="<div class='col-sm-12 col-md-3 col-xl-4 task-wrap animated fadeInRight'  id='todo-card-wrap-"+ response.id +"' data-id='"+ response.id +"'><div class='col-xs-12 card card-shadow' id='todo-card-"+ response.id +"'>" + htmlButtonGroup + "<div style='width:100%; padding:10px;'><span class='card-title' style='width:70%; margin:10px; font-weight:700; font-size:16px; text-transform:uppercase;'>" + response.title + "</span>" + htmlBadge + "</div><div class='card-body'><p class='card-subtitle mb-2 text-muted'>"+ response.description + "</p><div id='todo-" + response.id +"'></div></div>" + htmlInput + "</div><div id='todo-card-back-"+ response.id +"' class='' style='display:none;'><h3>Info</h3></div></div>";
         $("#todoList").append(html);
 
         //remove fadeIn right after its done animating so it wont animate when sorting
@@ -83,20 +83,33 @@ function deleteTask(id) {
     taskId: id
   }).done(function(data) {
     console.log(data);
-    var data = JSON.parse(data);
+    var jsonData = JSON.parse(data);
+    console.log(jsonData.success);
+
+    if(jsonData.success == true){
+        console.log("in sucess true delete task");
+        $("#todo-card-wrap-"+id).hide("slow");
+    }
+    else if(jsonData.success == false){
+      console.error(data);
+    }
+
+
+
 
   });
 
 }
 
 function completeTask(id) {
-  console.log("delete task: "+ id);
-
   $.post('includes/rest/completeTask.php', {
     taskId: id,
   }).done(function(data) {
-    console.log(data);
     var data = JSON.parse(data);
+    console.log(data.success);
+
+
+
 
 
   });

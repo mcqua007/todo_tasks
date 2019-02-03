@@ -32,7 +32,7 @@ $data = array();      // array to pass back data
       $taskId = $_POST['taskId'];
 
 
-      $todoQuery = mysqli_query($con, "DELETE * FROM tasks WHERE id = '$taskId'");
+      $todoQuery = mysqli_query($con, "DELETE FROM tasks WHERE id = '$taskId'");
 
       // show a message of success and provide a true success variable
       $data['success'] = true;
