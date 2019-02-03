@@ -123,15 +123,56 @@ function addToDo(id) {
     console.log(data);
     var data = JSON.parse(data);
 
-    var todoHtml = "<div style='width:100%;' id='todo-row-" + data.id + "'><div class='form-check'><input type='checkbox' data-id='" + data.id + "' onclick='setCheckBox(" + data.id + ")' class='form-check-input'><label class='form-check-label' id='todo-label-" + data.id + "'>" + todoInput + "</label></div></div>";
-    $("#todo-" + id).append(todoHtml);
-    $('input[type="text"], textarea').val(''); //reset form input to an epty value
+    if(data.success == true){
+        //add to do
+        var todoHtml = "<div style='width:100%;' id='todo-row-" + data.id + "'><div class='form-check'><input type='checkbox' data-checked='false' id='todo-checkbox-" + data.id + "' onchange='setCheckBox(" + data.id + ")' class='form-check-input'><label class='form-check-label' id='todo-label-" + data.id + "'>" + todoInput + "</label></div></div>";
+        $("#todo-" + id).append(todoHtml);
+        $('input[type="text"], textarea').val(''); //reset form input to an epty value
+    }
+    if(data.success == false){
+      console.error(data);
+      
+      //show there is an error to the user
+      var errorText = "<div class='error-todo-text animated fadeIn'>"+ data.errors.todo + "</div>";
+
+      $("#todo-"+ id).append(errorText);
+
+        setTimeout(function() {
+          $(".error-todo-text").remove(); //remove error after .7 seconds
+        }, 3000);
+    }
+
+
   });
 }
 
 function setCheckBox(id) {
+  var checked = $("#todo-checkbox-" + id).attr("data-checked");
+  console.log(checked);
 
-  $("#todo-label-" + id).addClass("grey");
+  if(checked == "true"){
+      console.log(checked);
+     $("#todo-checkbox-" + id).attr("data-checked", "false");
+     $("#todo-label-" + id).removeClass("grey");
+
+     $.post('includes/rest/completeToDo.php', {
+       todoId: id
+     }).done(function(data) {
+       console.log(data);
+     }
+  }
+  else if(checked == "false"){
+      console.log(checked);
+    $("#todo-checkbox-" + id).attr("data-checked", "true");
+    $("#todo-label-" + id).addClass("grey");
+
+    $.post('includes/rest/completeToDo.php', {
+      todoId: id
+    }).done(function(data) {
+      console.error(data);
+    }
+  }
+
 }
 
 function showTaskManager() {
@@ -166,24 +207,6 @@ function showBack(id){
     $("#todo-card-back-"+ id).show("slow");
   }, 100);
 
-}
-function addToDo(id){
- // need to post to php and then grab id that way
-  var todoInput = $("#todo-input-" + id).val();
-
-  $.post('includes/rest/addToDo.php', {data: todoInput, taskId: id}).done(function(data){
-      console.log(data);
-     var data = JSON.parse(data);
-
-     var todoHtml = "<div style='width:100%;' id='todo-row-" + data.id + "'><div class='form-check'><input type='checkbox' data-id='" + data.id + "' onclick='setCheckBox(" + data.id + ")' class='form-check-input'><label class='form-check-label' id='todo-label-" + data.id + "'>" + todoInput + "</label></div></div>";
-     $("#todo-" + id).append(todoHtml);
-     $('input[type="text"], textarea').val('');//reset form input to an epty value
-  });
-}
-
-function setCheckBox(id){
-
-  $("#todo-label-" + id).addClass("grey");
 }
 
 function showTaskManager(){
