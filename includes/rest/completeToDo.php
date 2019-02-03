@@ -11,6 +11,7 @@ $data = array();      // array to pass back data
 
     if (empty($_POST['todoId']))
         $errors['todoId'] = 'Todo Id is required.';
+    if (empty($_POST['completed']))
         $errors['completed'] = 'Completed is required.';
 
 
@@ -35,7 +36,7 @@ $data = array();      // array to pass back data
       $completed = $_POST['completed'];
 
 
-      $todoQuery = mysqli_query($con, "UPDATE todos SET completed = '$compelted' WHERE id = '$todoId'");
+      $todoQuery = mysqli_query($con, "UPDATE todos SET completed = '$completed' WHERE id = '$todoId'");
 
       // show a message of success and provide a true success variable
       $data['success'] = true;

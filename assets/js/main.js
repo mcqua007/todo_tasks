@@ -148,7 +148,6 @@ function addToDo(id) {
 function setCheckBox(id) {
   var checked = $("#todo-checkbox-" + id).attr("data-checked");
 
-
   if(checked == "true"){
       console.log(checked);
      $("#todo-checkbox-" + id).attr("data-checked", "false");
@@ -158,7 +157,14 @@ function setCheckBox(id) {
        todoId: id,
        completed: 0
      }).done(function(data) {
-       console.error(data);
+       var response = JSON.parse(data);
+
+       if(response.success == false){
+         console.error(data);
+       }
+       else{
+         console.log(data);
+       }
      });
 
   }
@@ -171,7 +177,16 @@ function setCheckBox(id) {
       todoId: id,
       completed: 1
     }).done(function(data) {
-      console.log(data);
+      var response = JSON.parse(data);
+
+      if(response.success == false){
+        console.error(data);
+      }
+      else{
+        console.log(data);
+      }
+
+
     });
   }
 
