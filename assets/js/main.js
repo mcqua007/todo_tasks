@@ -1,12 +1,20 @@
 $(function(){
 
-   //make the task area sortable
+ //MAKE TEH CARDS SORTABLE
    $( "#todoList" ).sortable();
-    $( "#todoList" ).disableSelection();
+   $( "#todoList" ).disableSelection();
 
-   //process the form for task manager
 
+
+
+//=====================================================
+// SUBMIT TASK FORM - process form data
+//=====================================================
    $("#task_form").submit(function(event){
+
+     //remvoe an error messages that where there previously
+     $(".task-error-message").hide();
+
      // stop the form from submitting the normal way and refreshing the page
       event.preventDefault();
       //grab form data
@@ -26,61 +34,34 @@ $(function(){
 
          $('input[type="text"], textarea').val('');//reset form input to an epty value
 
-        console.log(data); //test if data is being called back
+         console.log(data); //test if data is being called back
         //return same data entered in JSON, use data to buld a card, that shows up on the page
-        //build card in javascript
-         var response = JSON.parse(data);
+        var response = JSON.parse(data);
 
-        var htmlBadge = "";
-
-      // Conditional for severity badge level
-
-        if (response.severity == "low"){
-          htmlBadge = "<span class='badge  badge-success' style='float:right; width:20%; padding:5px; '>Low</span>";
-        }else if(response.severity == "medium"){
-          htmlBadge = "<span class='badge  badge-warning' style='float:right; width:20%; padding:5px; '>Medium</span>";
+        if(response.success == true){
+           //alert a success message in task jumbotron
+             alertFlash("#task-alert-flash", "success","Success! Task created below.");
+           //build the card
+             buildCard(data);
         }
-        else {
-        htmlBadge =" <span class='badge  badge-danger' style='float:right; width:20%; padding:5px; '>High</span>";
+        else if(response.success == false){
+           alertFlash("#task-alert-flash", "danger","ERROR! Please fix issue below!");
+
+           //IF ERRORS - DISPLAY TO USER
+           displayErrors("#title-group", response.errors.title);
+           displayErrors("#description-group", response.errors.description)
+           displayErrors("#assigned-group", response.errors.assigned)
+
+
         }
-        var htmlInput = "<div class='input-group mb-3'  style='padding:10px;'><input type='text' class='form-control' placeholder='To do' id='todo-input-" + response.id +"' aria-describedby='button-addon2'><div class='input-group-append'><button class='btn btn-outline-secondary' type='button' id='todo-button-" + response.id +"' onclick='addToDo(" + response.id + ", )'><i class='fa fa-plus'></i></button></div></div>";
-
-        var menuButton ="<div class='btn-group'>";
-          menuButton += "<button class='btn btn-outline-secondary dropdown-toggle' type='button' id='btnGroupDrop1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> more </button>";
-          menuButton += "<div class='dropdown-menu dropdown-menu-right' aria-labelledby='btnGroupDrop1'>";
-          menuButton += "<button class='dropdown-item' type='button' onclick='completeTask(" + response.id +")'> <i class='fa fa-check' style='margin-right:5px;'></i>Completed</button>";
-          menuButton += "<button class='dropdown-item' type='button' onclick='deleteTask(" + response.id +")'> <i class='fa fa-trash' style='margin-right:8px;'></i>Delete</button>";
-          menuButton += "<button class='dropdown-item' type='button'> <i class='fa fa-info' style=' margin-right:8px; margin-left: 5px;'></i>Info</button>";
-          menuButton +=  "</div>";
-          menuButton += "</div>";
-
-
-        var htmlButtonGroup = "<div class='btn-group' role='group' aria-label='Basic example'><button type='button' class='btn btn-outline-primary'><i class='fa fa-microphone'></i></button><button type='button' class='btn btn-outline-danger'><i class='fa fa-picture-o'></i></button>" + menuButton + " </div>";
-
-
-        var html = "<div class='col-sm-12 col-md-3 col-xl-4 task-wrap animated fadeInRight'  id='todo-card-wrap-"+ response.id +"' data-id='"+ response.id +"'>";
-        html += "<div class='col-xs-12 card card-shadow' id='todo-card-"+ response.id +"'>" + htmlButtonGroup + "<div style='width:100%; padding:10px;'>";
-        html += "<span class='card-title' style='width:70%; margin:10px; font-weight:700; font-size:16px; text-transform:uppercase;'>" + response.title + "</span>" + htmlBadge + "</div>";
-        html += "<div class='card-body'><p class='card-subtitle mb-2 text-muted'>"+ response.description + "</p>";
-        html += "<div id='todo-" + response.id +"'></div>";
-        html += "</div>" + htmlInput + "</div>";
-        html += "<div id='todo-card-back-"+ response.id +"' class='' style='display:none;'>";
-        html += "<h3>Info</h3>";
-        html += " </div>";
-        html += "</div>";
-
-        $("#todoList").append(html);
-
-        //remove fadeIn right after its done animating so it wont animate when sorting
-        setTimeout(function(){
-          $("#todo-card-wrap-"+ response.id).removeClass("fadeInRight");
-        }, 600);
       });
-
 
    });
 
-}); //end document ready
+}); //END DOCUMENT READY
+
+
+
 
 
 //==============================================
@@ -105,9 +86,6 @@ function deleteTask(id) {
       console.error(data);
     }
 
-
-
-
   });
 
 }
@@ -118,11 +96,7 @@ function completeTask(id) {
   }).done(function(data) {
     var data = JSON.parse(data);
     console.log(data.success);
-
-
-
-
-
+   //Do Stuff here
   });
 
 }
@@ -233,4 +207,86 @@ function showTaskManager(){
       $("#add-task-icon").removeClass("fa-minus");
       $("#add-task-icon").addClass("fa-plus");
   }
+}
+
+function alertFlash(where, type, message){
+
+  var html = "<div class='alert animated fadeInDown alert-"+ type +"' role='alert' id='task-alert'>";
+      html += message;
+      html += "</div>";
+
+    $(where).append(html);
+
+  //animation to fade in alert and fade it out
+    setTimeout(function(){
+
+      $("#task-alert").addClass("fadeOu");
+          setTimeout(function(){
+              $("#task-alert").remove();
+          }, 500);
+
+    }, 4000);
+
+}
+
+function displayErrors(where, data){
+  if(data){
+       var errorText =  "<div class='task-error-message'>"+ data + "</div>";
+       $(where).append(errorText);
+
+   }
+}
+//===========================================================
+// BUILD CARD WITH RETURN DATA                            ===
+//===========================================================
+function buildCard(returnData){
+
+   //turn data into Javascript object
+  var response = JSON.parse(returnData);
+
+    // Conditional for severity badge level ================
+     var htmlBadge = "";
+     if (response.severity == "low"){
+       htmlBadge = "<span class='badge  badge-success' style='float:right; width:20%; padding:5px; '>Low</span>";
+     }else if(response.severity == "medium"){
+       htmlBadge = "<span class='badge  badge-warning' style='float:right; width:20%; padding:5px; '>Medium</span>";
+     }
+     else {
+     htmlBadge =" <span class='badge  badge-danger' style='float:right; width:20%; padding:5px; '>High</span>";
+     }
+
+     // END CONDITIONAL ===================================
+     var htmlInput = "<div class='input-group mb-3'  style='padding:10px;'><input type='text' class='form-control' placeholder='To do' id='todo-input-" + response.id +"' aria-describedby='button-addon2'><div class='input-group-append'><button class='btn btn-outline-secondary' type='button' id='todo-button-" + response.id +"' onclick='addToDo(" + response.id + ", )'><i class='fa fa-plus'></i></button></div></div>";
+
+     var menuButton ="<div class='btn-group'>";
+       menuButton += "<button class='btn btn-outline-secondary dropdown-toggle' type='button' id='btnGroupDrop1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> more </button>";
+       menuButton += "<div class='dropdown-menu dropdown-menu-right' aria-labelledby='btnGroupDrop1'>";
+       menuButton += "<button class='dropdown-item' type='button' onclick='completeTask(" + response.id +")'> <i class='fa fa-check' style='margin-right:5px;'></i>Completed</button>";
+       menuButton += "<button class='dropdown-item' type='button' onclick='deleteTask(" + response.id +")'> <i class='fa fa-trash' style='margin-right:8px;'></i>Delete</button>";
+       menuButton += "<button class='dropdown-item' type='button'> <i class='fa fa-info' style=' margin-right:8px; margin-left: 5px;'></i>Info</button>";
+       menuButton +=  "</div>";
+       menuButton += "</div>";
+
+
+     var htmlButtonGroup = "<div class='btn-group' role='group' aria-label='Basic example'><button type='button' class='btn btn-outline-primary'><i class='fa fa-microphone'></i></button><button type='button' class='btn btn-outline-danger'><i class='fa fa-picture-o'></i></button>" + menuButton + " </div>";
+
+
+     var html = "<div class='col-sm-12 col-md-3 col-xl-4 task-wrap animated fadeInRight'  id='todo-card-wrap-"+ response.id +"' data-id='"+ response.id +"'>";
+     html += "<div class='col-xs-12 card card-shadow' id='todo-card-"+ response.id +"'>" + htmlButtonGroup + "<div style='width:100%; padding:10px;'>";
+     html += "<span class='card-title' style='width:70%; margin:10px; font-weight:700; font-size:16px; text-transform:uppercase;'>" + response.title + "</span>" + htmlBadge + "</div>";
+     html += "<div class='card-body'><p class='card-subtitle mb-2 text-muted'>"+ response.description + "</p>";
+     html += "<div id='todo-" + response.id +"'></div>";
+     html += "</div>" + htmlInput + "</div>";
+     html += "<div id='todo-card-back-"+ response.id +"' class='' style='display:none;'>";
+     html += "<h3>Info</h3>";
+     html += " </div>";
+     html += "</div>";
+
+     $("#todoList").append(html);
+
+     //remove fadeIn right after its done animating so it wont animate when sorting
+     setTimeout(function(){
+       $("#todo-card-wrap-"+ response.id).removeClass("fadeInRight");
+     }, 600);
+
 }

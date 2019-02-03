@@ -5,17 +5,20 @@
   <h3 class="logo-font" style="margin-top:20px;">Task Manager</h3>
     <button class="btn btn-success btn-lg sticky-right" onclick="showTaskManager()"><i class="fa fa-plus  m-right-5" id="add-task-icon" ></i><span class="add-task-text"> Add Task </span></button>
     <div class="jumbotron" id="task-manager" data-show="false" style="display:none; margin-top:50px;">
+      <div style="100%" id="task-alert-flash">
+
+      </div>
         <h3>Add New Issue:</h3>
         <form id="task_form">
-          <div class="form-group">
+          <div class="form-group" id="title-group">
             <label for="issueDescInput">Title</label>
             <input type="text" class="form-control" id="title_input" placeholder="Title...">
           </div>
-            <div class="form-group">
+            <div class="form-group" id="description-group">
             <label for="issueDescInput">Description</label>
             <input type="text" class="form-control" id="description_input" placeholder="Describe the issue...">
             </div>
-            <div class="form-group">
+            <div class="form-group" id="severity-group">
             <label for="issueSeverityInput">Severity</label>
                 <select class="form-control"  id="severity_input">
                 <option value="Low">Low</option>
@@ -23,7 +26,7 @@
                 <option value="High">High</option>
             </select>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="assigned-group">
             <label for="issueAssignedToInput">Assigned To</label>
             <input type="text" class="form-control" id="assigned_to_input" placeholder="Assign To...">
             </div>
