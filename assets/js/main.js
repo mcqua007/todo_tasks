@@ -155,9 +155,10 @@ function setCheckBox(id) {
      $("#todo-label-" + id).removeClass("grey");
 
      $.post('includes/rest/completeToDo.php', {
-       todoId: id
+       todoId: id,
+       completed: 0
      }).done(function(data) {
-       console.log(data);
+       console.error(data);
      });
 
   }
@@ -167,9 +168,10 @@ function setCheckBox(id) {
     $("#todo-label-" + id).addClass("grey");
 
     $.post('includes/rest/completeToDo.php', {
-      todoId: id
+      todoId: id,
+      completed: 1
     }).done(function(data) {
-      console.error(data);
+      console.log(data);
     });
   }
 
