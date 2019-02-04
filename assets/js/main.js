@@ -49,8 +49,8 @@ $(function(){
 
            //IF ERRORS - DISPLAY TO USER
            displayErrors("#title-group", response.errors.title);
-           displayErrors("#description-group", response.errors.description)
-           displayErrors("#assigned-group", response.errors.assigned)
+           displayErrors("#description-group", response.errors.description);
+           displayErrors("#assigned-group", response.errors.assigned);
 
 
         }
@@ -98,9 +98,11 @@ function completeTask(id) {
     var jsonData = JSON.parse(data);
 
 
-    if(jsonData.success == true){
       //Do Stuff here
-    }
+      $("#btn-image-"+id).prop("disabled");
+      $("#btn-audio-"+id).prop("disabled");
+
+
 
   });
 
@@ -280,7 +282,7 @@ function buildCard(returnData){
        menuButton += "</div>";
 
 
-     var htmlButtonGroup = "<div class='btn-group' role='group' aria-label='Basic example'><button type='button' class='btn btn-outline-primary'><i class='fa fa-microphone'></i></button><button type='button' class='btn btn-outline-danger'><i class='fa fa-picture-o'></i></button>" + menuButton + " </div>";
+     var htmlButtonGroup = "<div class='btn-group' role='group' aria-label='Basic example'><button type='button' class='btn btn-outline-primary' id='btn-audio-"+ response.id +"'><i class='fa fa-microphone'></i></button><button type='button' class='btn btn-outline-danger' id='btn-image-"+ response.id +"'><i class='fa fa-picture-o'></i></button>" + menuButton + " </div>";
 
 
      var html = "<div class='col-sm-12 col-md-3 col-xl-4 task-wrap animated fadeInRight'  id='todo-card-wrap-"+ response.id +"' data-id='"+ response.id +"'>";
