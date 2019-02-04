@@ -94,9 +94,14 @@ function completeTask(id) {
   $.post('includes/rest/completeTask.php', {
     taskId: id,
   }).done(function(data) {
-    var data = JSON.parse(data);
-    console.log(data.success);
-   //Do Stuff here
+    console.log(data);
+    var jsonData = JSON.parse(data);
+
+
+    if(jsonData.success == true){
+      //Do Stuff here
+    }
+
   });
 
 }

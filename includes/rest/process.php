@@ -7,7 +7,7 @@ $errors = array();      // array to hold validation errors
 $data = array();      // array to pass back data
 
 
-// if any of these variables don't exist, add an error to our $errors array
+// if any of these variables don't exist, add an error to $errors array
 
     if (empty($_POST['title']))
         $errors['title'] = 'Title is required.';
@@ -25,7 +25,7 @@ $data = array();      // array to pass back data
 
 // return a response ===========================================================
 
-// if there are any errors in our errors array, return a success boolean of false
+// if there are any errors in errors array, return a success boolean of false
     if ( !empty($errors)) {
 
         // if there are items in our errors array, return those errors
@@ -33,10 +33,7 @@ $data = array();      // array to pass back data
         $data['errors']  = $errors;
     } else {
 
-        // if there are no errors process our form, then return a message
-
-        // DO ALL YOUR FORM PROCESSING HERE
-        // THIS CAN BE WHATEVER YOU WANT TO DO (LOGIN, SAVE, UPDATE, WHATEVER)
+        // if there are no errors process the orm, then return a message
 
       $assigned =  $_POST['assigned'];
       $severity = $_POST['severity'];
