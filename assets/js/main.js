@@ -163,11 +163,12 @@ function setCheckBox(id) {
 
      $.post('includes/rest/completeToDo.php', {
        todoId: id,
-       completed: "0"
+       completed: 0
      }).done(function(data) {
-       var response = JSON.parse(data);
-        console.log(response.success );
-       if(response.success == false){
+       var jsonData = JSON.parse(data);
+        console.log(jsonData.success );
+
+       if(jsonData.success == false){
          console.error(data);
        }
        else{
@@ -183,7 +184,7 @@ function setCheckBox(id) {
 
     $.post('includes/rest/completeToDo.php', {
       todoId: id,
-      completed: "1"
+      completed: 1
     }).done(function(data) {
       var response = JSON.parse(data);
 
