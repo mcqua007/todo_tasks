@@ -198,44 +198,11 @@ function setCheckBox(id) {
 
 }
 
-function showTaskManager() {
 
-  var visible = $("#task-manager").attr("data-show");
-  console.log(visible);
-
-  if (visible == "false") {
-    $("html, body").animate({
-      scrollTop: 0
-    }, "slow");
-    $("#task-manager").show("slow");
-    $("#task-manager").attr("data-show", "true");
-
-    $("#add-task-icon").removeClass("fa-plus");
-    $("#add-task-icon").addClass("fa-minus");
-  } else {
-
-    $("#task-manager").hide("slow");
-    $("#task-manager").attr("data-show", "false");
-
-    $("#add-task-icon").removeClass("fa-minus");
-    $("#add-task-icon").addClass("fa-plus");
-  }
-}
-function showBack(id){
-  $("#todo-card-"+ id).addClass("animated flipInY");
-
-  setTimeout(function(){
-    console.log(id);
-    $("#todo-"+ id).hide("slow");
-    $("#todo-card-back-"+ id).show("slow");
-  }, 100);
-
-}
 
 function showTaskManager(){
 
   var visible = $("#task-manager").attr("data-show");
-  console.log(visible);
 
   if(visible == "false"){
     $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -246,8 +213,7 @@ function showTaskManager(){
     $("#add-task-icon").addClass("fa-minus");
   }
   else{
-
-    $("#task-manager").hide("slow");
+      $("#task-manager").hide("slow");
       $("#task-manager").attr("data-show", "false");
 
       $("#add-task-icon").removeClass("fa-minus");
@@ -266,7 +232,7 @@ function alertFlash(where, type, message){
   //animation to fade in alert and fade it out
     setTimeout(function(){
 
-      $("#task-alert").addClass("fadeOu");
+      $("#task-alert").addClass("fadeOut");
           setTimeout(function(){
               $("#task-alert").remove();
           }, 500);
@@ -290,7 +256,7 @@ function buildCard(returnData){
    //turn data into Javascript object
   var response = JSON.parse(returnData);
 
-    // Conditional for severity badge level ================
+    // CONDITIONAL - for severity badge level ================
      var htmlBadge = "";
      if (response.severity == "low"){
        htmlBadge = "<span class='badge  badge-success' style='float:right; width:20%; padding:5px; '>Low</span>";
