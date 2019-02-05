@@ -98,9 +98,67 @@ function completeTask(id) {
     var jsonData = JSON.parse(data);
 
 
-      //Do Stuff here
-      $("#btn-image-"+id).prop("disabled");
-      $("#btn-audio-"+id).prop("disabled");
+      //Remove Severity Badge and Show Completed Badge
+      var htmlBadge =" <span class='badge  badge-secondary completed-badge' id='todo-badge-completed" + id +"'>Completed</span>";
+
+      $("#todo-badge-"+id).hide();
+      $("#todo-title-wrap-"+id).append(htmlBadge);
+
+       //Grey out the task title
+      $("#task-title-"+id).addClass("grey");
+
+      //disable the checbox input for each to do
+      $("input[data-task-id='"+id+"']").prop("disabled", true);
+
+      //disabled top two buttons
+      $("#btn-image-"+id).prop("disabled", true);
+      $("#btn-audio-"+id).prop("disabled", true);
+
+      //disabled todo input
+      $("#todo-input-"+id).prop("disabled", true);
+
+      //complete button change to re open
+      var reopenBtn ="<button class='dropdown-item' type='button' data-reopen-btn-id='" + id +"' onclick='reopenTask(" + id +")'> <i class='fa fa-undo' style='margin-right:5px;'></i>Re-open</button>";
+      $("button[data-complete-btn-id='"+id+"']").remove();
+      $("div[data-dropdown-task-id='"+id+"']").prepend(reopenBtn);
+
+
+
+  });
+
+}
+
+
+function reopenTask(id) {
+  $.post('includes/rest/reopenTask.php', {
+    taskId: id,
+  }).done(function(data) {
+    console.log(data);
+    var jsonData = JSON.parse(data);
+
+
+      //Remove Completed Badge and Show Severity Badge
+      $(".completed-badge").remove();
+      $("#todo-badge-"+id).show();
+
+
+       //Grey out the task title
+      $("#task-title-"+id).removeClass("grey");
+
+      //disable the checbox input for each to do
+      $("input[data-task-id='"+id+"']").prop("disabled", false);
+
+      //disabled top two buttons
+      $("#btn-image-"+id).prop("disabled", false);
+      $("#btn-audio-"+id).prop("disabled", false);
+
+      //disabled todo input
+      $("#todo-input-"+id).prop("disabled", false);
+
+      //complete button change to re open
+      var completeBtn ="<button class='dropdown-item' type='button' data-complete-btn-id='" + id +"' onclick='completeTask(" + id +")'> <i class='fa fa-check' style='margin-right:5px;'></i>Completed</button>";
+      $("button[data-reopen-btn-id='"+id+"']").remove();
+      $("div[data-dropdown-task-id='"+id+"']").prepend(completeBtn);
 
 
 
@@ -132,7 +190,7 @@ function addToDo(id) {
 
     if(data.success == true){
         //add to do
-        var todoHtml = "<div style='width:100%;' id='todo-row-" + data.id + "'><div class='form-check'><input type='checkbox' data-checked='false' id='todo-checkbox-" + data.id + "' onchange='setCheckBox(" + data.id + ")' class='form-check-input'><label class='form-check-label' id='todo-label-" + data.id + "'>" + todoInput + "</label></div></div>";
+        var todoHtml = "<div style='width:100%;' id='todo-row-" + data.id + "'><div class='form-check'><input type='checkbox' data-checked='false' data-task-id='" + id + "' id='todo-checkbox-" + data.id + "' onchange='setCheckBox(" + data.id + ")' class='form-check-input'><label class='form-check-label' id='todo-label-" + data.id + "'>" + todoInput + "</label></div></div>";
         $("#todo-" + id).append(todoHtml);
         $('input[type="text"], textarea').val(''); //reset form input to an epty value
     }
@@ -262,23 +320,23 @@ function buildCard(returnData){
     // CONDITIONAL - for severity badge level ================
      var htmlBadge = "";
      if (response.severity == "low"){
-       htmlBadge = "<span class='badge  badge-success' style='float:right; width:20%; padding:5px; '>Low</span>";
+       htmlBadge = "<span class='badge  badge-success severity-badge' id='todo-badge-" + response.id +"'>Low</span>";
      }else if(response.severity == "medium"){
-       htmlBadge = "<span class='badge  badge-warning' style='float:right; width:20%; padding:5px; '>Medium</span>";
+       htmlBadge = "<span class='badge  badge-warning severity-badge' id='todo-badge-" + response.id +"'>Medium</span>";
      }
      else {
-     htmlBadge =" <span class='badge  badge-danger' style='float:right; width:20%; padding:5px; '>High</span>";
+     htmlBadge =" <span class='badge  badge-danger severity-badge' id='todo-badge-" + response.id +"'>High</span>";
      }
 
      // END CONDITIONAL ===================================
-     var htmlInput = "<div class='input-group mb-3'  style='padding:10px;'><input type='text' class='form-control' placeholder='To do' id='todo-input-" + response.id +"' aria-describedby='button-addon2'><div class='input-group-append'><button class='btn btn-outline-secondary' type='button' id='todo-button-" + response.id +"' onclick='addToDo(" + response.id + ", )'><i class='fa fa-plus'></i></button></div></div>";
+     var htmlInput = "<div class='input-group mb-3'  style='padding:10px;'><input type='text' class='form-control' placeholder='Add to do here...' id='todo-input-" + response.id +"' aria-describedby='button-addon2'><div class='input-group-append'><button class='btn btn-outline-secondary' type='button' id='todo-button-" + response.id +"' onclick='addToDo(" + response.id + ", )'><i class='fa fa-plus'></i></button></div></div>";
 
      var menuButton ="<div class='btn-group'>";
        menuButton += "<button class='btn btn-outline-secondary dropdown-toggle' type='button' id='btnGroupDrop1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> more </button>";
-       menuButton += "<div class='dropdown-menu dropdown-menu-right' aria-labelledby='btnGroupDrop1'>";
-       menuButton += "<button class='dropdown-item' type='button' onclick='completeTask(" + response.id +")'> <i class='fa fa-check' style='margin-right:5px;'></i>Completed</button>";
-       menuButton += "<button class='dropdown-item' type='button' onclick='deleteTask(" + response.id +")'> <i class='fa fa-trash' style='margin-right:8px;'></i>Delete</button>";
-       menuButton += "<button class='dropdown-item' type='button'> <i class='fa fa-info' style=' margin-right:8px; margin-left: 5px;'></i>Info</button>";
+       menuButton += "<div class='dropdown-menu dropdown-menu-right' aria-labelledby='btnGroupDrop1' data-dropdown-task-id='" + response.id +"'>";
+       menuButton += "<button class='dropdown-item' type='button' data-complete-btn-id='" + response.id +"' onclick='completeTask(" + response.id +")'> <i class='fa fa-check' style='margin-right:5px;'></i>Completed</button>";
+       menuButton += "<button class='dropdown-item' type='button' data-delete-btn-id='" + response.id +"' onclick='deleteTask(" + response.id +")'> <i class='fa fa-trash' style='margin-right:8px;'></i>Delete</button>";
+       menuButton += "<button class='dropdown-item' type='button' data-info-btn-id='" + response.id +"'> <i class='fa fa-info' style=' margin-right:8px; margin-left: 5px;'></i>Info</button>";
        menuButton +=  "</div>";
        menuButton += "</div>";
 
@@ -287,8 +345,8 @@ function buildCard(returnData){
 
 
      var html = "<div class='col-sm-12 col-md-3 col-xl-4 task-wrap animated fadeInRight'  id='todo-card-wrap-"+ response.id +"' data-id='"+ response.id +"'>";
-     html += "<div class='col-xs-12 card card-shadow' id='todo-card-"+ response.id +"'>" + htmlButtonGroup + "<div style='width:100%; padding:10px;'>";
-     html += "<span class='card-title' style='width:70%; margin:10px; font-weight:700; font-size:16px; text-transform:uppercase;'>" + response.title + "</span>" + htmlBadge + "</div>";
+     html += "<div class='col-xs-12 card card-shadow' id='todo-card-"+ response.id +"'>" + htmlButtonGroup + "<div style='width:100%; padding:10px;'  id='todo-title-wrap-" + response.id +"' >";
+     html += "<span class='card-title' style='width:70%; margin:10px; font-weight:700; font-size:16px; text-transform:uppercase;' id='task-title-"+ response.id +"'>" + response.title + "</span>" + htmlBadge + "</div>";
      html += "<div class='card-body'><p class='card-subtitle mb-2 text-muted'>"+ response.description + "</p>";
      html += "<div id='todo-" + response.id +"'></div>";
      html += "</div>" + htmlInput + "</div>";
