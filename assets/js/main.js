@@ -99,7 +99,7 @@ function completeTask(id) {
 
 
       //Remove Severity Badge and Show Completed Badge
-      var htmlBadge =" <span class='badge  badge-secondary completed-badge' id='todo-badge-completed" + id +"'>Completed</span>";
+      var htmlBadge =" <span class='badge  badge-secondary completed-badge' id='todo-badge-completed-" + id +"'>Completed</span>";
 
       $("#todo-badge-"+id).hide();
       $("#todo-title-wrap-"+id).append(htmlBadge);
@@ -130,6 +130,7 @@ function completeTask(id) {
 
 
 function reopenTask(id) {
+  //!NEED TO  issue where reopen and completed deltes all deleted cards
   $.post('includes/rest/reopenTask.php', {
     taskId: id,
   }).done(function(data) {
@@ -138,7 +139,7 @@ function reopenTask(id) {
 
 
       //Remove Completed Badge and Show Severity Badge
-      $(".completed-badge").remove();
+      $("#todo-badge-completed-"+id).remove();
       $("#todo-badge-"+id).show();
 
 
@@ -156,7 +157,7 @@ function reopenTask(id) {
       $("#todo-input-"+id).prop("disabled", false);
 
       //complete button change to re open
-      var completeBtn ="<button class='dropdown-item' type='button' data-complete-btn-id='" + id +"' onclick='completeTask(" + id +")'> <i class='fa fa-check' style='margin-right:5px;'></i>Completed</button>";
+      var completeBtn ="<button class='dropdown-item' type='button' id='complete-btn-id-" + id  + "' data-complete-btn-id='" + id +"' onclick='completeTask(" + id +")'> <i class='fa fa-check' style='margin-right:5px;'></i>Completed</button>";
       $("button[data-reopen-btn-id='"+id+"']").remove();
       $("div[data-dropdown-task-id='"+id+"']").prepend(completeBtn);
 
