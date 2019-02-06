@@ -4,11 +4,16 @@ $(function(){
    $( "#todoList" ).sortable();
    $( "#todoList" ).disableSelection();
 
+//=====================================================
+// IMAGE UPLOAD FORM - processing data              ===
+//=====================================================
+
+
 
 
 
 //=====================================================
-// SUBMIT TASK FORM - process form data
+// SUBMIT TASK FORM - process form data             ===
 //=====================================================
    $("#task_form").submit(function(event){
 
@@ -142,7 +147,6 @@ function reopenTask(id) {
       $("#todo-badge-completed-"+id).remove();
       $("#todo-badge-"+id).show();
 
-
        //Grey out the task title
       $("#task-title-"+id).removeClass("grey");
 
@@ -161,22 +165,11 @@ function reopenTask(id) {
       $("button[data-reopen-btn-id='"+id+"']").remove();
       $("div[data-dropdown-task-id='"+id+"']").prepend(completeBtn);
 
-
-
   });
 
 }
 
-function showBack(id) {
-  $("#todo-card-" + id).addClass("animated flipInY");
 
-  setTimeout(function() {
-    console.log(id);
-    $("#todo-" + id).hide("slow");
-    $("#todo-card-back-" + id).show("slow");
-  }, 100);
-
-}
 
 function addToDo(id) {
   // need to post to php and then grab id that way
@@ -310,9 +303,61 @@ function displayErrors(where, data){
 
    }
 }
+
+function imageUpload(event, id){
+  $("#form-img-"+id).submit(function(event){
+    console.log("Img Form Submit:");
+
+      event.preventDefault();
+
+      var formData = new FormData($("#form-img-"+id)[0]);
+
+      formData.append("taskId", id);
+
+
+
+      console.log(formData);
+
+      $.ajax({
+          url : 'includes/rest/upload_image.php',
+          type : 'POST',
+          data : formData,
+          contentType : false,
+          processData : false,
+          success: function(data) {
+           console.log(data);
+          var jsonData = JSON.parse(data);
+
+
+            //if sucessful image upload, create thumbnail
+            if(jsonData.success == true){
+              //add image thumbnail
+              var imgHtml = "<img src='" + jsonData.file_path +"' style='width:50px; margin:5px;'/>";
+              $("#image-thumb-id-"+ id).prepend(imgHtml);
+
+              $("#form-img-"+id).trigger("reset");
+            
+
+
+            }
+            else{
+              var imageError = "<span id='img-thumb-error-'" +id +" style='color:red;'>"+ jsonData.errors +"</span>";
+              $("#image-thumb-id-"+ id).prepend(imageError);
+
+
+            }
+          }
+
+
+      });
+  });
+}
 //===========================================================
 // BUILD CARD WITH RETURN DATA                            ===
 //===========================================================
+
+
+
 function buildCard(returnData){
 
    //turn data into Javascript object
@@ -330,14 +375,22 @@ function buildCard(returnData){
      }
 
      // END CONDITIONAL ===================================
-     var htmlInput = "<div class='input-group mb-3'  style='padding:10px;'><input type='text' class='form-control' placeholder='Add to do here...' id='todo-input-" + response.id +"' aria-describedby='button-addon2'><div class='input-group-append'><button class='btn btn-outline-secondary' type='button' id='todo-button-" + response.id +"' onclick='addToDo(" + response.id + ", )'><i class='fa fa-plus'></i></button></div></div>";
+     var imageUploadForm = "<div class='card-body'><div class='card-title image-upload-title'>Upload Image</div>";
+         imageUploadForm +=   "<div id='image-thumb-id-"+ response.id + "' style='position:relative; top:-70px; margin-bottom:-30px;'></div>";
+         imageUploadForm +=  "<form id='form-img-"+ response.id +"' method='POST' role='form' enctype='multipart/form-data'>";
+         imageUploadForm +=    "<input class='form-group' type='file' name='file' multiple>";
+         imageUploadForm +=    "<button class='btn btn-success' data-task-id='"+ response.id +"' onclick='imageUpload(event, "+ response.id +")' type='submit'>Submit</button>";
+         imageUploadForm += "</form>";
+         imageUploadForm += "</div>";
+
+     var htmlInput = "<div class='input-group mb-3' id='todo-input-group-" + response.id +"'  style='padding:10px;'><input type='text' class='form-control' placeholder='Add to do here...' id='todo-input-" + response.id +"' aria-describedby='button-addon2'><div class='input-group-append'><button class='btn btn-outline-secondary' type='button' id='todo-button-" + response.id +"' onclick='addToDo(" + response.id + ", )'><i class='fa fa-plus'></i></button></div></div>";
 
      var menuButton ="<div class='btn-group'>";
        menuButton += "<button class='btn btn-outline-secondary dropdown-toggle' type='button' id='btnGroupDrop1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> more </button>";
        menuButton += "<div class='dropdown-menu dropdown-menu-right' aria-labelledby='btnGroupDrop1' data-dropdown-task-id='" + response.id +"'>";
        menuButton += "<button class='dropdown-item' type='button' data-complete-btn-id='" + response.id +"' onclick='completeTask(" + response.id +")'> <i class='fa fa-check' style='margin-right:5px;'></i>Completed</button>";
        menuButton += "<button class='dropdown-item' type='button' data-delete-btn-id='" + response.id +"' onclick='deleteTask(" + response.id +")'> <i class='fa fa-trash' style='margin-right:8px;'></i>Delete</button>";
-       menuButton += "<button class='dropdown-item' type='button' data-info-btn-id='" + response.id +"'> <i class='fa fa-info' style=' margin-right:8px; margin-left: 5px;'></i>Info</button>";
+       menuButton += "<button class='dropdown-item' type='button' data-info-btn-id='" + response.id +"' onclick='showBack(" + response.id + ")'> <i class='fa fa-info' style=' margin-right:8px; margin-left: 5px;'></i>Info</button>";
        menuButton +=  "</div>";
        menuButton += "</div>";
 
@@ -348,13 +401,15 @@ function buildCard(returnData){
      var html = "<div class='col-sm-12 col-md-3 col-xl-4 task-wrap animated fadeInRight'  id='todo-card-wrap-"+ response.id +"' data-id='"+ response.id +"'>";
      html += "<div class='col-xs-12 card card-shadow' id='todo-card-"+ response.id +"'>" + htmlButtonGroup + "<div style='width:100%; padding:10px;'  id='todo-title-wrap-" + response.id +"' >";
      html += "<span class='card-title' style='width:70%; margin:10px; font-weight:700; font-size:16px; text-transform:uppercase;' id='task-title-"+ response.id +"'>" + response.title + "</span>" + htmlBadge + "</div>";
-     html += "<div class='card-body'><p class='card-subtitle mb-2 text-muted'>"+ response.description + "</p>";
+     html += "<div class='card-body'><p class='card-subtitle mb-2 text-muted' id='task-desc-"+ response.id +"'>"+ response.description + "</p>";
      html += "<div id='todo-" + response.id +"'></div>";
-     html += "</div>" + htmlInput + "</div>";
+     html += "</div>" + htmlInput;
      html += "<div id='todo-card-back-"+ response.id +"' class='' style='display:none;'>";
-     html += "<h3>Info</h3>";
+     html += imageUploadForm;
      html += " </div>";
      html += "</div>";
+     html += "</div>";
+
 
      $("#todoList").append(html);
 
@@ -362,5 +417,27 @@ function buildCard(returnData){
      setTimeout(function(){
        $("#todo-card-wrap-"+ response.id).removeClass("fadeInRight");
      }, 600);
+
+}
+
+function showBack(id) {
+  $("#todo-card-" + id).addClass("animated flipInY");
+
+  setTimeout(function() {
+
+    $("#todo-" + id).hide("slow");
+    $("#task-title-" + id).hide("slow");
+    $("#todo-badge-" + id).hide("slow");
+    $("#task-desc-" + id).hide("slow");
+    $("#todo-input-group-" + id).hide("slow");
+
+    $("#todo-card-back-" + id).show("slow");
+
+  }, 100);
+
+  setTimeout(function() {
+    $("#todo-card-" + id).removeClass("animated flipInY");
+  }, 500);
+
 
 }

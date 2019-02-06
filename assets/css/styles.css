@@ -31,7 +31,12 @@
   width:35%;
   padding:6px;
 }
-
+.image-upload-title{
+  position: relative;
+  top: -70px;
+  font-weight: 600;
+  font-size: 23px;
+}
 .task-error-message{
   color: #c53434;
   font-size: 14px;
