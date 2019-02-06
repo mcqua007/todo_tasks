@@ -305,7 +305,7 @@ function displayErrors(where, data){
 
 function imageUpload(event, id){
   $("#form-img-"+id).submit(function(event){
-    console.log("Img Form Submit:");
+
 
       event.preventDefault();  //prevents default action, in this case form from submitting the page/reloading
       event.stopImmediatePropagation();//keeps form from duplicating as it was before
@@ -314,10 +314,6 @@ function imageUpload(event, id){
       var formData = new FormData($("#form-img-"+id)[0]);
 
       formData.append("taskId", id);
-
-
-
-      console.log(formData);
 
       $.ajax({
           url : 'includes/rest/upload_image.php',
