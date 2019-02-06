@@ -427,13 +427,13 @@ function showBack(id) {
 
   setTimeout(function() {
 
-    $("#todo-" + id).hide("slow");
-    $("#task-title-" + id).hide("slow");
-    $("#todo-badge-" + id).hide("slow");
-    $("#task-desc-" + id).hide("slow");
-    $("#todo-input-group-" + id).hide("slow");
+    $("#todo-" + id).hide();
+    $("#task-title-" + id).hide();
+    $("#todo-badge-" + id).hide();
+    $("#task-desc-" + id).hide();
+    $("#todo-input-group-" + id).hide();
 
-    $("#todo-card-back-" + id).show("slow");
+    $("#todo-card-back-" + id).show();
 
   }, 100);
 
