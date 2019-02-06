@@ -125,6 +125,7 @@ function completeTask(id) {
       //complete button change to re open
       var reopenBtn ="<button class='dropdown-item' type='button' data-reopen-btn-id='" + id +"' onclick='reopenTask(" + id +")'> <i class='fa fa-undo' style='margin-right:5px;'></i>Re-open</button>";
       $("button[data-complete-btn-id='"+id+"']").remove();
+      $("button[data-image-upload-btn-id='"+id+"']").hide();
       $("div[data-dropdown-task-id='"+id+"']").prepend(reopenBtn);
 
 
@@ -163,6 +164,7 @@ function reopenTask(id) {
       //complete button change to re open
       var completeBtn ="<button class='dropdown-item' type='button' id='complete-btn-id-" + id  + "' data-complete-btn-id='" + id +"' onclick='completeTask(" + id +")'> <i class='fa fa-check' style='margin-right:5px;'></i>Completed</button>";
       $("button[data-reopen-btn-id='"+id+"']").remove();
+      $("button[data-image-upload-btn-id='"+id+"']").show();
       $("div[data-dropdown-task-id='"+id+"']").prepend(completeBtn);
 
   });
@@ -393,7 +395,7 @@ function buildCard(returnData){
        menuButton += "<button class='dropdown-item' type='button' data-showfront-btn-id='" + response.id +"' onclick='showFront(" + response.id +")' style='display:none;'> <i class='fa fa-arrow-left' style='margin-right:5px;'></i>Go Back</button>";
        menuButton += "<button class='dropdown-item' type='button' data-complete-btn-id='" + response.id +"' onclick='completeTask(" + response.id +")'> <i class='fa fa-check' style='margin-right:5px;'></i>Completed</button>";
        menuButton += "<button class='dropdown-item' type='button' data-delete-btn-id='" + response.id +"' onclick='deleteTask(" + response.id +")'> <i class='fa fa-trash' style='margin-right:8px;'></i>Delete</button>";
-       menuButton += "<button class='dropdown-item' type='button' data-info-btn-id='" + response.id +"' onclick='showBack(" + response.id + ")'> <i class='fa fa-info' style=' margin-right:8px; margin-left: 5px;'></i>Info</button>";
+       menuButton += "<button class='dropdown-item' type='button' data-image-upload-btn-id='" + response.id +"' onclick='showBack(" + response.id + ")'> <i class='fa fa-file-image-o' style=' margin-right:8px;'></i>Upload Images</button>";
        menuButton +=  "</div>";
        menuButton += "</div>";
 
@@ -427,10 +429,13 @@ function showBack(id) {
   $("#todo-card-" + id).addClass("animated flipInY");
 
   setTimeout(function() {
-
+   //hide the btns that arent shown in drop down when card is flipped
     $("button[data-showfront-btn-id='"+id+"']").show();
     $("button[data-complete-btn-id='"+id+"']").hide();
-    $("button[data-info-btn-id='"+id+"']").hide();
+    $("button[data-image-upload-btn-id='"+id+"']").hide();
+    $("button[data-reopen-btn-id='"+id+"']").hide();
+
+    //hide the front of the card elements
     $("#todo-" + id).hide();
     $("#task-title-" + id).hide();
     $("#todo-badge-" + id).hide();
@@ -453,9 +458,13 @@ function showFront(id) {
 
   setTimeout(function() {
 
+   //after animation hide the go back button and show the normal btns
     $("button[data-showfront-btn-id='"+id+"']").hide();
     $("button[data-complete-btn-id='"+id+"']").show();
-    $("button[data-info-btn-id='"+id+"']").show();
+    $("button[data-image-upload-btn-id='"+id+"']").show();
+    $("button[data-reopen-btn-id='"+id+"']").show();
+
+    //show the front of card elements
 
     $("#todo-" + id).show();
     $("#task-title-" + id).show();
