@@ -4,13 +4,6 @@ $(function(){
    $( "#todoList" ).sortable();
    $( "#todoList" ).disableSelection();
 
-//=====================================================
-// IMAGE UPLOAD FORM - processing data              ===
-//=====================================================
-
-
-
-
 
 //=====================================================
 // SUBMIT TASK FORM - process form data             ===
@@ -305,6 +298,10 @@ function displayErrors(where, data){
 
    }
 }
+
+//=====================================================
+// IMAGE UPLOAD FORM - processing data              ===
+//=====================================================
 
 function imageUpload(event, id){
   $("#form-img-"+id).submit(function(event){
