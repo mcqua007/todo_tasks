@@ -390,6 +390,7 @@ function buildCard(returnData){
      var menuButton ="<div class='btn-group'>";
        menuButton += "<button class='btn btn-outline-secondary dropdown-toggle' type='button' id='btnGroupDrop1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> more </button>";
        menuButton += "<div class='dropdown-menu dropdown-menu-right' aria-labelledby='btnGroupDrop1' data-dropdown-task-id='" + response.id +"'>";
+       menuButton += "<button class='dropdown-item' type='button' data-showfront-btn-id='" + response.id +"' onclick='showFront(" + response.id +")' style='display:none;'> <i class='fa fa-arrow-left' style='margin-right:5px;'></i>Go Back</button>";
        menuButton += "<button class='dropdown-item' type='button' data-complete-btn-id='" + response.id +"' onclick='completeTask(" + response.id +")'> <i class='fa fa-check' style='margin-right:5px;'></i>Completed</button>";
        menuButton += "<button class='dropdown-item' type='button' data-delete-btn-id='" + response.id +"' onclick='deleteTask(" + response.id +")'> <i class='fa fa-trash' style='margin-right:8px;'></i>Delete</button>";
        menuButton += "<button class='dropdown-item' type='button' data-info-btn-id='" + response.id +"' onclick='showBack(" + response.id + ")'> <i class='fa fa-info' style=' margin-right:8px; margin-left: 5px;'></i>Info</button>";
@@ -427,6 +428,9 @@ function showBack(id) {
 
   setTimeout(function() {
 
+    $("button[data-showfront-btn-id='"+id+"']").show();
+    $("button[data-complete-btn-id='"+id+"']").hide();
+    $("button[data-info-btn-id='"+id+"']").hide();
     $("#todo-" + id).hide();
     $("#task-title-" + id).hide();
     $("#todo-badge-" + id).hide();
@@ -434,6 +438,32 @@ function showBack(id) {
     $("#todo-input-group-" + id).hide();
 
     $("#todo-card-back-" + id).show();
+
+  }, 100);
+
+  setTimeout(function() {
+    $("#todo-card-" + id).removeClass("animated flipInY");
+  }, 500);
+
+
+}
+
+function showFront(id) {
+  $("#todo-card-" + id).addClass("animated flipInY");
+
+  setTimeout(function() {
+
+    $("button[data-showfront-btn-id='"+id+"']").hide();
+    $("button[data-complete-btn-id='"+id+"']").show();
+    $("button[data-info-btn-id='"+id+"']").show();
+
+    $("#todo-" + id).show();
+    $("#task-title-" + id).show();
+    $("#todo-badge-" + id).show();
+    $("#task-desc-" + id).show();
+    $("#todo-input-group-" + id).show();
+
+    $("#todo-card-back-" + id).hide();
 
   }, 100);
 
