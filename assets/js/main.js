@@ -308,7 +308,9 @@ function imageUpload(event, id){
   $("#form-img-"+id).submit(function(event){
     console.log("Img Form Submit:");
 
-      event.preventDefault();
+      event.preventDefault();  //prevents default action, in this case form from submitting the page/reloading
+      event.stopImmediatePropagation();//keeps form from duplicating as it was before
+
 
       var formData = new FormData($("#form-img-"+id)[0]);
 
@@ -336,7 +338,7 @@ function imageUpload(event, id){
               $("#image-thumb-id-"+ id).prepend(imgHtml);
 
               $("#form-img-"+id).trigger("reset");
-            
+
 
 
             }
