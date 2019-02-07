@@ -2,7 +2,7 @@
 
 <body>
 <div class="container">
-  <h3 class="logo-font" style="margin-top:20px;">Task Manager</h3>
+  <h3 class="logo-font" style="margin-top:20px;">Staqpack</h3>
     <button class="btn btn-success btn-lg sticky-right" onclick="showTaskManager()"><i class="fa fa-plus  m-right-5" id="add-task-icon" ></i><span class="add-task-text"> Add Task </span></button>
     <div class="jumbotron" id="task-manager" data-show="false" style="display:none; margin-top:50px;">
       <div style="100%" id="task-alert-flash">
