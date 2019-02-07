@@ -5,16 +5,15 @@ include("../config.php");
     $errors = array();      // array to hold validation errors
     $data = array();      // array to pass back data
 
-    //ommented out until image is realted to task id
-    //if (!isset($_POST['taskId'])){
-    //  $errors['taskId'] = 'Task Id is required.';
-    //}
+
     if(!isset($_FILES['file'])){
        $errors['image'] = 'An image is required.';
     }
     if(!isset($_POST['taskId'])){
        $errors['task_id'] = 'A task id is required.';
     }
+
+    //=========================================================
     //CHECKING TYPE IS A JPG OR PNG,MAKING SURE IT IS AN IMAGE
     //=========================================================
 
