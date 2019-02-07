@@ -329,18 +329,31 @@ function imageUpload(event, id){
             //if sucessful image upload, create thumbnail
             if(jsonData.success == true){
               //add image thumbnail
-              var imgHtml = "<img src='" + jsonData.file_path +"' style='width:50px; margin:5px;'/>";
-              $("#image-thumb-id-"+ id).prepend(imgHtml);
+
+              if(jsonData.type.includes("image")){
+                var imgHtml = "<div class='col-sm-3'><img src='" + jsonData.file_path +"' style='width:100%; margin:2px;'/></div>";
+                $("#image-thumb-id-"+ id).prepend(imgHtml);
+             }
 
               $("#form-img-"+id).trigger("reset");
 
 
 
             }
-            else{
-              var imageError = "<span id='img-thumb-error-'" +id +" style='color:red;'>"+ jsonData.errors +"</span>";
-              $("#image-thumb-id-"+ id).prepend(imageError);
+            //error block, diaplys different erros that can return depending what fails
+            else if(jsonData.success == false){
+              if(jsonData.errors.file_type_error == true){
+                var imageError = "<span id='img-thumb-error-"+id +"' style='color:red;'>"+ jsonData.errors.file_type +"</span>";
+                $("#image-thumb-id-"+ id).prepend(imageError);
+              }
+              if(jsonData.errors.upload_error == true){
+                var imageError = "<span id='img-thumb-error-"+id +"' style='color:red;'>"+ jsonData.errors.upload +"</span>";
+                $("#image-thumb-id-"+ id).prepend(imageError);
+              }
 
+              setTimeout(function(){
+                  $("#img-thumb-error-"+ id).remove();
+              }, 2500)
 
             }
           }
@@ -373,7 +386,7 @@ function buildCard(returnData){
 
      // END CONDITIONAL ===================================
      var imageUploadForm = "<div class='card-body'><div class='card-title image-upload-title'>Upload Image</div>";
-         imageUploadForm +=   "<div id='image-thumb-id-"+ response.id + "' style='position:relative; top:-70px; margin-bottom:-30px;'></div>";
+         imageUploadForm +=   "<div class='row' id='image-thumb-id-"+ response.id + "' style='position:relative; top:-70px; margin-bottom:-30px;'></div>";
          imageUploadForm +=  "<form id='form-img-"+ response.id +"' method='POST' role='form' enctype='multipart/form-data'>";
          imageUploadForm +=    "<input class='form-group' type='file' name='file' multiple>";
          imageUploadForm +=    "<button class='btn btn-success' data-task-id='"+ response.id +"' onclick='imageUpload(event, "+ response.id +")' type='submit'>Submit</button>";
