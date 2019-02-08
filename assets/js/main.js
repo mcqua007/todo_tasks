@@ -181,7 +181,7 @@ function addToDo(id) {
         //add to do
         var todoHtml = "<div style='width:100%;' id='todo-row-" + data.id + "'><div class='form-check'><input type='checkbox' data-checked='false' data-task-id='" + id + "' id='todo-checkbox-" + data.id + "' onchange='setCheckBox(" + data.id + ")' class='form-check-input'><label class='form-check-label' id='todo-label-" + data.id + "'>" + todoInput + "</label></div></div>";
         $("#todo-" + id).append(todoHtml);
-        $('input[type="text"], textarea').val(''); //reset form input to an epty value
+        $('input[type="text"], textarea').val(''); //reset form input to an empty value
     }
     if(data.success == false){
       console.error(data);
