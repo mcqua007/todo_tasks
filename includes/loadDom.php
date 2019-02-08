@@ -5,7 +5,7 @@
 <!-- **** ALso Load images and files associated with each task-->
 <?php
 
-$taskTodoQuery = mysqli_query($con, "SELECT * FROM tasks");
+$taskTodoQuery = mysqli_query($con, "SELECT * FROM tasks"); //  *eventually add where clasue for user/ users group
 
 $taskData = array();
 
