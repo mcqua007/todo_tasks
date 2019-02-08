@@ -2,6 +2,7 @@
 <script> var response;</script>
 
 <!--  START OF BUILDING EACH CARD ON PAGE LOAD **** still needs to have condition if to completed grey out-->
+<!-- **** ALso Load images and files associated with each task-->
 <?php
 
 $taskTodoQuery = mysqli_query($con, "SELECT * FROM tasks");
