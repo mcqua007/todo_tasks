@@ -76,7 +76,7 @@ while($row = mysqli_fetch_array($taskTodoQuery)){
    html += "</div>";
 
    $("#todoList").append(html);
-
+ // if task is closed call complete task to render as should, eventually needs to be redone so there is not ajax call
    if(response.open == 0){
      completeTask(response.id);
    }
