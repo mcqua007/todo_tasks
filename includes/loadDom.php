@@ -77,6 +77,10 @@ while($row = mysqli_fetch_array($taskTodoQuery)){
 
    $("#todoList").append(html);
 
+   if(response.open == 0){
+     completeTask(response.id);
+   }
+
    //GET TODOS SECTION
    //=============================================
    <?php
