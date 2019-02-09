@@ -411,7 +411,7 @@ function buildCard(returnData){
      var htmlButtonGroup = "<div class='btn-group' role='group' aria-label='Basic example'><button type='button' class='btn btn-outline-primary' id='btn-audio-"+ response.id +"'><i class='fa fa-microphone'></i></button><button type='button' class='btn btn-outline-danger' id='btn-image-"+ response.id +"'><i class='fa fa-picture-o'></i></button>" + menuButton + " </div>";
 
 
-     var html = "<div class='col-sm-12 col-md-3 col-xl-4 task-wrap animated fadeInRight'  id='todo-card-wrap-"+ response.id +"'data-expanded='false' data-id='"+ response.id +"'>";
+     var html = "<div class='col-12 sol-sm-6 col-lg-4 task-wrap animated fadeInRight'  id='todo-card-wrap-"+ response.id +"'data-expanded='false' data-id='"+ response.id +"'>";
      html += "<div class='col-xs-12 card card-shadow' id='todo-card-"+ response.id +"'>" + htmlButtonGroup + "<div style='width:100%; padding:10px;'  id='todo-title-wrap-" + response.id +"' >";
      html += "<span class='card-title' style='width:70%; margin:10px; font-weight:700; font-size:16px; text-transform:uppercase;' id='task-title-"+ response.id +"'>" + response.title + "</span>" + htmlBadge + "</div>";
      html += "<div class='card-body'><p class='card-subtitle mb-2 text-muted' id='task-desc-"+ response.id +"'>"+ response.description + "</p>";

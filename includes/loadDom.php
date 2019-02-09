@@ -9,16 +9,13 @@ $taskTodoQuery = mysqli_query($con, "SELECT * FROM tasks"); //  *eventually add 
 
 $taskData = array();
 
-while($row = mysqli_fetch_array($taskTodoQuery)){
-
+while ($row = mysqli_fetch_array($taskTodoQuery)) {
     $taskData['id'] = $row['id'];
     $taskData['title'] = $row['title'];
     $taskData['description'] =  $row['description'];
     $taskData['severity'] =  $row['severity'];
     $taskData['assigned_to'] = $row['assigned_to'];
-    $taskData['open'] = $row['open'];
-
-  ?>
+    $taskData['open'] = $row['open']; ?>
   <script>
 
   response = <?php echo json_encode($taskData); ?>;
@@ -63,7 +60,7 @@ while($row = mysqli_fetch_array($taskTodoQuery)){
    var htmlButtonGroup = "<div class='btn-group' role='group' aria-label='Basic example'><button type='button' class='btn btn-outline-primary' id='btn-audio-"+ response.id +"'><i class='fa fa-microphone'></i></button><button type='button' class='btn btn-outline-danger' id='btn-image-"+ response.id +"'><i class='fa fa-picture-o'></i></button>" + menuButton + " </div>";
 
 
-   var html = "<div class='col-sm-12 col-md-3 col-xl-4 task-wrap animated'  id='todo-card-wrap-"+ response.id +"'data-expanded='false' data-id='"+ response.id +"'>";
+   var html = "<div class='col-12 sol-sm-6 col-lg-4 task-wrap animated'  id='todo-card-wrap-"+ response.id +"'data-expanded='false' data-id='"+ response.id +"'>";
    html += "<div class='col-xs-12 card card-shadow' id='todo-card-"+ response.id +"'>" + htmlButtonGroup + "<div style='width:100%; padding:10px;'  id='todo-title-wrap-" + response.id +"' >";
    html += "<span class='card-title' style='width:70%; margin:10px; font-weight:700; font-size:16px; text-transform:uppercase;' id='task-title-"+ response.id +"'>" + response.title + "</span>" + htmlBadge + "</div>";
    html += "<div class='card-body'><p class='card-subtitle mb-2 text-muted' id='task-desc-"+ response.id +"'>"+ response.description + "</p>";
@@ -86,18 +83,16 @@ while($row = mysqli_fetch_array($taskTodoQuery)){
    <?php
    $taskId = $row['id'];
 
-     $todoQuery = mysqli_query($con, "SELECT * FROM todos where taskId = '$taskId'");
+    $todoQuery = mysqli_query($con, "SELECT * FROM todos where taskId = '$taskId'");
 
-     $todoData = array();
+    $todoData = array();
 
-     while($row2 = mysqli_fetch_array($todoQuery)){
+    while ($row2 = mysqli_fetch_array($todoQuery)) {
+        $todoData['id'] = $row2['id'];
+        $todoData['todo'] = $row2['todo'];
+        $todoData['completed'] =  $row2['completed'];
 
-       $todoData['id'] = $row2['id'];
-       $todoData['todo'] = $row2['todo'];
-       $todoData['completed'] =  $row2['completed'];
-
-       $data = json_encode($todoData);
-  ?>
+        $data = json_encode($todoData); ?>
 
   var data = <?php echo $data; ?>;
   console.log(data);
@@ -112,7 +107,8 @@ while($row = mysqli_fetch_array($taskTodoQuery)){
      }
      todoHtml += "id='todo-label-" + data.id + "'>" + data.todo + "</label></div></div>";
      $("#todo-" + response.id).append(todoHtml);
-  <?php } ?>
+  <?php
+    } ?>
    //=============================================
 
    //remove fadeIn right after its done animating so it wont animate when sorting

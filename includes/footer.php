@@ -11,3 +11,5 @@
   integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
   crossorigin="anonymous"></script>
 <?php include("includes/loadDom.php"); ?>
+
+</html>
