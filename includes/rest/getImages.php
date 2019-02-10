@@ -10,7 +10,7 @@ $data = array();      // array to pass back data
 // if any of these variables don't exist, add an error to our $errors array
 
     if (empty($_POST['taskId']))
-        $errors['taskId'] = 'Task Id is required.';
+        $errors['taskId'] = 'The Task Id is required.';
 
 
 
@@ -31,11 +31,19 @@ $data = array();      // array to pass back data
       $taskId = $_POST['taskId'];
 
 
-      $todoQuery = mysqli_query($con, "UPDATE tasks SET open = '1' WHERE id = '$taskId'");
+      $imageQuery = mysqli_query($con, "SELECT * FROM images  WHERE task_id = '$taskId'");
 
+      $imageData = array();
+
+          while ($row = mysqli_fetch_array($imageQuery)) {
+
+              $imageData[] = $row;
+
+         }
       // show a message of success and provide a true success variable
       $data['success'] = true;
       $data['message'] = 'Success!';
+      $data['images'] = $imageData;
   }
 
     // return all our data to an AJAX call
