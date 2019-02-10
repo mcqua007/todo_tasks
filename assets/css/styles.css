@@ -1,16 +1,16 @@
 .menu-animation{
-    -webkit-transition: -webkit-transform .3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) .1008s;
-    transition: -webkit-transform .3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) .1008s;
-    transition: transform .3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) .1008s;
-    transition: transform .3192s cubic-bezier(0.0, 0.0, 0.0, 0.0) .1008s, -webkit-transform .3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) .1008s;
+    -webkit-transition: -webkit-transform .3192s cubic-bezier(0.0, 0.0, 0.0, 0.0) .1008s;
+    transition: -webkit-transform .3192s cubic-bezier(0.0, 0.0, 0.0, 0.0) .1008s;
+    transition: transform .3192s cubic-bezier(0.0, 0.0, 0.0, 0.0) .1008s;
+    transition: transform .3192s cubic-bezier(0.0, 0.0, 0.0, 0.0) .1008s, -webkit-transform .3192s cubic-bezier(0.0, 0.0, 0.0, 0.0) .1008s;
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
 }
 .menu-close-animation{
-    -webkit-transition: -webkit-transform .3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) .1008s;
-    transition: -webkit-transform .3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) .1008s;
-    transition: transform .3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) .1008s;
-    transition: transform .3192s cubic-bezier(0.0, 0.0, 0.0, 0.0) .1008s, -webkit-transform .3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) .1008s;
+    -webkit-transition: -webkit-transform .3192s cubic-bezier(0.0, 0.0, 0.0, 0.0) .1008s;
+    transition: -webkit-transform .3192s cubic-bezier(0.0, 0.0, 0.0, 0.0) .1008s;
+    transition: transform .3192s cubic-bezier(0.0, 0.0, 0.0, 0.0) .1008s;
+    transition: transform .3192s cubic-bezier(0.0, 0.0, 0.0, 0.0) .1008s, -webkit-transform .3192s cubic-bezier(0.0, 0.0, 0.0, 0.0) .1008s;
     -webkit-transform: rotate(-360deg);
     transform: rotate(-360deg);
 }
@@ -118,6 +118,9 @@
     display:none;
   }
 }
-/*font-family: 'Lobster Two', cursive;
-font-family: 'Pacifico', cursive;
-font-family: 'Leckerli One', cursive;*/
+@media only screen and (max-width: 767px) and (min-width: 451px){
+
+}
+@media only screen and (max-width: 1000px) and (min-width: 768px){
+
+}
