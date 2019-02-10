@@ -1,3 +1,21 @@
+.menu-animation{
+    -webkit-transition: -webkit-transform .3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) .1008s;
+    transition: -webkit-transform .3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) .1008s;
+    transition: transform .3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) .1008s;
+    transition: transform .3192s cubic-bezier(0.0, 0.0, 0.0, 0.0) .1008s, -webkit-transform .3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) .1008s;
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+.menu-close-animation{
+    -webkit-transition: -webkit-transform .3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) .1008s;
+    transition: -webkit-transform .3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) .1008s;
+    transition: transform .3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) .1008s;
+    transition: transform .3192s cubic-bezier(0.0, 0.0, 0.0, 0.0) .1008s, -webkit-transform .3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) .1008s;
+    -webkit-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+}
+
+
 .sidebar-nav-open{
   background-color: #fff;
   position: fixed;
