@@ -1,13 +1,12 @@
 
 <?php include("includes/header.php"); ?>
-
+<?php include("includes/sidenavBar.php"); ?>
 <body>
 <div class="container">
   <h3 class="logo-font" style="margin-top:20px;">Staqpack</h3>
     <button class="btn btn-success btn-lg sticky-right" onclick="showTaskManager()"><i class="fa fa-plus  m-right-5" id="add-task-icon" ></i><span class="add-task-text"> Add Task </span></button>
     <div class="jumbotron" id="task-manager" data-show="false" style="display:none; margin-top:50px;">
       <div style="100%" id="task-alert-flash">
-
       </div>
         <h3>Add New Issue:</h3>
         <form id="task_form">
@@ -35,12 +34,14 @@
         </form>
         </div>
 
-            <div class="row" id="todoList" style="margin-top:20px; margin-bottom:20px;">
-            </div>
+        <div class="row" id="todoList" style="margin-top:20px; margin-bottom:20px;">
+        </div>
 
         <div class="footer">
     </div>
 </div>
 </body>
+
+
 
 <?php include("includes/footer.php"); ?>
