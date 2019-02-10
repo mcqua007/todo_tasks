@@ -7,13 +7,8 @@
     z-index: 1;
     top:0px;
 ">
-
-    <i onclick="openSide()" class="fa fa-bars" style="
-    color: #fff;
-    padding-top: 7px;
-    padding-left: 6px;
-    margin-bottom: -5px;
-    font-size: 21px;"></i>
+<div ><i class="fa fa-times" style="display:none;  color: #fff; padding-top: 7px; padding-left: 6px; margin-bottom: -5px; font-size: 21px" id="menu-icon-close" onclick="closeSide()"></i>
+<i onclick="openSide()" class="fa fa-bars" style="color: #fff; padding-top: 7px; padding-left: 6px; margin-bottom: -5px; font-size: 21px;" id="menu-icon" ></i></div>
 
     <center><h3 class="logo-font" style="margin-top: -30px;color: #fff; font-family: 'Leckerli One', cursive; font-size: 25px;">Staqpack</h3></center>
 

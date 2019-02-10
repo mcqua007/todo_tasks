@@ -1,6 +1,6 @@
 function openSide(){
   $( "#menu-icon" ).hide();
-  $( "#menu-icon-close" ).show("slow");
+  $( "#menu-icon-close" ).show();
   $( ".sidebar-nav-closed" ).animate({
      width: "15%",
      opacity: 1,
