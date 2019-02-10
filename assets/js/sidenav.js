@@ -13,7 +13,7 @@ function closeSide(){
 
   $( "#menu-icon-close" ).hide();
   $( ".sidebar-nav-closed" ).animate({
-     width: "50px",
+     width: "0px",
      opacity: 1,
    }, 600 );
      $( "#menu-list" ).hide();
