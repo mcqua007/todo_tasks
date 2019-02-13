@@ -54,6 +54,10 @@
 }
 .card-shadow:hover{
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  transition-property: transform;
+  transition-timing-function: ease;
+  transition-duration: 0.3s;
+  transform: scale(1.015 , 1.015);
 }
 .task-wrap{
   margin-top: 10px;
@@ -113,11 +117,13 @@
   to { transform: rotateY(180deg); }
 }
 
+/* media queries */
 @media only screen and (max-width: 450px){
   .add-task-text{
     display:none;
   }
 }
+
 @media only screen and (max-width: 767px) and (min-width: 451px){
 
 }
