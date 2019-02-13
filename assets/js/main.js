@@ -405,7 +405,7 @@ function buildCard(returnData){
      var html = "<div class='col-12 col-sm-6 col-lg-4 task-wrap animated fadeInRight'  id='todo-card-wrap-"+ response.id +"'data-expanded='false' data-id='"+ response.id +"'>";
      html += "<div class='col-xs-12 card card-shadow' id='todo-card-"+ response.id +"'>" + htmlButtonGroup + "<div style='width:100%; padding:10px;'  id='todo-title-wrap-" + response.id +"' >";
      html += "<span class='card-title' style='width:70%; margin:10px; font-weight:700; font-size:16px; text-transform:uppercase;' id='task-title-"+ response.id +"'>" + response.title + "</span>" + htmlBadge + "</div>";
-     html += "<div class='card-body'><p class='card-subtitle mb-2 text-muted' id='task-desc-"+ response.id +"'>"+ response.description + "</p><hr/>";
+     html += "<div class='card-body'><p class='card-subtitle mb-2 text-muted' id='task-desc-" + response.id + "'>" + response.description + "</p><hr id='todo-hr-" + response.id + "'/>";
      html += "<div id='todo-" + response.id +"'></div>";
      html += "</div>" + htmlInput;
      html += "<div id='todo-card-back-"+ response.id +"' class='' style='display:none;'>";
@@ -451,6 +451,7 @@ function showBack(id) {
     $("#task-title-" + id).hide();
     $("#todo-badge-" + id).hide();
     $("#task-desc-" + id).hide();
+    $("#todo-hr-" + id).hide();
     $("#todo-input-group-" + id).hide();
 
     $("#todo-card-back-" + id).show();
@@ -482,6 +483,7 @@ function showFront(id) {
     $("#task-title-" + id).show();
     $("#todo-badge-" + id).show();
     $("#task-desc-" + id).show();
+    $("#todo-hr-" + id).show();
     $("#todo-input-group-" + id).show();
 
     $("#todo-card-back-" + id).hide();
