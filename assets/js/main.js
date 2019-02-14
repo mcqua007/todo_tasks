@@ -460,7 +460,7 @@ function showBack(id) {
   if(todoToggle == "true"){
       $("button[data-hide-todo-btn-id='"+id+"']").hide();
   }
-  else{
+  else {
       $("button[data-show-todo-btn-id='"+id+"']").hide();
   }
 
@@ -503,6 +503,7 @@ function showFront(id) {
     var todoToggle =  $("button[data-hide-todo-btn-id='"+id+"']").attr("data-visible");
     if(todoToggle == "true"){
         $("button[data-hide-todo-btn-id='"+id+"']").show();
+          $("#todo-" + id).show();
     }
     else{
         $("button[data-show-todo-btn-id='"+id+"']").show();
@@ -510,8 +511,6 @@ function showFront(id) {
     }
 
     //show the front of card elements
-
-    $("#todo-" + id).show();
     $("#task-title-" + id).show();
     $("#todo-badge-" + id).show();
     $("#task-desc-" + id).show();
