@@ -424,25 +424,53 @@ function buildCard(returnData){
 }
 
 function showTodo(id) {
-  $("#todo-" + id).show("slow");
 
-  $("button[data-show-todo-btn-id='"+id+"']").attr("data-visible", "false");//changing data-visible attr to false
-  $("button[data-show-todo-btn-id='"+id+"']").hide();
+  $.post('includes/rest/toggleTodoVisbility.php', {
+    taskId: id,
+    visible: 0
+  }).done(function(data){
+    var response = JSON.parse(data);
 
-  $("button[data-hide-todo-btn-id='"+id+"']").show();
-  $("button[data-hide-todo-btn-id='"+id+"']").attr("data-visible", "true");//changing data-visible attr to true
+    if(response.success == false){
+      console.error(data);
+    }
+    else{
+    $("#todo-" + id).show("slow");
+
+    $("button[data-show-todo-btn-id='"+id+"']").attr("data-visible", "false");//changing data-visible attr to false
+    $("button[data-show-todo-btn-id='"+id+"']").hide();
+
+    $("button[data-hide-todo-btn-id='"+id+"']").show();
+    $("button[data-hide-todo-btn-id='"+id+"']").attr("data-visible", "true");//changing data-visible attr to true
+     }
+   })
 
 }
 
 function hideTodo(id) {
-  $("#todo-" + id).hide("slow");
 
-  $("button[data-hide-todo-btn-id='"+id+"']").attr("data-visible", "false");
-   $("button[data-hide-todo-btn-id='"+id+"']").hide();
+  $.post('includes/rest/toggleTodoVisbility.php', {
+    taskId: id,
+    visible: 1
+  }).done(function(data){
+    var response = JSON.parse(data);
 
-  $("button[data-show-todo-btn-id='"+id+"']").show();
-  $("button[data-show-todo-btn-id='"+id+"']").attr("data-visible", "true");  //changing data-visible attr to true
+    if(response.success == false){
+      console.error(data);
+    }
+    else{
+    $("#todo-" + id).hide("slow");
+
+    $("button[data-hide-todo-btn-id='"+id+"']").attr("data-visible", "false");
+     $("button[data-hide-todo-btn-id='"+id+"']").hide();
+
+    $("button[data-show-todo-btn-id='"+id+"']").show();
+    $("button[data-show-todo-btn-id='"+id+"']").attr("data-visible", "true");  //changing data-visible attr to true
+    }
+  })
+
 }
+
 
 function showBack(id) {
   $("#todo-card-back-" + id).empty(); //empty the back child elements on back in case thats where it was

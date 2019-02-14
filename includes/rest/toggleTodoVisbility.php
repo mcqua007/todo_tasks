@@ -9,10 +9,10 @@ $data = array();      // array to pass back data
 
 // if any of these variables don't exist, add an error to our $errors array
 
-    if (!isset($_POST['todoId']))
-        $errors['todoId'] = 'Todo Id is required.';
+    if (!isset($_POST['taskId']))
+        $errors['taskId'] = 'Task Id is required.';
 
-    if (!isset($_POST['completed']))
+    if (!isset($_POST['visible']))
         $errors['visible'] = 'Visible flag is required.';
 
 
