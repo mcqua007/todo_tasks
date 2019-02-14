@@ -391,8 +391,8 @@ function buildCard(returnData){
        menuButton += "<button class='dropdown-item' type='button' data-complete-btn-id='" + response.id +"' onclick='completeTask(" + response.id +")'> <i class='fa fa-check' style='margin-right:5px;'></i>Completed</button>";
        menuButton += "<button class='dropdown-item' type='button' data-expand-btn-id='" + response.id +"' onclick='expandTask(" + response.id +")'> <i class='fa fa-expand' style='margin-right:5px;'></i>Expand</button>";
        menuButton += "<button class='dropdown-item' type='button' data-shrink-btn-id='" + response.id +"' onclick='shrinkTask(" + response.id +")'  style='display:none;'> <i class='fa fa-compress' style='margin-right:5px;'></i>Shrink</button>";
-       menuButton += "<button class='dropdown-item' type='button' data-hide-todo-btn-id='" + response.id +"' onclick='hideTodo(" + response.id +")'> <i class='fa fa-eye-slash' style='margin-right:5px;'></i>Hide Todos</button>";
-       menuButton += "<button class='dropdown-item' type='button' data-show-todo-btn-id='" + response.id +"' onclick='showTodo(" + response.id +")' style='display:none;'> <i class='fa fa-eye' style='margin-right:5px;'></i>Show Todos</button>";
+       menuButton += "<button class='dropdown-item' type='button' data-hide-todo-btn-id='" + response.id +"' data-visible='true' onclick='hideTodo(" + response.id +")'> <i class='fa fa-eye-slash' style='margin-right:5px;'></i>Hide Todos</button>";
+       menuButton += "<button class='dropdown-item' type='button' data-show-todo-btn-id='" + response.id +"' data-visible='false' onclick='showTodo(" + response.id +")' style='display:none;'> <i class='fa fa-eye' style='margin-right:5px;'></i>Show Todos</button>";
        menuButton += "<button class='dropdown-item' type='button' data-delete-btn-id='" + response.id +"' onclick='deleteTask(" + response.id +")'> <i class='fa fa-trash' style='margin-right:8px;'></i>Delete</button>";
        menuButton += "<button class='dropdown-item' type='button' data-image-upload-btn-id='" + response.id +"' onclick='showImageUpload(" + response.id + ")'> <i class='fa fa-file-image-o' style=' margin-right:8px;'></i>Upload Images</button>";
        menuButton +=  "</div>";
@@ -425,14 +425,23 @@ function buildCard(returnData){
 
 function showTodo(id) {
   $("#todo-" + id).show("slow");
+
+  $("button[data-show-todo-btn-id='"+id+"']").attr("data-visible", "false");//changing data-visible attr to false
   $("button[data-show-todo-btn-id='"+id+"']").hide();
+
   $("button[data-hide-todo-btn-id='"+id+"']").show();
+  $("button[data-hide-todo-btn-id='"+id+"']").attr("data-visible", "true");//changing data-visible attr to true
+
 }
 
 function hideTodo(id) {
   $("#todo-" + id).hide("slow");
-  $("button[data-hide-todo-btn-id='"+id+"']").hide();
+
+  $("button[data-hide-todo-btn-id='"+id+"']").attr("data-visible", "false");
+   $("button[data-hide-todo-btn-id='"+id+"']").hide();
+
   $("button[data-show-todo-btn-id='"+id+"']").show();
+  $("button[data-show-todo-btn-id='"+id+"']").attr("data-visible", "true");  //changing data-visible attr to true
 }
 
 function showBack(id) {
@@ -446,6 +455,17 @@ function showBack(id) {
     $("button[data-image-upload-btn-id='"+id+"']").hide();
     $("button[data-reopen-btn-id='"+id+"']").hide();
 
+   //check if hide to and show todo button our visbile to hide them or not depending on state
+  var todoToggle =  $("button[data-hide-todo-btn-id='"+id+"']").attr("data-visible");
+  if(todoToggle == "true"){
+      $("button[data-hide-todo-btn-id='"+id+"']").hide();
+  }
+  else{
+      $("button[data-show-todo-btn-id='"+id+"']").hide();
+  }
+
+
+
     //hide the front of the card elements
     $("#todo-" + id).hide();
     $("#task-title-" + id).hide();
@@ -453,8 +473,10 @@ function showBack(id) {
     $("#task-desc-" + id).hide();
     $("#todo-hr-" + id).hide();
     $("#todo-input-group-" + id).hide();
+    $("#todo-hr-" + id).hide();
 
     $("#todo-card-back-" + id).show();
+
 
   }, 100);
 
@@ -477,6 +499,16 @@ function showFront(id) {
     $("button[data-image-upload-btn-id='"+id+"']").show();
     $("button[data-reopen-btn-id='"+id+"']").show();
 
+     //check if hide to and show todo button our visbile to show them or not depending on state
+    var todoToggle =  $("button[data-hide-todo-btn-id='"+id+"']").attr("data-visible");
+    if(todoToggle == "true"){
+        $("button[data-hide-todo-btn-id='"+id+"']").show();
+    }
+    else{
+        $("button[data-show-todo-btn-id='"+id+"']").show();
+          $("#todo-" + id).hide();
+    }
+
     //show the front of card elements
 
     $("#todo-" + id).show();
@@ -485,6 +517,7 @@ function showFront(id) {
     $("#task-desc-" + id).show();
     $("#todo-hr-" + id).show();
     $("#todo-input-group-" + id).show();
+      $("#todo-hr-" + id).show();
 
     $("#todo-card-back-" + id).hide();
 
