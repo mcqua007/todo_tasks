@@ -15,7 +15,8 @@ while ($row = mysqli_fetch_array($taskTodoQuery)) {
     $taskData['description'] =  $row['description'];
     $taskData['severity'] =  $row['severity'];
     $taskData['assigned_to'] = $row['assigned_to'];
-    $taskData['open'] = $row['open']; ?>
+    $taskData['open'] = $row['open'];
+    $taskData['todo_hidden'] = $row['todo_hidden'];?>
   <script>
 
   response = <?php echo json_encode($taskData); ?>;
@@ -71,6 +72,15 @@ while ($row = mysqli_fetch_array($taskTodoQuery)) {
  // if task is closed call complete task to render as should, eventually needs to be redone so there is not ajax call
    if(response.open == 0){
      completeTask(response.id);
+   }
+   if(response.todo_hidden == 1){
+     $("#todo-" + response.id).hide("slow");
+
+     $("button[data-hide-todo-btn-id='"+ response.id +"']").attr("data-visible", "false");
+      $("button[data-hide-todo-btn-id='"+ response.id +"']").hide();
+
+     $("button[data-show-todo-btn-id='"+ response.id +"']").show();
+     $("button[data-show-todo-btn-id='"+ response.id +"']").attr("data-visible", "true");  //changing
    }
 
    //GET TODOS SECTION
