@@ -40,7 +40,7 @@ $data = array();      // array to pass back data
       $description =  $_POST['description'];
       $title = $_POST['title'];
 
-      $taskQuery = mysqli_query($con, "INSERT INTO tasks VALUES('', '$title', '$description', '$assigned', '$severity', '1', '')");
+      $taskQuery = mysqli_query($con, "INSERT INTO tasks VALUES('', '$title', '$description', '$assigned', '$severity', '1', '', '0')");
       $getIdQuery = mysqli_query($con, "SELECT * FROM tasks");
 
       // show a message of success and provide a true success variable
