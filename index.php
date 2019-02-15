@@ -2,6 +2,27 @@
 <?php include("includes/header.php"); ?>
 <?php include("includes/topbar.php"); ?>
 <?php include("includes/sidenavBar.php"); ?>
+
+<?php
+  if(isset($_GET['userLoggedIn'])){
+    $userLoggedIn = new User($con, $_GET['userLoggedIn']);
+  }
+  else{
+    echo "Username variable was not passed. Check the openPage() function in script.js";
+
+  }
+
+
+  if(isset($_SESSION['userLoggedIn'])) {
+	$userLoggedIn = new User($con, $_SESSION['userLoggedIn']);
+	$username = $userLoggedIn->getUsername();
+	echo "<script> userLoggedIn = '$username';</script>";
+  }
+  else {
+  	header("Location: register.php");
+  }
+
+  ?>
 <body>
 
 <div class="container" style="margin-top:50px;">

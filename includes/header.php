@@ -25,7 +25,3 @@ include("includes/handlers/login_handler.php");
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Leckerli+One|Lobster+Two|Pacifico" rel="stylesheet">
   </head>
-
-  <?php
-
- ?>
