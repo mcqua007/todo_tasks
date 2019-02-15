@@ -446,6 +446,24 @@ function showTodo(id) {
    })
 
 }
+function openPage(url){
+
+	if(timer != null) {
+		clearTimeout(timer);
+	}
+	if(url.indexOf("?") == -1){
+		url = url + "?";
+		var encodedUrl = encodeURI(url + "userLoggedIn=" + userLoggedIn);
+	}
+	else{
+		var encodedUrl = encodeURI(url + "&userLoggedIn=" + userLoggedIn);
+	}
+	console.log(encodedUrl);
+	$("#mainContent").load(encodedUrl);
+	$("body").scrollTop(0);
+
+	history.pushState(null, null, url); //puts the url in the adress bar so it appears the user is changing pages
+}
 
 function hideTodo(id) {
 

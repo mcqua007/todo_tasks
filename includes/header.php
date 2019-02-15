@@ -1,5 +1,16 @@
 <!DOCTYPE html>
-<?php include("config.php"); ?>
+<?php include("config.php");
+include("includes/classes/Account.php");
+include("includes/classes/Constants.php");
+include("includes/classes/User.php");
+
+	$account = new Account($con);
+
+include("includes/handlers/register_handler.php");
+include("includes/handlers/login_handler.php");
+
+?>
+
 
 <html>
   <head>
@@ -14,3 +25,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Leckerli+One|Lobster+Two|Pacifico" rel="stylesheet">
   </head>
+
+  <?php
+
+ ?>
