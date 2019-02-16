@@ -1,9 +1,6 @@
 <?php
 include("includes/header.php");
 
-
-
-
 	function getInputValue($name) {
 		if(isset($_POST[$name])) {
 			echo $_POST[$name];
@@ -50,7 +47,7 @@ include("includes/header.php");
 
 			<div id="inputContainer">
 				<form id="loginForm" action="register.php" method="POST">
-					<h2>Login to your account</h2>
+					<h2>Login</h2>
 					<p>
 						<?php echo $account->getError(Constants::$loginFailed); ?>
 						<label for="loginUsername">Username</label>
@@ -61,7 +58,7 @@ include("includes/header.php");
 						<input id="loginPassword" name="loginPassword" type="password" placeholder="Your password" required>
 					</p>
 
-					<button type="submit" name="loginButton">LOG IN</button>
+					<button  class="btn btn-primary" type="submit" name="loginButton">LOG IN</button>
 
 					<div class="hasAccountText">
 						<span id="hideLogin">Don't have an account yet? Signup here.</span>

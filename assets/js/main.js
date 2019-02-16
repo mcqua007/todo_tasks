@@ -1,6 +1,7 @@
 $(function(){
    $("#sidebar-username").append(userLoggedIn);
-   console.log("user: "+ userLoggedIn);
+    console.log("user: "+ userLoggedIn);
+    console.log("user id: "+ userId);
  //MAKE TEH CARDS SORTABLE
    $( "#todoList" ).sortable();
    $( "#todoList" ).disableSelection();
@@ -21,7 +22,8 @@ $(function(){
         'title' : $('#title_input').val(),
         'description' : $('#description_input').val(),
         'severity' : $('#severity_input').val(),
-        'assigned' : $('#assigned_to_input').val()
+        'assigned' : $('#assigned_to_input').val(),
+        'userId': userId
       }
 
       $.ajax({
@@ -66,6 +68,23 @@ $(function(){
 //==============================================
 //   FUNCTIONS                               ===
 //==============================================
+
+var timer;
+
+function openPage(url){
+
+	if(timer != null) {
+		clearTimeout(timer);
+	}
+
+		var encodedUrl = encodeURI(url + "&userLoggedIn=" + userLoggedIn);
+
+	console.log(encodedUrl);
+	$("#todoList").load(encodedUrl);
+	$("body").scrollTop(0);
+
+	history.pushState(null, null, url); //puts the url in the adress bar so it appears the user is changing pages
+}
 
 function logout(){
 	$.post("includes/rest/logout.php", function(){
@@ -143,7 +162,6 @@ function reopenTask(id) {
     console.log(data);
     var jsonData = JSON.parse(data);
 
-
       //Remove Completed Badge and Show Severity Badge
       $("#todo-badge-completed-"+id).remove();
       $("#todo-badge-"+id).show();
@@ -198,7 +216,7 @@ function addToDo(id) {
       $("#todo-"+ id).append(errorText);
 
         setTimeout(function() {
-          $(".error-todo-text").remove(); //remove error after .7 seconds
+          $(".error-todo-text").remove(); //remove error after 3 seconds
         }, 3000);
     }
 
@@ -248,7 +266,6 @@ function setCheckBox(id) {
       else{
         console.log(data);
       }
-
 
     });
   }
@@ -453,25 +470,6 @@ function showTodo(id) {
    })
 
 }
-function openPage(url){
-
-	if(timer != null) {
-		clearTimeout(timer);
-	}
-	if(url.indexOf("?") == -1){
-		url = url + "?";
-		var encodedUrl = encodeURI(url + "userLoggedIn=" + userLoggedIn);
-	}
-	else{
-		var encodedUrl = encodeURI(url + "&userLoggedIn=" + userLoggedIn);
-	}
-	console.log(encodedUrl);
-	$("#mainContent").load(encodedUrl);
-	$("body").scrollTop(0);
-
-	history.pushState(null, null, url); //puts the url in the adress bar so it appears the user is changing pages
-}
-
 function hideTodo(id) {
 
   $.post('includes/rest/toggleTodoVisbility.php', {

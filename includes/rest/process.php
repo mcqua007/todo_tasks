@@ -19,14 +19,17 @@ $data = array();      // array to pass back data
             $errors['severity'] = 'Severity is required.';
 
     if (empty($_POST['assigned']))
-                    $errors['assigned'] = 'Person assigned is required.';
+            $errors['assigned'] = 'Person assigned is required.';
+
+    if (!isset($_POST['userId']))
+            $errors['userId'] = 'User Id is required.';
 
 
 
 // return a response ===========================================================
 
 // if there are any errors in errors array, return a success boolean of false
-    if ( !empty($errors)) {
+    if (!empty($errors)) {
 
         // if there are items in our errors array, return those errors
         $data['success'] = false;
@@ -39,8 +42,9 @@ $data = array();      // array to pass back data
       $severity = $_POST['severity'];
       $description =  $_POST['description'];
       $title = $_POST['title'];
+      $user_id = $_POST['userId'];
 
-      $taskQuery = mysqli_query($con, "INSERT INTO tasks VALUES('', '$title', '$description', '$assigned', '$severity', '1', '', '0')");
+      $taskQuery = mysqli_query($con, "INSERT INTO tasks VALUES('', '$title', '$description', '$assigned', '$severity', '1', '', '0', '$user_id')");
       $getIdQuery = mysqli_query($con, "SELECT * FROM tasks");
 
       // show a message of success and provide a true success variable
