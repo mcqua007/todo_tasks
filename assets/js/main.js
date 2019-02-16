@@ -1,5 +1,6 @@
 $(function(){
-
+   $("#sidebar-username").append(userLoggedIn);
+   console.log("user: "+ userLoggedIn);
  //MAKE TEH CARDS SORTABLE
    $( "#todoList" ).sortable();
    $( "#todoList" ).disableSelection();
@@ -65,6 +66,12 @@ $(function(){
 //==============================================
 //   FUNCTIONS                               ===
 //==============================================
+
+function logout(){
+	$.post("includes/rest/logout.php", function(){
+			location.reload(); //force reloads current page
+	});
+}
 
 function deleteTask(id) {
   console.log("delete task: "+ id);
