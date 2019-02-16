@@ -16,7 +16,10 @@
   if(isset($_SESSION['userLoggedIn'])) {
 	$userLoggedIn = new User($con, $_SESSION['userLoggedIn']);
 	$username = $userLoggedIn->getUsername();
-	echo "<script> userLoggedIn = '$username'; console.log(userLoggedIn);</script>";
+  $userId = $userLoggedIn->getUserId();
+	echo "<script> var userLoggedIn = '$username';
+          var userId = '$userId'; 
+  </script>";
   }
   else {
   	header("Location: register.php");
