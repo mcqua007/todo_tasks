@@ -631,6 +631,30 @@ function showImageUpload(id) {
 
 //expand images in a modal
 
+
+function deleteImage(id) {
+  console.log("delete task: "+ id);
+
+  $("button[data-close-modal='"+ id +"']").trigger("click");
+
+  $.post('includes/rest/deleteImage.php', {
+    imageId: id
+  }).done(function(data) {
+    console.log(data);
+    var jsonData = JSON.parse(data);
+    console.log(jsonData.success);
+
+    if(jsonData.success == true){
+        $("div[data-thumb-wrap-id='"+id+"'").remove();
+    }
+    else if(jsonData.success == false){
+      console.error(data);
+    }
+
+  });
+
+}
+
 function expandImage(click){
   var imageSrc = $(click).attr("src");
   var imageId = $(click).attr("data-image-id");
@@ -639,8 +663,8 @@ function expandImage(click){
     modalHtml += "<div class='modal-dialog  modal-lg' role='document'>";
     modalHtml += "  <div class='modal-content'>";
     modalHtml += "    <div class='modal-header'>"
-    modalHtml += "      <i class='fa fa-trash image-delete' onclick='deleteImage(this)' data-delete-id='" + imageId + "'></i>";
-    modalHtml += "      <button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
+    modalHtml += "      <i class='fa fa-trash image-delete' onclick='deleteImage(" + imageId + ")' data-delete-id='" + imageId + "'></i>";
+    modalHtml += "      <button type='button' class='close' data-dismiss='modal' data-close-modal='" + imageId + "' aria-label='Close'>";
     modalHtml += "        <span aria-hidden='true'>&times;</span>";
     modalHtml += "      </button>";
     modalHtml += "    </div>";
