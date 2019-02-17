@@ -34,15 +34,12 @@
         </div>
           <h3>Add New Issue:</h3>
           <form id="task_form" data-project-id="">
-            <div class="form-group" id="title-group">
-              <label for="issueDescInput">Title</label>
-              <input type="text" class="form-control" id="title_input" placeholder="Title...">
-            </div>
-              <div class="form-group" id="description-group">
-              <label for="issueDescInput">Description</label>
-              <input type="text" class="form-control" id="description_input" placeholder="Describe the issue...">
+            <div class="row">
+              <div class="form-group col-md-4" id="title-group">
+                <label for="issueDescInput">Title</label>
+                <input type="text" class="form-control" id="title_input" placeholder="Title...">
               </div>
-              <div class="form-group" id="severity-group">
+              <div class="form-group col-md-4" id="severity-group">
               <label for="issueSeverityInput">Severity</label>
                   <select class="form-control"  id="severity_input">
                   <option value="Low">Low</option>
@@ -50,10 +47,19 @@
                   <option value="High">High</option>
               </select>
               </div>
-              <div class="form-group" id="assigned-group">
+              <div class="form-group col-md-4" id="assigned-group">
               <label for="issueAssignedToInput">Assigned To</label>
               <input type="text" class="form-control" id="assigned_to_input" placeholder="Assign To...">
               </div>
+            </div>
+            
+
+              <div class="form-group" id="description-group">
+              <label for="issueDescInput">Description</label>
+              <input type="text" class="form-control" id="description_input" placeholder="Describe the issue...">
+              </div>
+
+
               <button type="submit" class="btn btn-primary">Add</button>
           </form>
           </div>
