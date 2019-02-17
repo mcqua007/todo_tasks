@@ -17,13 +17,17 @@ $(function(){
 
      // stop the form from submitting the normal way and refreshing the page
       event.preventDefault();
+
+    var projectId = $("#todoList").attr("data-project-id");
+    console.log("Project Id:" + projectId);
       //grab form data
       var formData = {
         'title' : $('#title_input').val(),
         'description' : $('#description_input').val(),
         'severity' : $('#severity_input').val(),
         'assigned' : $('#assigned_to_input').val(),
-        'userId': userId
+        'userId': userId,
+        'projectId': projectId
       }
 
       $.ajax({
@@ -152,6 +156,32 @@ function completeTask(id) {
   });
 
 }
+
+function showDropdownMenu(click, elementId, iconId){
+	console.log("click");
+
+	var visible = $("#" + elementId).attr("data-collapsed");
+
+  $(click).addClass("active-bottom");
+	if(visible == "false"){
+		console.log("show");
+		$("#" + elementId).show("slow");
+		$("#" + elementId).attr("data-collapsed", "true");
+    $(click).addClass("active-bottom");
+	}
+	else{
+		console.log("hide");
+		$("#" + elementId).hide("slow");
+		$("#" + elementId).attr("data-collapsed", "false");
+    $(click).removeClass("active-bottom");
+	}
+}
+
+function openTasks(loadId, typeLoad, click){
+   $("#menu-list").parent().find('span').removeClass("active-link");
+  $(click).addClass("active-link");
+    $('#loadTasks').load("loadTaskTypes.php?loadId=" + loadId +"&typeLoad="+ typeLoad);
+  }
 
 
 function reopenTask(id) {
