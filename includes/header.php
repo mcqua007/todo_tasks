@@ -4,6 +4,7 @@ include("includes/classes/Account.php");
 include("includes/classes/Constants.php");
 include("includes/classes/User.php");
 
+
 	$account = new Account($con);
 
 include("includes/handlers/register_handler.php");

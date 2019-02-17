@@ -7,5 +7,5 @@
 <script src="assets/js/main.js"></script>
 <script src="assets/js/sidenav.js"></script>
 <script src="assets/js/register.js"></script>
-<?php include("includes/loadDom.php"); ?>
+
 </html>
