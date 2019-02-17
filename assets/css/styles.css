@@ -23,9 +23,20 @@
 *:focus{
   outline: none !important;
 }
+.image-thumb-wrap:hover {
+    opacity: .5;
+ }
+
 
 [role=link]{
  cursor: pointer;
+}
+.image-delete{
+  display: block;
+  font-size: 28px;
+  color: #e03c4f;
+  z-index: 3;
+  position: relative;
 }
 
 .active-bottom{

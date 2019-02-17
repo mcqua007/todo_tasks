@@ -67,16 +67,3 @@
       </div>
   </nav>
 </div>
-
-
-
-<!-- ALias Example
-SELECT * FROM table1 a
-
-now a is an alias
-
-table2 b
-
-b is an alias
-
-a.id = b.id  -->

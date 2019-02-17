@@ -629,7 +629,36 @@ function showImageUpload(id) {
   $("#todo-card-back-" + id).append(imageUploadForm);
 }
 
+//expand images in a modal
 
+function expandImage(click){
+  var imageSrc = $(click).attr("src");
+  var imageId = $(click).attr("data-image-id");
+
+  var modalHtml = "<div class='modal fade' id='exampleModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true' style='margin-top:35px;'>";
+    modalHtml += "<div class='modal-dialog  modal-lg' role='document'>";
+    modalHtml += "  <div class='modal-content'>";
+    modalHtml += "    <div class='modal-header'>"
+    modalHtml += "      <i class='fa fa-trash image-delete' onclick='deleteImage(this)' data-delete-id='" + imageId + "'></i>";
+    modalHtml += "      <button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
+    modalHtml += "        <span aria-hidden='true'>&times;</span>";
+    modalHtml += "      </button>";
+    modalHtml += "    </div>";
+    modalHtml += "    <div class='modal-body'>";
+    modalHtml += "    <img src='"+ imageSrc + "' style='width:100%;'/>";
+    modalHtml += "    </div>";
+    modalHtml += "    <div class='modal-footer'";
+    modalHtml += "    </div>";
+    modalHtml += "  </div>";
+    modalHtml += "</div>";
+    modalHtml += "  </div>";
+
+    $("body").prepend(modalHtml);
+
+    $('#exampleModal').modal('show')
+}
+
+// show images
 
 function showImages(id) {
   $.post('includes/rest/getImages.php', {
@@ -650,15 +679,12 @@ function showImages(id) {
       $("#todo-card-back-" + id).append(imageWrap);
 
       $.each(response.images, function(index, element) {
-            var imgHtml = "<div class='col-sm-3'><img src='" + element.image_path +"' style='width:100%; margin:2px;'/></div>";
+            var imgHtml = "<div class='col-6 col-sm-3 image-thumbnail-wrap' data-thumb-wrap-id='" + element.id + "'><img class='image-thumbnail' src='" + element.image_path +"' style='width:100%; margin:2px;' onclick='expandImage(this)' data-image-id='" + element.id + "' data-toggle='modal' data-target='#exampleModal'/></div>";
             $("#image-thumb-id-"+ id).prepend(imgHtml);
+
+
          });
-
-      response.image.each(function(){
-
-      });
-
-    }
+     }
 
   });
 
