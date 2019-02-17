@@ -633,7 +633,7 @@ function showImageUpload(id) {
 
 
 function deleteImage(id) {
-  console.log("delete task: "+ id);
+
 
   $("button[data-close-modal='"+ id +"']").trigger("click");
 
