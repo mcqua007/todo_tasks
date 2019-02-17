@@ -1,11 +1,11 @@
 
-<script> var response;</script>
+
 
 <!--  START OF BUILDING EACH CARD ON PAGE LOAD **** still needs to have condition if to completed grey out-->
 <!-- **** ALso Load images and files associated with each task-->
 <?php
-
-$taskTodoQuery = mysqli_query($con, "SELECT * FROM tasks"); //  *eventually add where clasue for user/ users group
+function loadTasks($con, $query){
+$taskTodoQuery = mysqli_query($con, $query); //  *eventually add where clasue for user/ users group
 
 $taskData = array();
 
@@ -19,7 +19,7 @@ while ($row = mysqli_fetch_array($taskTodoQuery)) {
     $taskData['todo_hidden'] = $row['todo_hidden'];?>
   <script>
 
-  response = <?php echo json_encode($taskData); ?>;
+  var response = <?php echo json_encode($taskData); ?>;
 
   console.log(response);
 
@@ -101,7 +101,6 @@ while ($row = mysqli_fetch_array($taskTodoQuery)) {
 
   var data = <?php echo $data; ?>;
   console.log(data);
-  console.log(data.id)
 
      var todoHtml = "<div style='width:100%; margin-top: 5px;' id='todo-row-" + data.id + "'><div class='form-check'><input type='checkbox'";
      if(data.completed == 0){
@@ -124,6 +123,10 @@ while ($row = mysqli_fetch_array($taskTodoQuery)) {
 
   </script>
 
+  <?php
+  }
+  ?>
+
 <?php
-}
+} // end function
 ?>
