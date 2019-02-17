@@ -2,10 +2,6 @@ $(function(){
    $("#sidebar-username").append(userLoggedIn);
     console.log("user: "+ userLoggedIn);
     console.log("user id: "+ userId);
- //MAKE TEH CARDS SORTABLE
-   $( "#todoList" ).sortable();
-   $( "#todoList" ).disableSelection();
-
 
 //=====================================================
 // SUBMIT TASK FORM - process form data             ===
@@ -181,8 +177,21 @@ function openTasks(loadId, typeLoad, click){
    $("#menu-list").parent().find('span').removeClass("active-link");
   $(click).addClass("active-link");
     $('#loadTasks').load("loadTaskTypes.php?loadId=" + loadId +"&typeLoad="+ typeLoad);
-  }
 
+    makeSortable();
+
+}
+
+function makeSortable(){
+setTimeout(function(){
+  //MAKE THE CARDS SORTABLE
+    $( "#todoList" ).sortable();
+    $( "#todoList" ).disableSelection();
+}, 1000)
+
+
+
+}
 
 function reopenTask(id) {
   //!NEED TO  issue where reopen and completed deltes all deleted cards
@@ -544,8 +553,6 @@ function showBack(id) {
   else {
       $("button[data-show-todo-btn-id='"+id+"']").hide();
   }
-
-
 
     //hide the front of the card elements
     $("#todo-" + id).hide();
