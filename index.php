@@ -83,14 +83,21 @@
                <div class="form-group col-md-4" id="project-team-select" style="display:none;">
                  <label for="issueSeverityInput">Teams</label>
                   <select class="form-control"  id="project_team_input">
-                     <option value="team">Team 1</option>
-                     <option value="personal">Team 2</option>
+                    <?php $teamIdQuery = mysqli_query($con, "SELECT name, t1.id FROM teams t1 INNER JOIN teamUsers t2 ON t1.id = t2.team_id WHERE t2.user_id = '$user_id'");
+                      while($row = mysqli_fetch_array($teamIdQuery)){
+
+                    ?>
+                    <option value="<?php echo $row['id']; ?>" id="project-team-<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+
+                  <?php
+                      }
+                    ?>
                  </select>
                </div>
              </div>
-               <div class="form-group" id="description-group">
-               <label for="issueDescInput">Description</label>
-               <input type="text" class="form-control" id="description_input" placeholder="Describe the issue...">
+               <div class="form-group" id="project_description-group">
+               <label for="issueDescInput">Project Description</label>
+               <input type="text" class="form-control" id="project_description_input" placeholder="Describe the Project...">
                </div>
                <button type="submit" class="btn btn-primary">Add</button>
            </form>
