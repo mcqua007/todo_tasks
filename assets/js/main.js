@@ -311,28 +311,20 @@ function setCheckBox(id) {
 
 }
 
+function showFormManager(formId){
+   //close any kids of all forms that are open, before showing new form
+    $("#all-forms").children().hide();
 
-
-function showTaskManager(){
-
-  var visible = $("#task-manager").attr("data-show");
-
-  if(visible == "false"){
     $("html, body").animate({ scrollTop: 0 }, "slow");
-    $("#task-manager").show("slow");
-    $("#task-manager").attr("data-show", "true");
-
-    $("#add-task-icon").removeClass("fa-plus");
-    $("#add-task-icon").addClass("fa-minus");
-  }
-  else{
-      $("#task-manager").hide("slow");
-      $("#task-manager").attr("data-show", "false");
-
-      $("#add-task-icon").removeClass("fa-minus");
-      $("#add-task-icon").addClass("fa-plus");
-  }
+    $("#"+formId).show("slow");
+    $("#"+formId).attr("data-show", "true");
 }
+
+function closeFormManager(formId){
+  $("#"+formId).hide("slow");
+  $("#"+formId).attr("data-show", "true");
+}
+
 
 function alertFlash(where, type, message){
 

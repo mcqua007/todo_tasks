@@ -26,7 +26,11 @@
 .image-thumb-wrap:hover {
     opacity: .5;
  }
-
+.add-btn-menu{
+  padding: 7px;
+    border-color: transparent;
+    background-color: #007bff;
+}
 
 [role=link]{
  cursor: pointer;

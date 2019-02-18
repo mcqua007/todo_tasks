@@ -7,5 +7,6 @@
 <script src="assets/js/main.js"></script>
 <script src="assets/js/sidenav.js"></script>
 <script src="assets/js/register.js"></script>
+<script src="assets/js/projectForm.js"></script>
 
 </html>
