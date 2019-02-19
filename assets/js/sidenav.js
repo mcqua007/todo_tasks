@@ -7,12 +7,30 @@ function openSide(){
     $( "#menu-icon-close" ).show();
   }, 300);
 
-  $( ".sidebar-nav-closed" ).animate({
-     width: "15%",
-     opacity: 1,
-   }, 600 );
+  var screenWidth = $(window).width();
 
-     $( "#menu-list" ).show("slow");
+    console.log(screenWidth);
+
+      if(screenWidth <= 550){
+        $( ".sidebar-nav-closed" ).animate({
+           width: "65%",
+           opacity: 1,
+         }, 600 );
+      }
+      else if(screenWidth <= 900){
+        $( ".sidebar-nav-closed" ).animate({
+           width: "35%",
+           opacity: 1,
+         }, 600 );
+      }
+      else{
+        $( ".sidebar-nav-closed" ).animate({
+           width: "20%",
+           opacity: 1,
+         }, 600 );
+      }
+
+      $( "#menu-list" ).show("slow");
 
 }
 
