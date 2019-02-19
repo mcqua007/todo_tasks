@@ -18,10 +18,10 @@ $(function(){
     console.log("Project Id:" + projectId);
       //grab form data
       var formData = {
-        'title' : $('#title_input').val(),
-        'description' : $('#description_input').val(),
-        'severity' : $('#severity_input').val(),
-        'assigned' : $('#assigned_to_input').val(),
+        'title' : $('#task_title_input').val(),
+        'description' : $('#task_description_input').val(),
+        'severity' : $('#task_severity_input').val(),
+        'assigned' : $('#task_assigned_to_input').val(),
         'userId': userId,
         'projectId': projectId
       }
@@ -183,14 +183,11 @@ function openTasks(loadId, typeLoad, click){
 }
 
 function makeSortable(){
-setTimeout(function(){
-  //MAKE THE CARDS SORTABLE
-    $( "#todoList" ).sortable();
-    $( "#todoList" ).disableSelection();
-}, 1000)
-
-
-
+  setTimeout(function(){
+    //MAKE THE CARDS SORTABLE
+      $( "#todoList" ).sortable();
+      $( "#todoList" ).disableSelection();
+  }, 1000)
 }
 
 function reopenTask(id) {
