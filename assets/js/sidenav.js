@@ -25,7 +25,7 @@ function openSide(){
       }
       else{
         $( ".sidebar-nav-closed" ).animate({
-           width: "20%",
+           width: "17%",
            opacity: 1,
          }, 600 );
       }
