@@ -18,7 +18,7 @@
                while($row = mysqli_fetch_array($user_projects_query )){
               ?>
               <div class="navItem nav-link">
-                <span role="link" tabindex="0" onclick="openTasks(<?php echo $row['id']; ?>,'project_id', this)" id="user-project-<?php echo $row['id']; ?>" class=""><?php echo $row['title']; ?></span>
+                <span role="link" tabindex="0" onclick="openTasks(<?php echo $row['id']; ?>,'project_id', this)" id="sidebar-project-<?php echo $row['id']; ?>" class=""><?php echo $row['title']; ?></span>
               </div>
               <?php
               }
@@ -48,7 +48,7 @@
                           while($row3 = mysqli_fetch_array($team_project_query)){
                          ?>
                          <div class="navItem nav-link">
-                           <span role="link" tabindex="0" onclick="openTasks(<?php echo $row3['id']; ?>,'project_id', this)" id="user-project-<?php echo $row3['id']; ?>" class=""><?php echo $row3['title']; ?></span>
+                           <span role="link" tabindex="0" onclick="openTasks(<?php echo $row3['id']; ?>,'project_id', this)" id="sidebar-project-<?php echo $row3['id']; ?>" class=""><?php echo $row3['title']; ?></span>
                          </div>
                          <?php
                          }
