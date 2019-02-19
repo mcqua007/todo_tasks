@@ -39,11 +39,11 @@
          <div class="row">
            <div class="form-group col-md-4" id="title-group">
              <label for="issueDescInput">Title</label>
-             <input type="text" class="form-control" id="project_title" placeholder="Title...">
+             <input type="text" class="form-control" id="task_title_input" placeholder="Title...">
            </div>
            <div class="form-group col-md-4" id="severity-group">
            <label for="issueSeverityInput">Severity</label>
-               <select class="form-control"  id="severity_input">
+               <select class="form-control"  id="task_severity_input">
                <option value="Low">Low</option>
                <option value="Medium">Medium</option>
                <option value="High">High</option>
@@ -51,12 +51,12 @@
            </div>
            <div class="form-group col-md-4" id="assigned-group">
            <label for="issueAssignedToInput">Assigned To</label>
-           <input type="text" class="form-control" id="assigned_to_input" placeholder="Assign To...">
+           <input type="text" class="form-control" id="task_assigned_to_input" placeholder="Assign To...">
            </div>
          </div>
            <div class="form-group" id="description-group">
            <label for="issueDescInput">Description</label>
-           <input type="text" class="form-control" id="description_input" placeholder="Describe the issue...">
+           <input type="text" class="form-control" id="task_description_input" placeholder="Describe the issue...">
            </div>
            <button type="submit" class="btn btn-primary">Add</button>
        </form>
@@ -67,21 +67,21 @@
          <div style="100%" id="project-alert-flash">
          </div>
            <h3>Add New Project</h3>
-           <form id="task_form" data-project-id="">
+           <form id="project_form" data-project-id="">
              <div class="row">
-               <div class="form-group col-md-4" id="title-group">
-                 <label for="issueDescInput">Title</label>
-                 <input type="text" class="form-control" id="title_input" placeholder="Title...">
+               <div class="form-group col-md-4" id="project_title_group">
+                 <label for="projectDescInput">Title</label>
+                 <input type="text" class="form-control" id="project_title_input" placeholder="Title...">
                </div>
                <div class="form-group col-md-4" id="project-type">
-                 <label for="projet-type">Type</label>
+                 <label for="projetTypeInput">Type</label>
                   <select class="form-control"  id="project_type_input">
                      <option value="personal">Personal</option>
                      <option value="team">Team</option>
                  </select>
                </div>
-               <div class="form-group col-md-4" id="project-team-select" style="display:none;">
-                 <label for="issueSeverityInput">Teams</label>
+               <div class="form-group col-md-4" id="project_team_group" style="display:none;">
+                 <label for="projectTeamsInput">Teams</label>
                   <select class="form-control"  id="project_team_input">
                     <?php $teamIdQuery = mysqli_query($con, "SELECT name, t1.id FROM teams t1 INNER JOIN teamUsers t2 ON t1.id = t2.team_id WHERE t2.user_id = '$user_id'");
                       while($row = mysqli_fetch_array($teamIdQuery)){
@@ -95,7 +95,7 @@
                  </select>
                </div>
              </div>
-               <div class="form-group" id="project_description-group">
+               <div class="form-group" id="project_description_group">
                <label for="issueDescInput">Project Description</label>
                <input type="text" class="form-control" id="project_description_input" placeholder="Describe the Project...">
                </div>
@@ -105,31 +105,31 @@
        <!-- Team Manager Form -->
          <div class="jumbotron" id="team-manager" data-show="false" style="display:none; margin-top:10px;">
            <i class="fa fa-times" onclick="closeFormManager('team-manager')" style="float: right;font-size:30px;top: -30px;color: #ccc;position: relative;"></i>
-           <div style="100%" id="project-alert-flash">
+           <div style="100%" id="team-alert-flash">
            </div>
-             <h3>Add New Project</h3>
+             <h3>Add New Team</h3>
              <form id="team_form" data-project-id="">
                <div class="row">
-                 <div class="form-group col-md-4" id="title-group">
+                 <div class="form-group col-md-4" id="">
                    <label for="issueDescInput">Title</label>
-                   <input type="text" class="form-control" id="title_input" placeholder="Title...">
+                   <input type="text" class="form-control" id="" placeholder="Title...">
                  </div>
-                 <div class="form-group col-md-4" id="severity-group">
+                 <div class="form-group col-md-4" id="">
                  <label for="issueSeverityInput">Severity</label>
-                     <select class="form-control"  id="severity_input">
+                     <select class="form-control"  id="">
                      <option value="Low">Low</option>
                      <option value="Medium">Medium</option>
                      <option value="High">High</option>
                  </select>
                  </div>
-                 <div class="form-group col-md-4" id="assigned-group">
+                 <div class="form-group col-md-4" id="">
                  <label for="issueAssignedToInput">Assigned To</label>
-                 <input type="text" class="form-control" id="assigned_to_input" placeholder="Assign To...">
+                 <input type="text" class="form-control" id="" placeholder="Assign To...">
                  </div>
                </div>
-                 <div class="form-group" id="description-group">
+                 <div class="form-group" id="">
                  <label for="issueDescInput">Description</label>
-                 <input type="text" class="form-control" id="description_input" placeholder="Describe the issue...">
+                 <input type="text" class="form-control" id="" placeholder="Describe the issue...">
                  </div>
                  <button type="submit" class="btn btn-primary">Add</button>
              </form>
