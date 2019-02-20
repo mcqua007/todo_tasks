@@ -75,7 +75,7 @@ else{
 			$lastId = mysqli_insert_id($con);
 
 			if($projectQuery == false) {
-          $data['liveError'] = "Query failed: " . mysqli_error($projectQuery);
+          $data['liveError'] = "Query failed: " . mysqli_error($con);
       }
 
 
