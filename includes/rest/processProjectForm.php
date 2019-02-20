@@ -78,10 +78,10 @@ else{
      //if type of project is team then insert into teamProjects table else insert into userProjects table
       if($_POST['type'] == "team"){
          $team_id = $_POST['team'];
-         $projectTeamQuery = mysqli_query($con, "INSERT INTO teamProjects VALUES('', '$team_id', '$lastId')");
+         $projectTeamQuery = mysqli_query($con, "INSERT INTO teamProjects VALUES(NULL, '$team_id', '$lastId')");
       }
       else if($_POST['type'] == "personal"){
-        $projectTeamQuery = mysqli_query($con, "INSERT INTO userProjects VALUES('', '$user_id', '$lastId')");
+        $projectTeamQuery = mysqli_query($con, "INSERT INTO userProjects VALUES(NULL, '$user_id', '$lastId')");
       }
 
 
