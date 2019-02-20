@@ -147,7 +147,7 @@ case ($file_type == "text/rtf" || $file_type == "text/plain"):
 
                                 $taskId = $_POST['taskId'];
 
-                                $QueryInsertFile="INSERT INTO images VALUES(NULL, '$TargetPath', '$taskId', '')";
+                                $QueryInsertFile="INSERT INTO images VALUES(NULL, '$TargetPath', '$taskId', NULL)";
                                 mysqli_query($con, $QueryInsertFile);
                          }
                          else{
