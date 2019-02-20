@@ -385,12 +385,6 @@ function imageUpload(event, id){
                 var imgHtml = "<div class='col-sm-3'><img src='" + jsonData.file_path +"' style='width:100%; margin:2px;'/></div>";
                 $("#image-thumb-id-"+ id).prepend(imgHtml);
              }
-             //test error for mobile
-             if(jsonData.errors.upload == "The file did not uploaded properly!"){
-                var iError = "<span id='img-thumb-error-"+id +"' style='color:red;'>"+ jsonData.errors.upload +"</span>";
-              $("#image-thumb-id-"+ id).prepend(iError);
-             }
-             //end test error mobile
               $("#form-img-"+id).trigger("reset");
             }
             //error block, diaplys different erros that can return depending what fails
