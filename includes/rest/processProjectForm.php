@@ -71,7 +71,7 @@ else{
 
 
 
-      $projectQuery = mysqli_query($con, "INSERT INTO projects VALUES('', '$title', '$description','$user_id', '0', '0')");
+      $projectQuery = mysqli_query($con, "INSERT INTO projects VALUES('', '$title', '$description','$user_id', '0', '$date', '0')");
 			$lastId = mysqli_insert_id($con);
 
 
