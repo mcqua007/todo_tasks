@@ -48,8 +48,12 @@ $data = array();      // array to pass back data
       $project_id = $_POST['projectId'];
       $date = date("Y-m-d H:i:s");
 
-      $taskQuery = mysqli_query($con, "INSERT INTO tasks VALUES('', '$title', '$description', '$assigned', '$severity', '1', '$project_id', '0', '$user_id', '$date')");
+      $taskQuery = mysqli_query($con, "INSERT INTO tasks VALUES(NULL , '$title', '$description', '$assigned', '$severity', '1', '$project_id', '0', '$user_id', '$date')");
       $getIdQuery = mysqli_query($con, "SELECT * FROM tasks");
+
+      if($taskQuery === false) {
+          $data['liveError'] = "Query failed: " . mysql_error();
+      }
 
       // show a message of success and provide a true success variable
       $data['success'] = true;
