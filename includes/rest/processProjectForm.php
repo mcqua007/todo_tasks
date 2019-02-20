@@ -5,10 +5,6 @@ include("../classes/Account.php");
 include("../classes/Constants.php");
 include("../classes/User.php");
 
-//trying to catch errors
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 	$account = new Account($con);
 
@@ -75,7 +71,7 @@ else{
 			$lastId = mysqli_insert_id($con);
 
 			if($projectQuery == false) {
-          $data['liveError'] = "Query failed: " . mysqli_error($con);
+          $data['sql_error'] = "Query failed: " . mysqli_error($con);
       }
 
 
