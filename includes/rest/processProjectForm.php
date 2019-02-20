@@ -5,10 +5,6 @@ include("../classes/Account.php");
 include("../classes/Constants.php");
 include("../classes/User.php");
 
-//trying to catch errors
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 	$account = new Account($con);
 
@@ -72,13 +68,12 @@ else{
 
 
       $projectQuery = mysqli_query($con, "INSERT INTO projects VALUES('', '$title', '$description','$user_id', '0', '$date', '0')");
-			$lastId = mysqli_insert_id($con);
 
-			if($projectQuery === false) {
-          $data['liveError'] = "Query failed: " . mysql_error();
+      $projectQueryId = mysqli_query($con, "SELECT MAX(id) as maxId FROM projects");
+
+      while ($row = mysqli_fetch_array($projectQueryId)){
+          $lastId = $row['maxId'];
       }
-
-
      //if type of project is team then insert into teamProjects table else insert into userProjects table
       if($_POST['type'] == "team"){
          $team_id = $_POST['team'];

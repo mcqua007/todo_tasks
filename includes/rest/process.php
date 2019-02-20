@@ -51,10 +51,6 @@ $data = array();      // array to pass back data
       $taskQuery = mysqli_query($con, "INSERT INTO tasks VALUES('', '$title', '$description', '$assigned', '$severity', '1', '$project_id', '0', '$user_id', '$date')");
       $getIdQuery = mysqli_query($con, "SELECT * FROM tasks");
 
-      if($taskQuery === false) {
-          $data['liveError'] = "Query failed: " . mysql_error();
-      }
-
       // show a message of success and provide a true success variable
       $data['success'] = true;
       $data['message'] = 'Success!';

@@ -30,8 +30,6 @@ $(function(){ //dont execute until dom is loaded
           'team': $('#project_team_input').val()
         }
 
-        console.log(projectFormData);
-
         $.ajax({
           type: 'POST',
           url: 'includes/rest/processProjectForm.php',
