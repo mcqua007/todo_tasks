@@ -71,15 +71,8 @@ else{
 
 
 
-      $projectQuery = mysqli_query($con, "INSERT INTO projects VALUES('', '$title', '$description','$user_id', '0', '$date', '0')");
+      $projectQuery = mysqli_query($con, "INSERT INTO projects VALUES('', '$title', '$description','$user_id', '0', '0')");
 			$lastId = mysqli_insert_id($con);
-
-    //  $projectQueryId = mysqli_query($con, "SELECT MAX(id) as maxId FROM projects");
-
-    //  while ($row = mysqli_fetch_array($projectQueryId)){
-        //  $lastId = $row['maxId'];
-    //  }
-
 
 
      //if type of project is team then insert into teamProjects table else insert into userProjects table
