@@ -389,12 +389,14 @@ function imageUpload(event, id){
             }
             //error block, diaplys different erros that can return depending what fails
             else if(jsonData.success == false){
+
+              var imageError;
               if(jsonData.errors.file_type_error == true){
-                var imageError = "<span id='img-thumb-error-"+id +"' style='color:red;'>"+ jsonData.errors.file_type +"</span>";
+                imageError = "<span id='img-thumb-error-"+id +"' style='color:red;'>"+ jsonData.errors.file_type +"</span>";
                 $("#image-thumb-id-"+ id).prepend(imageError);
               }
               if(jsonData.errors.upload_error == true){
-                var imageError = "<span id='img-thumb-error-"+id +"' style='color:red;'>"+ jsonData.errors.upload +"</span>";
+                 imageError = "<span id='img-thumb-error-"+id +"' style='color:red;'>"+ jsonData.errors.upload +"</span>";
                 $("#image-thumb-id-"+ id).prepend(imageError);
               }
 
