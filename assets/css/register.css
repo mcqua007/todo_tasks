@@ -47,12 +47,6 @@ body {
    color:    #fff;
 }
 
-#inputContainer {
-    width: 400px;
-    padding: 45px;
-    float: left;
-    border-right: 1px solid #999;
-}
 
 #inputContainer h2 {
 	text-align: center;
@@ -140,4 +134,30 @@ body {
     color: #07d159;
     font-size: 12px;
     display: block;
+}
+
+@media only screen and (max-width: 767px) {
+	#inputContainer {
+	    margin-top:25px;
+	    float: left;
+	}
+	#loginText {
+	    margin-top: 25px;
+	    display: table-cell;
+			padding: 0;
+	}
+
+}
+@media only screen and  (min-width: 768px){
+	#inputContainer {
+			width: 400px;
+			padding: 45px;
+			float: left;
+			border-right: 1px solid #999;
+	}
+	#loginText {
+	    padding: 45px;
+	    display: table-cell;
+	}
+
 }
