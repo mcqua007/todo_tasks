@@ -36,7 +36,7 @@ $data = array();      // array to pass back data
       $taskId = $_POST['taskId'];
 
 
-      $todoQuery = mysqli_query($con, "INSERT INTO todos VALUES('', '$todo', '$taskId', '0')");
+      $todoQuery = mysqli_query($con, "INSERT INTO todos VALUES(NULL , '$todo', '$taskId', '0')");
       $getIdQuery = mysqli_query($con, "SELECT * FROM todos");
 
       // show a message of success and provide a true success variable
