@@ -4,8 +4,10 @@ include("../config.php");
 
     $errors = array();      // array to hold validation errors
     $data = array();      // array to pass back data
-
-
+//trying to catch errors
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 
 if(!isset($_FILES['file'])){
    $errors['image'] = 'An file is required.';
