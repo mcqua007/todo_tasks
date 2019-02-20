@@ -74,6 +74,10 @@ else{
       $projectQuery = mysqli_query($con, "INSERT INTO projects VALUES('', '$title', '$description','$user_id', '0', '$date', '0')");
 			$lastId = mysqli_insert_id($con);
 
+			if($projectQuery === false) {
+          $data['liveError'] = "Query failed: " . mysql_error();
+      }
+
 
      //if type of project is team then insert into teamProjects table else insert into userProjects table
       if($_POST['type'] == "team"){
