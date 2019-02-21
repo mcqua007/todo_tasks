@@ -668,8 +668,7 @@ function expandImage(click){
     modalHtml += "</div>";
     modalHtml += "  </div>";
 
-    //$("body").prepend(modalHtml);
-    $("#loadTasks").prepend(modalHtml);
+    $("body").prepend(modalHtml);
 
     $('#exampleModal').modal('show')
 }
