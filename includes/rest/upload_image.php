@@ -22,7 +22,7 @@ $file_type = $_FILES['file']['type']; //get file type and save for checking
 //  CHOOSE PATH WHETHER ITS AN IMAGE OR FILE
 //=========================================================
 
-switch ($file_type) {
+//switch ($file_type) {
 
 //=========================================================
 //  FILE PATH - IF FILE TYPE IS A FILE GO THORUGH THIS
@@ -94,7 +94,7 @@ case ($file_type == "text/rtf" || $file_type == "text/plain"):
 //  IMAGE PATH - IF FILE TYPE IS IMAGE GO THORUGH THIS
 //=========================================================
 
-    case ($file_type == "image/png" || $file_type == "image/jpeg"):
+    //case ($file_type == "image/png" || $file_type == "image/jpeg"):
 
 
      //CHECKING TYPE IS A JPG OR PNG,MAKING SURE IT IS AN IMAGE
@@ -134,7 +134,7 @@ case ($file_type == "text/rtf" || $file_type == "text/plain"):
                  $temp_name  = $_FILES['file']['tmp_name'];
                  //check errors
                  $data['file_name'] = $name;
-           //if(isset($name)){comented out for error checking
+           if(isset($name)){
                if(!empty($name)){
                    $location = '../../assets/uploaded_images/';
                    $TargetPath = "/assets/uploaded_images/".$name;
@@ -161,16 +161,16 @@ case ($file_type == "text/rtf" || $file_type == "text/plain"):
                          }
                  }
 
-           //}
+           }
         }
 
-        break;
-    default:
+      //  break;
+    //default:
         $data['success'] = false;
         $errors['file_type_error'] = true;
         $errors['file_type'] = "You are not uploading the an allowed file type";
         $data['errors']  = $errors;
-}
+//}
 // return all our data to an AJAX call
 echo json_encode($data);
 
