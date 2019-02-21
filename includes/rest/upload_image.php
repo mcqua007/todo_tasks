@@ -100,7 +100,7 @@ case ($file_type == "text/rtf" || $file_type == "text/plain"):
      //CHECKING TYPE IS A JPG OR PNG,MAKING SURE IT IS AN IMAGE
 
         //checking content header type
-
+/*REMOVED FOR IMAGE ERROR CHECKING
         if($_FILES['file']['type'] != "image/png" && $_FILES['file']['type'] != "image/jpeg") {
          $errors['file_type_error'] = true;
          $errors['file_type'] = "Only PNG and JPG format are allowed!";
@@ -118,7 +118,7 @@ case ($file_type == "text/rtf" || $file_type == "text/plain"):
             $errors['file_type'] = "Only PNG and JPG format are allowed!";
             $data['errors']  = $errors;
           }
-
+  */
 
       // if there are any errors in errors array, return a success boolean of false
         if ( !empty($errors)) {
