@@ -134,8 +134,8 @@ case ($file_type == "text/rtf" || $file_type == "text/plain"):
                  $temp_name  = $_FILES['file']['tmp_name'];
                  //check errors
                  $data['file_name'] = $name;
-           if(isset($name)){
-               //if(!empty($name)){ comented out for error checking
+           //if(isset($name)){comented out for error checking
+               if(!empty($name)){
                    $location = '../../assets/uploaded_images/';
                    $TargetPath = "/assets/uploaded_images/".$name;
                          if(move_uploaded_file($temp_name, $location.$name)){
@@ -159,9 +159,9 @@ case ($file_type == "text/rtf" || $file_type == "text/plain"):
                             $errors['upload'] = 'The file did not uploaded properly!';
                             $data['errors']  = $errors;
                          }
-                 //}
+                 }
 
-           }
+           //}
         }
 
         break;
