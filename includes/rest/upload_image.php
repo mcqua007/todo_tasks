@@ -132,7 +132,8 @@ case ($file_type == "text/rtf" || $file_type == "text/plain"):
 
                  $name       = $_FILES['file']['name'];
                  $temp_name  = $_FILES['file']['tmp_name'];
-
+                 //check errors
+                 $data['file_name'] = $name;
            if(isset($name)){
                if(!empty($name)){
                    $location = '../../assets/uploaded_images/';
