@@ -150,6 +150,9 @@ case ($file_type == "text/rtf" || $file_type == "text/plain"):
 
                                 $QueryInsertFile="INSERT INTO images VALUES(NULL, '$TargetPath', '$taskId', NULL)";
                                 mysqli_query($con, $QueryInsertFile);
+                                //checking errors
+                                $data['sql_error'] = mysqli_error($con);
+
                          }
                          else{
                             $errors['upload_error'] = true;
