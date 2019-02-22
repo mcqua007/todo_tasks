@@ -457,7 +457,7 @@ function buildCard(returnData){
 
 
      var html = "<div class='col-12 col-sm-6 col-lg-4 task-wrap animated fadeInRight'  id='todo-card-wrap-"+ response.id +"'data-expanded='false' data-id='"+ response.id +"'>";
-     html += "<div class='col-xs-12 card card-shadow' id='todo-card-"+ response.id +"'>" + htmlButtonGroup + "<div style='width:100%; padding:10px;'  id='todo-title-wrap-" + response.id +"' >";
+     html += "<div class='col-xs-12 card-set-down card card-shadow' id='todo-card-"+ response.id +"'>" + htmlButtonGroup + "<div style='width:100%; padding:10px;'  id='todo-title-wrap-" + response.id +"' >";
      html += "<span class='card-title' style='width:70%; margin:10px; font-weight:700; font-size:16px; text-transform:uppercase;' id='task-title-"+ response.id +"'>" + response.title + "</span>" + htmlBadge + "</div>";
      html += "<div class='card-body'><p class='card-subtitle mb-2 text-muted' id='task-desc-" + response.id + "'>" + response.description + "</p><hr id='todo-hr-" + response.id + "'/>";
      html += "<div id='todo-" + response.id +"'></div>";
