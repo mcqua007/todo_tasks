@@ -12,7 +12,6 @@ if(isset($_GET['loadId']) && isset($_GET['typeLoad'])){
 
            loadTasks($con, $query);
 
-
           if($typeLoad == "project_id"){
             $query2 = mysqli_query($con, "SELECT title FROM projects WHERE id = '$loadId'");
 
@@ -29,7 +28,6 @@ if(isset($_GET['loadId']) && isset($_GET['typeLoad'])){
              }
           }
           else if($typeLoad == "user_id"){
-
             ?>
             <div class="row">
               <div class="title" style="font-size:25px; margin-left:25px;float:left; color: #000; font-weight:bold;">
@@ -38,11 +36,13 @@ if(isset($_GET['loadId']) && isset($_GET['typeLoad'])){
             </div>
             <?php
           }
+        }
 
-    }
-  else{ echo "Failed!";}
+     else {
+           echo "Failed!";
+      }
 
  ?>
-   <hr />
-    <div class="row" id="todoList" style="margin-top:20px; margin-bottom:20px;" data-project-id="<?php echo $loadId; ?>">
-    </div>
+  <hr />
+     <div class="row" id="todoList" style="margin-top:20px; margin-bottom:20px;" data-project-id="<?php echo $loadId; ?>">
+  </div>
