@@ -46,6 +46,13 @@ $(function(){ //dont execute until dom is loaded
           if(response.success == true){
              //alert a success message in task jumbotron
                alertFlash("#project-alert-flash", "success","Success! Project created below.");
+             //add to the project to nav
+             var menuProjectsHtml = "<div class='navItem nav-link'>";
+                 menuProjectsHtml += "<span role='link' tabindex='0' onclick=\"openTasks("+ response.project.id +",\'project_id\', this)\" id='sidebar-project-"+ response.project.id +"' class=''>"+ response.project.title +"</span>";
+                 menuProjectsHtml += "</div>";
+                 //if personal project add to user projects menu else add to teams
+                 response.team == "personal" ?   $("#user-projects-menu-items").append(menuProjectsHtml) : $("#team-projects-menu-items-"+response.teamId).append(menuProjectsHtml);
+
              //load project
 
              openTasks(response.projectId,'project_id', 'sidebar-project-' + response.projectId);

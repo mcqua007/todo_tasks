@@ -1,7 +1,7 @@
 
 <?php
  include("includes/config.php");
-include("includes/loadDom.php");
+include("includes/handlers/loadDom.php");
 
 if(isset($_GET['loadId']) && isset($_GET['typeLoad'])){
 

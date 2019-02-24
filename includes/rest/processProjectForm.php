@@ -11,7 +11,8 @@ include("../classes/User.php");
 
 
 $errors = array();      // array to hold validation errors
-$data = array();      // array to pass back data
+$data = array();        // array to pass back data
+$project = array();     //used to pass prject data back
 
 
 if(isset($_SESSION['userLoggedIn'])) {
@@ -84,12 +85,23 @@ else{
         $projectTeamQuery = mysqli_query($con, "INSERT INTO userProjects VALUES(NULL, '$user_id', '$lastId')");
       }
 
+      $getProject = mysqli_query($con, "SELECT id, title FROM projects WHERE id ='$lastId'");
+
+			while($row = mysqli_fetch_array($getProject)){
+				$project['id'] = $row['id'];
+				$project['title'] = $row['title'];
+
+			}
 
       // show a message of success and provide a true success variable
       $data['success'] = true;
       $data['message'] = 'Success!';
       $data['projectId'] = $lastId;
+			$data['project'] = $project;
       $data['team'] = $_POST['type'];
+			if($_POST['type'] == "team"){
+				$data['teamId'] = $team_id;
+			}
 
     }
 

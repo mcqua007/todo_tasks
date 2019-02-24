@@ -11,7 +11,7 @@
        <div role="link" tabindex="0" onclick="showDropdownMenu(this, 'user-project-menu')"  class="navItemLink link nav-link">Your Projects</div>
        <div class="" id="user-project-menu" data-collapsed="false" style="display:none;">
          <div class="bordertop" style="margin-top:10px;"></div>
-            <div class="m-left-10" style="margin-left:10px;">
+            <div class="m-left-10" style="margin-left:10px;" id="user-projects-menu-items">
               <?php
                $user_projects_query = mysqli_query($con, "SELECT title, t1.id FROM projects t1 INNER JOIN userProjects t2 ON t1.id = t2.project_id WHERE t2.user_id = '$user_id'");
 
@@ -40,7 +40,7 @@
                   <div role="link" tabindex="0" onclick="showDropdownMenu(this, 'team-projects-<?php echo $row2['id']; ?>')"  id="team-id-<?php echo $row2['id']; ?>" class=""><?php echo $row2['name']; ?></div>
                   <div class="" id="team-projects-<?php echo $row2['id']; ?>" data-collapsed="false" style="display:none;">
                     <div class="bordertop" style="margin-top:10px;"></div>
-                       <div class="m-left-10" style="margin-left:10px;">
+                       <div class="m-left-10" style="margin-left:10px;" id="team-projects-menu-items-<?php echo $row2['id']; ?>">
                          <?php
                          $team_id = $row2['id'];
                           $team_project_query = mysqli_query($con, "SELECT title, t1.id FROM projects t1 INNER JOIN teamProjects t2 ON t1.id = t2.project_id WHERE t2.team_id = '$team_id'");
