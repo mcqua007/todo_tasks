@@ -1,14 +1,14 @@
 
 <div class="sidebar-nav-closed" style="margin-top: -11px;">
    <nav class="nav flex-column" id="menu-list" style="display:none;">
-    <div class="nav-link" role="link" tabindex="0" onclick="showDropdownMenu(this, 'user-menu')" id="sidebar-username"><i class="fa fa-user"></i> </div>
+    <div class="nav-link" role="link" tabindex="0" onclick="showDropdownMenu(this, 'user-menu')" id="sidebar-username"><i class="fa fa-user"></i>&nbsp; </div>
     <div class="" id="user-menu" data-collapsed="false" style="display:none;">
         <div class="m-left-10" style="margin-left:10px;">
            <a class="nav-link" role="link"  onclick="logout()">Logout</a>
         </div>
    </div>
      <div class="navItem">
-       <div role="link" tabindex="0" onclick="showDropdownMenu(this, 'user-project-menu')"  class="navItemLink link nav-link"> <i class="fa fa-folder"></i> Your Projects</div>
+       <div role="link" tabindex="0" onclick="showDropdownMenu(this, 'user-project-menu')"  class="navItemLink link nav-link"> <i class="fa fa-folder"></i>&nbsp;Your Projects</div>
        <div class="" id="user-project-menu" data-collapsed="false" style="display:none;">
          <div class="bordertop" style="margin-top:10px;"></div>
             <div class="m-left-10" style="margin-left:10px;" id="user-projects-menu-items">
@@ -27,7 +27,7 @@
          </div>
        </div>
        <div class="navItem">
-         <div role="link" tabindex="0" onclick="showDropdownMenu(this, 'team-menu')"  class="navItemLink link nav-link"> <i class="fa fa-users"></i> Your Teams</div>
+         <div role="link" tabindex="0" onclick="showDropdownMenu(this, 'team-menu')"  class="navItemLink link nav-link"> <i class="fa fa-users"></i>&nbsp;Your Teams</div>
          <div class="" id="team-menu" data-collapsed="false" style="display:none;">
            <div class="bordertop" style="margin-top:10px;"></div>
               <div class="m-left-10" style="margin-left:10px;">
@@ -63,7 +63,7 @@
            </div>
          </div>
       <div class="navItem nav-link">
-        <span class="" role="link" onclick="openTasks(userId,'user_id', this)"> <i class="fa fa-tasks"></i>  View All Tasks</span>
+        <span class="" role="link" onclick="openTasks(userId,'user_id', this)"> <i class="fa fa-tasks"></i>&nbsp; View All Tasks</span>
       </div>
   </nav>
 </div>
