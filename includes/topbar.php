@@ -11,7 +11,7 @@
     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1" data-dropdown-task-id="">
     <button class="dropdown-item" type="button" data-showfront-btn-id="" onclick="showFormManager('task-manager')" ><span> Task </span></button>
     <button class="dropdown-item" type="button" data-showfront-btn-id="" onclick="showFormManager('project-manager')" > Project</button>
-    <button class="dropdown-item" type="button" data-complete-btn-id="" onclick="showFormManager('team-manager')"> Team</button>
+   <!--  <button class="dropdown-item" type="button" data-complete-btn-id="" onclick="showFormManager('team-manager')"> Team</button> -->
       </div>
     </div>
 </div>
