@@ -27,7 +27,7 @@
   ?>
 
 <?php include("includes/sidenavBar.php"); ?>
-<body onload="openTasks(userId, 'user_id')">
+<body onload="initalLoadTasks()">
   <div class="container" style="margin-top:50px;">
    <div id="all-forms">
      <!-- Task Manager Form -->

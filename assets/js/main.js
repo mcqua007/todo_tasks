@@ -1,4 +1,6 @@
 $(function(){
+
+
    $("#sidebar-username").append(userLoggedIn);
     console.log("user: "+ userLoggedIn);
     console.log("user id: "+ userId);
@@ -25,6 +27,7 @@ $(function(){
         'userId': userId,
         'projectId': projectId
       }
+
 
       $.ajax({
         type: 'POST',
@@ -70,7 +73,7 @@ $(function(){
 //==============================================
 
 var timer;
-
+//this function is currently not in use
 function openPage(url){
 
 	if(timer != null) {
@@ -157,9 +160,12 @@ function completeTask(id) {
 function openTasks(loadId, typeLoad, click){
    $("#menu-list").parent().find('span').removeClass("active-link");
   $(click).addClass("active-link");
-    $('#loadTasks').load("loadTaskTypes.php?loadId=" + loadId +"&typeLoad="+ typeLoad);
+  $('#loadTasks').load("loadTaskTypes.php?loadId=" + loadId +"&typeLoad="+ typeLoad);
 
-    makeSortable();
+  setCookie("last_project_viewed",loadId , 30);
+  setCookie("last_viewed_type", typeLoad, 30);
+
+  makeSortable();
 
 }
 
@@ -704,4 +710,50 @@ function shrinkTask(id){
   $("#todo-card-wrap-"+id).addClass("col-12 col-sm-6 col-lg-4");
   $("button[data-expand-btn-id='"+id+"']").show();
   $("button[data-shrink-btn-id='"+id+"']").hide();
+}
+
+//================================================
+// COOKIE FUNCTIONS
+//================================================
+
+function initalLoadTasks(){
+  if(getCookie("last_project_viewed")){
+    var lastProjectId = getCookie("last_project_viewed");
+    console.log("Cookie: "+lastProjectId);
+
+    var lastType = getCookie("last_viewed_type");
+    console.log("Cookie Type: "+lastType);
+
+        openTasks(lastProjectId, lastType);
+
+  }else{
+        openTasks(userId, 'user_id');
+  }
+
+}
+
+function setCookie(name,value,days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++)
+    {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+function eraseCookie(name) {
+    document.cookie = name+'=; Max-Age=-99999999;';
 }
