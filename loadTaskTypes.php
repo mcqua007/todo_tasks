@@ -18,8 +18,13 @@ if(isset($_GET['loadId']) && isset($_GET['typeLoad'])){
              while($row = mysqli_fetch_array($query2)){
               ?>
               <div class="row">
-                <div class="title" style="font-size:25px; margin-left:25px;float:left; color: #000; font-weight:bold;">
-                  <?php echo $row['title']; ?>
+                <div class="col-12">
+                  <div class="title" style="font-size:25px; margin-left:25px;float:left; color: #000; font-weight:bold;">
+                    <?php echo $row['title']; ?>
+                  </div>
+                  <div style="float:right;color: #28a745;font-size: 25px;margin-right: 12px;"><i class="fa fa-check" style="position: relative; float: right; top: 5px;"></i></div>
+                  <div style="float:right;color: #dc3545;font-size: 25px;"><i class="fa fa-trash" style="position: relative;  float: right;top: 5px; margin-right: 10px;"></i></div>
+
                 </div>
 
               </div>
@@ -30,8 +35,10 @@ if(isset($_GET['loadId']) && isset($_GET['typeLoad'])){
           else if($typeLoad == "user_id"){
             ?>
             <div class="row">
-              <div class="title" style="font-size:25px; margin-left:25px;float:left; color: #000; font-weight:bold;">
-                View All Tasks
+              <div class="col-12">
+                <div class="title" style="font-size:25px; margin-left:25px;float:left; color: #000; font-weight:bold;">
+                  View All Tasks
+                </div>
               </div>
             </div>
             <?php
