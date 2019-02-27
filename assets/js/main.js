@@ -65,9 +65,6 @@ $(function(){
 }); //END DOCUMENT READY
 
 
-
-
-
 //==============================================
 //   FUNCTIONS                               ===
 //==============================================
@@ -756,4 +753,32 @@ function getCookie(name) {
 
 function eraseCookie(name) {
     document.cookie = name+'=; Max-Age=-99999999;';
+}
+
+//================================================
+// PROJECT FUNCTIONS
+//================================================
+
+function deleteProject(id) {
+  //alert("Are you sure you want to delete the project ?");
+  console.log("delete project: "+ id);
+
+  $.post('includes/rest/deleteProject.php', {
+    projectId: id
+  }).done(function(data) {
+    console.log(data);
+    var jsonData = JSON.parse(data);
+    console.log(jsonData.success);
+
+    if(jsonData.success == true){
+        console.log("in sucess true delete project");
+        $("#sidebar-project-wrap-"+id).remove();
+        openTasks(userId, 'user_id');
+    }
+    else if(jsonData.success == false){
+      console.error(data);
+    }
+
+  });
+
 }

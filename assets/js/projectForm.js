@@ -73,3 +73,13 @@ $(function(){ //dont execute until dom is loaded
 
      });
 });
+
+//==============================
+//  PROJECT FUNCTIONS
+//==============================
+
+function showProjectMenu() {
+  console.log("project menu");
+  $("#project-menu").show("slow");
+
+}
