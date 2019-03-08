@@ -17,10 +17,16 @@ $(function(){ //dont execute until dom is loaded
      $("#project_form").submit(function(event){
 
        //remvoe an error messages that where there previously
-       $(".project-error-message").hide();
+       $(".task-error-message").hide();
+
 
        // stop the form from submitting the normal way and refreshing the page
         event.preventDefault();
+
+        var projectTitle = $('#project_title_input').val();
+        var projectDesc = $('#project_description_input').val();
+        var projectType = $('#project_type_input').val();
+        var projectTeam = $('#project_team_input').val();
 
         //grab form data
         var projectFormData = {
@@ -66,6 +72,12 @@ $(function(){ //dont execute until dom is loaded
              displayErrors("#project_description_group", response.errors.description);
              displayErrors("#project_team_group", response.errors.team);
              displayErrors("#project_type_group", response.errors.type);
+
+             console.log(projectDesc);
+             $('#project_title_input').val(projectTitle);
+             $('#project_description_input').val(projectDesc);
+             $('#project_type_input').val(projectType);
+             $('#project_team_input').val(projectTeam);
 
 
           }
