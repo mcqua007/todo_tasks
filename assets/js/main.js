@@ -18,15 +18,27 @@ $(function(){
 
     var projectId = $("#todoList").attr("data-project-id");
     console.log("Project Id:" + projectId);
+
+     var taskTitle = $('#task_title_input').val();
+     var taskDesc = $('#task_description_input').val();
+     var taskSeverity = $('#task_severity_input').val();
+     var taskAssigned = $('#task_assigned_to_input').val();
+
       //grab form data
       var formData = {
-        'title' : $('#task_title_input').val(),
-        'description' : $('#task_description_input').val(),
-        'severity' : $('#task_severity_input').val(),
-        'assigned' : $('#task_assigned_to_input').val(),
+        'title' : taskTitle,
+        'description' : taskDesc,
+        'severity' : taskSeverity,
+        'assigned' : taskAssigned,
         'userId': userId,
         'projectId': projectId
       }
+  //set task cookies
+
+        //setCookie("last_task_title", taskTitle, 1);
+        //setCookie("last_task_description", taskDesc, 1);
+        //setCookie("last_task_severity", taskSeverity, 1);
+        //setCookie("last_task_assigned", taskAssigned, 1);
 
 
       $.ajax({
@@ -55,6 +67,12 @@ $(function(){
            displayErrors("#title-group", response.errors.title);
            displayErrors("#description-group", response.errors.description);
            displayErrors("#assigned-group", response.errors.assigned);
+
+           $('#task_title_input').val(taskTitle);
+           $('#task_description_input').val(taskDesc);
+           $('#task_severity_input').val(taskSeverity);
+           $('#task_assigned_to_input').val(taskAssigned);
+
 
 
         }
