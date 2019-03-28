@@ -427,12 +427,12 @@ function buildCard(returnData){
     // CONDITIONAL - for severity badge level ================
      var htmlBadge = "";
      if (response.severity == "low"){
-       htmlBadge = "<span class='badge  badge-success severity-badge' id='todo-badge-" + response.id +"'>Low</span>";
+       htmlBadge = "<span class='badge  badge-success severity-badge'role='link' onclick='changeBadge("+response.id+")' data-current-state='low' id='todo-badge-" + response.id +"'>Low</span>";
      }else if(response.severity == "medium"){
-       htmlBadge = "<span class='badge  badge-warning severity-badge' id='todo-badge-" + response.id +"'>Medium</span>";
+       htmlBadge = "<span class='badge  badge-warning severity-badge'role='link' onclick='changeBadge("+response.id+")' data-current-state='medium' id='todo-badge-" + response.id +"'>Medium</span>";
      }
      else {
-     htmlBadge =" <span class='badge  badge-danger severity-badge' id='todo-badge-" + response.id +"'>High</span>";
+     htmlBadge =" <span class='badge  badge-danger severity-badge' role='link' onclick='changeBadge("+response.id+")' data-current-state='high' id='todo-badge-" + response.id +"'>High</span>";
      }
 
      // END CONDITIONAL ===================================
@@ -440,7 +440,7 @@ function buildCard(returnData){
 
      var htmlInput = "<div class='input-group mb-3' id='todo-input-group-" + response.id +"'  style='padding:10px;'><input type='text' class='form-control' placeholder='Add to do here...' id='todo-input-" + response.id +"' aria-describedby='button-addon2'><div class='input-group-append'><button class='btn btn-outline-secondary' type='button' id='todo-button-" + response.id +"' onclick='addToDo(" + response.id + ", )'><i class='fa fa-plus'></i></button></div></div>";
          htmlInput += "<div style='color: #ccc;padding-left: 5px; padding-right: 5px; padding-bottom: 5px; margin-right: 9px;font-style: italic; font-size:12px; position: relative; text-align:right;'>Assigned To: "+ response.assigned_to +"</div>";
-         
+
      var menuButton ="<div class='btn-group'>";
        menuButton += "<button class='btn btn-outline-secondary dropdown-toggle' type='button' id='btnGroupDrop1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> more </button>";
        menuButton += "<div class='dropdown-menu dropdown-menu-right' aria-labelledby='btnGroupDrop1' data-dropdown-task-id='" + response.id +"'>";

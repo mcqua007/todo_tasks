@@ -26,12 +26,12 @@ while ($row = mysqli_fetch_array($taskTodoQuery)) {
   // CONDITIONAL - for severity badge level *still needs to have condition if to completed grey out================
    var htmlBadge = "";
    if (response.severity == "low"){
-     htmlBadge = "<span class='badge  badge-success severity-badge' id='todo-badge-" + response.id +"'>Low</span>";
+     htmlBadge = "<span class='badge  badge-success severity-badge' role='link' onclick='changeBadge("+response.id+")' data-current-state='low' id='todo-badge-" + response.id +"'>Low</span>";
    }else if(response.severity == "medium"){
-     htmlBadge = "<span class='badge  badge-warning severity-badge' id='todo-badge-" + response.id +"'>Medium</span>";
+     htmlBadge = "<span class='badge  badge-warning severity-badge' role='link' onclick='changeBadge("+response.id+")' data-current-state='medium' id='todo-badge-" + response.id +"'>Medium</span>";
    }
    else {
-   htmlBadge =" <span class='badge  badge-danger severity-badge' id='todo-badge-" + response.id +"'>High</span>";
+   htmlBadge =" <span class='badge  badge-danger severity-badge' role='link' onclick='changeBadge("+response.id+")' data-current-state='high' id='todo-badge-" + response.id +"'>High</span>";
    }
 
    // END CONDITIONAL ===================================
@@ -121,6 +121,45 @@ while ($row = mysqli_fetch_array($taskTodoQuery)) {
    setTimeout(function(){
      $("#todo-card-wrap-"+ response.id).removeClass("fadeInRight");
    }, 600);
+
+   function changeBadge(id){
+    var el = $("#todo-badge-"+id);
+    var newBadge;
+    var state =  el.attr("data-current-state");
+    console.log("state: "+state);
+
+    if(state == "low"){
+      el.removeClass("badge-success");
+      el.attr("data-current-state", "medium");
+
+      el.addClass("badge-warning");
+      el.text("Medium");
+      newBadge = "medium";
+    }
+    else if (state == "medium"){
+      el.removeClass("badge-warning");
+
+      el.attr("data-current-state", "high");
+      el.addClass("badge-danger");
+      el.text("High");
+      newBadge = "high";
+    }
+    else{
+      el.removeClass("badge-danger");
+
+      el.attr("data-current-state", "low");
+      el.addClass("badge-success");
+      el.text("Low");
+      newBadge = "low";
+    }
+
+    $.post('includes/rest/changeBadge.php', {
+      taskId: id,
+      newBadge: newBadge
+    }).done(function(data) {
+      console.log(data);
+    });
+  }
 
 
   </script>
