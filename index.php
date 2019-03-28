@@ -111,25 +111,24 @@
              <form id="team_form" data-project-id="">
                <div class="row">
                  <div class="form-group col-md-4" id="">
-                   <label for="issueDescInput">Title</label>
-                   <input type="text" class="form-control" id="" placeholder="Title...">
+                   <label for="issueDescInput">Team Name</label>
+                   <input type="text" class="form-control team-field" id="team_name" placeholder="Super Awesome Team..">
                  </div>
                  <div class="form-group col-md-4" id="">
-                 <label for="issueSeverityInput">Severity</label>
-                     <select class="form-control"  id="">
-                     <option value="Low">Low</option>
-                     <option value="Medium">Medium</option>
-                     <option value="High">High</option>
+                  <label for="num_members"># of team members</label>
+                     <select class="form-control team-field"  id="num_members">
+                     <option disabled selected value> -- select an option -- </option>
+                     <option value="1">1</option>
+                     <option value="2">2</option>
+                     <option value="3">3</option>
+                     <option value="4">4</option>
+                     <option value="5">5</option>
                  </select>
                  </div>
-                 <div class="form-group col-md-4" id="">
-                 <label for="issueAssignedToInput">Assigned To</label>
-                 <input type="text" class="form-control" id="" placeholder="Assign To...">
-                 </div>
                </div>
-                 <div class="form-group" id="">
-                 <label for="issueDescInput">Description</label>
-                 <input type="text" class="form-control" id="" placeholder="Describe the issue...">
+
+                 <div class="row" id="add_inputs">
+
                  </div>
                  <button type="submit" class="btn btn-primary">Add</button>
              </form>

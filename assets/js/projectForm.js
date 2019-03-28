@@ -12,7 +12,7 @@ $(function(){ //dont execute until dom is loaded
 
 
   //=====================================================
-  // SUBMIT TASK FORM - process form data             ===
+  // SUBMIT PROJECT FORM - process form data             ===
   //=====================================================
      $("#project_form").submit(function(event){
 
