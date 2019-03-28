@@ -30,7 +30,7 @@
          <div role="link" tabindex="0" onclick="showDropdownMenu(this, 'team-menu')"  class="navItemLink link nav-link"> <i class="fa fa-users"></i>&nbsp;Your Teams</div>
          <div class="" id="team-menu" data-collapsed="false" style="display:none;">
            <div class="bordertop" style="margin-top:10px;"></div>
-              <div class="m-left-10" style="margin-left:10px;">
+              <div class="m-left-10" id="team-menu-inner" style="margin-left:10px;">
                 <?php
                  $teams_query = mysqli_query($con, "SELECT name, t2.id FROM teamUsers t1 INNER JOIN teams t2 ON t1.team_id= t2.id WHERE t1.user_id= '$user_id'");
 

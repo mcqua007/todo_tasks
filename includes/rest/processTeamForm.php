@@ -53,14 +53,14 @@ else{
 				 $lastId = mysqli_insert_id($con);
 
 				 $getMember1 = mysqli_query($con, "SELECT id  FROM users WHERE username ='$member1'");
-				 if($getMember1 == true){
+				 while($row = mysqli_fetch_array($getMember1)){
+ 					 $memberId1 = $row['id'];
+ 				 }
 
-						 while($row == mysqli_fetch_array($getMember1)){
-							  $memberId1 = $row['id'];
-						  }
+		 			if(isset($memberId1)){
 
-					  //insert team member 1 into teamUsers table
-					  $teamUser1 = mysqli_query($con, "INSERT INTO teamUsers VALUES(NULL, '$lastId', '$memberId1')");
+		 					 //insert team member 1 into teamUsers table
+		 					 $teamUser1 = mysqli_query($con, "INSERT INTO teamUsers VALUES(NULL, '$lastId', '$memberId1')");
 
 					 //insert logged in user into teamUsers
 					 $teamUserLoggedIn = mysqli_query($con, "INSERT INTO teamUsers VALUES(NULL, '$lastId', '$user_id')");
@@ -83,11 +83,12 @@ else{
 
           //MEMBER 1 SECTION
 					$getMember1 = mysqli_query($con, "SELECT id  FROM users WHERE username ='$member1'");
-					if($getMember1 == true){
 
-							while($row = mysqli_fetch_array($getMember1)){
-								 $memberId1 = $row['id'];
-							 }
+					while($row = mysqli_fetch_array($getMember1)){
+						 $memberId1 = $row['id'];
+					 }
+
+		   	if(isset($memberId1)){
 
 						 //insert team member 1 into teamUsers table
 						 $teamUser1 = mysqli_query($con, "INSERT INTO teamUsers VALUES(NULL, '$lastId', '$memberId1')");
@@ -101,11 +102,13 @@ else{
 
 					//MEMBER 2 SECTION
 					$getMember2 = mysqli_query($con, "SELECT id  FROM users WHERE username ='$member2'");
-					if($getMember2 == true){
+
 
 							while($row2 = mysqli_fetch_array($getMember2)){
 								 $memberId2 = $row2['id'];
 							 }
+
+					if(isset($memberId2)){
 
 						 //insert team member 1 into teamUsers table
 						 $teamUser2 = mysqli_query($con, "INSERT INTO teamUsers VALUES(NULL, '$lastId', '$memberId2')");
@@ -129,13 +132,17 @@ else{
 					$member2 = $_POST['member2'];
 					$member3 = $_POST['member3'];
 
+					//insert team name to teams
+					$teamQuery = mysqli_query($con, "INSERT INTO teams VALUES(NULL, '$team_name', '1', '$date')");
+					$lastId = mysqli_insert_id($con);
+
 					//MEMBER 1 SECTION
 					$getMember1 = mysqli_query($con, "SELECT id  FROM users WHERE username ='$member1'");
-					if($getMember1 == true){
+					while($row = mysqli_fetch_array($getMember1)){
+						 $memberId1 = $row['id'];
+					 }
 
-							while($row = mysqli_fetch_array($getMember1)){
-								 $memberId1 = $row['id'];
-							 }
+					 if(isset($memberId1)){
 
 						 //insert team member 1 into teamUsers table
 						 $teamUser1 = mysqli_query($con, "INSERT INTO teamUsers VALUES(NULL, '$lastId', '$memberId1')");
@@ -149,11 +156,11 @@ else{
 
 					//MEMBER 2 SECTION
 					$getMember2 = mysqli_query($con, "SELECT id  FROM users WHERE username ='$member2'");
-					if($getMember2 == true){
+					while($row2 = mysqli_fetch_array($getMember2)){
+						 $memberId2 = $row2['id'];
+					 }
 
-							while($row2 = mysqli_fetch_array($getMember2)){
-								 $memberId2 = $row2['id'];
-							 }
+				if(isset($memberId2)){
 
 						 //insert team member 1 into teamUsers table
 						 $teamUser2 = mysqli_query($con, "INSERT INTO teamUsers VALUES(NULL, '$lastId', '$memberId2')");
@@ -167,17 +174,16 @@ else{
 
 					//MEMBER 3 SECTION
 					$getMember3 = mysqli_query($con, "SELECT id  FROM users WHERE username ='$member3'");
-					if($getMember3 == true){
 
-							while($row3 = mysqli_fetch_array($getMember3)){
-								 $memberId3 = $row3['id'];
-							 }
+
+					while($row3 = mysqli_fetch_array($getMember3)){
+						 $memberId3 = $row3['id'];
+					 }
+
+				if(isset($memberId3)){
 
 						 //insert team member 1 into teamUsers table
 						 $teamUser3 = mysqli_query($con, "INSERT INTO teamUsers VALUES(NULL, '$lastId', '$memberId3')");
-
-						 //insert logged in user into teamUsers
-						 $teamUserLoggedIn = mysqli_query($con, "INSERT INTO teamUsers VALUES(NULL, '$lastId', '$user_id')");
 
 					}
 					 else{
@@ -195,14 +201,18 @@ else{
 					$member3 = $_POST['member3'];
 					$member4 = $_POST['member4'];
 
+					//insert team name to teams
+					$teamQuery = mysqli_query($con, "INSERT INTO teams VALUES(NULL, '$team_name', '1', '$date')");
+					$lastId = mysqli_insert_id($con);
+
 
 					//MEMBER 1 SECTION
 					$getMember1 = mysqli_query($con, "SELECT id  FROM users WHERE username ='$member1'");
-					if($getMember1 == true){
+					while($row = mysqli_fetch_array($getMember1)){
+						 $memberId1 = $row['id'];
+					 }
 
-							while($row == mysqli_fetch_array($getMember1)){
-								 $memberId1 = $row['id'];
-							 }
+					 if(isset($memberId1)){
 
 						 //insert team member 1 into teamUsers table
 						 $teamUser1 = mysqli_query($con, "INSERT INTO teamUsers VALUES(NULL, '$lastId', '$memberId1')");
@@ -216,16 +226,14 @@ else{
 
 					//MEMBER 2 SECTION
 					$getMember2 = mysqli_query($con, "SELECT id  FROM users WHERE username ='$member2'");
-					if($getMember2 == true){
+					while($row2 = mysqli_fetch_array($getMember2)){
+						 $memberId2 = $row2['id'];
+					 }
 
-							while($row2 = mysqli_fetch_array($getMember2)){
-								 $memberId2 = $row2['id'];
-							 }
+				if(isset($memberId2)){
 
 						 //insert team member 1 into teamUsers table
 						 $teamUser2 = mysqli_query($con, "INSERT INTO teamUsers VALUES(NULL, '$lastId', '$memberId2')");
-
-
 
 					}
 					 else{
@@ -236,11 +244,13 @@ else{
 
 					//MEMBER 3 SECTION
 					$getMember3 = mysqli_query($con, "SELECT id  FROM users WHERE username ='$member3'");
-					if($getMember3 == true){
 
-							while($row3 = mysqli_fetch_array($getMember3)){
-								 $memberId3 = $row3['id'];
-							 }
+
+					while($row3 = mysqli_fetch_array($getMember3)){
+						 $memberId3 = $row3['id'];
+					 }
+
+				if(isset($memberId3)){
 
 						 //insert team member 1 into teamUsers table
 						 $teamUser3 = mysqli_query($con, "INSERT INTO teamUsers VALUES(NULL, '$lastId', '$memberId3')");
@@ -254,17 +264,14 @@ else{
 
 					//MEMBER 4 SECTION
 					$getMember4 = mysqli_query($con, "SELECT id  FROM users WHERE username ='$member4'");
-					if($getMember4 == true){
+					while($row4 = mysqli_fetch_array($getMember4)){
+						 $memberId4 = $row4['id'];
+					 }
 
-							while($row4 = mysqli_fetch_array($getMember4)){
-								 $memberId4 = $row4['id'];
-							 }
+				if(isset($memberId4)){
 
 						 //insert team member 1 into teamUsers table
 						 $teamUser4 = mysqli_query($con, "INSERT INTO teamUsers VALUES(NULL, '$lastId', '$memberId4')");
-
-						 //insert logged in user into teamUsers
-						 $teamUserLoggedIn = mysqli_query($con, "INSERT INTO teamUsers VALUES(NULL, '$lastId', '$user_id')");
 
 					}
 					 else{
@@ -283,13 +290,17 @@ else{
 					$member4 = $_POST['member4'];
 					$member5 = $_POST['member5'];
 
+					//insert team name to teams
+					$teamQuery = mysqli_query($con, "INSERT INTO teams VALUES(NULL, '$team_name', '1', '$date')");
+					$lastId = mysqli_insert_id($con);
+
 					//MEMBER 1 SECTION
 					$getMember1 = mysqli_query($con, "SELECT id  FROM users WHERE username ='$member1'");
-					if($getMember1 == true){
+					while($row = mysqli_fetch_array($getMember1)){
+						 $memberId1 = $row['id'];
+					 }
 
-							while($row = mysqli_fetch_array($getMember1)){
-								 $memberId1 = $row['id'];
-							 }
+				   if(isset($memberId1)){
 
 						 //insert team member 1 into teamUsers table
 						 $teamUser1 = mysqli_query($con, "INSERT INTO teamUsers VALUES(NULL, '$lastId', '$memberId1')");
@@ -303,11 +314,11 @@ else{
 
 					//MEMBER 2 SECTION
 					$getMember2 = mysqli_query($con, "SELECT id  FROM users WHERE username ='$member2'");
-					if($getMember2 == true){
+					while($row2 = mysqli_fetch_array($getMember2)){
+						 $memberId2 = $row2['id'];
+					 }
 
-							while($row2 = mysqli_fetch_array($getMember2)){
-								 $memberId2 = $row2['id'];
-							 }
+		   	if(isset($memberId2)){
 
 						 //insert team member 1 into teamUsers table
 						 $teamUser2 = mysqli_query($con, "INSERT INTO teamUsers VALUES(NULL, '$lastId', '$memberId2')");
@@ -321,11 +332,13 @@ else{
 
 					//MEMBER 3 SECTION
 					$getMember3 = mysqli_query($con, "SELECT id  FROM users WHERE username ='$member3'");
-					if($getMember3 == true){
 
-							while($row3 = mysqli_fetch_array($getMember3)){
-								 $memberId3 = $row3['id'];
-							 }
+
+					while($row3 = mysqli_fetch_array($getMember3)){
+ 						 $memberId3 = $row3['id'];
+ 					 }
+
+ 		   	if(isset($memberId3)){
 
 						 //insert team member 1 into teamUsers table
 						 $teamUser3 = mysqli_query($con, "INSERT INTO teamUsers VALUES(NULL, '$lastId', '$memberId3')");
@@ -339,11 +352,11 @@ else{
 
 					//MEMBER 4 SECTION
 					$getMember4 = mysqli_query($con, "SELECT id  FROM users WHERE username ='$member4'");
-					if($getMember4 == true){
+					while($row4 = mysqli_fetch_array($getMember4)){
+						 $memberId4 = $row4['id'];
+					 }
 
-							while($row4 = mysqli_fetch_array($getMember4)){
-								 $memberId4 = $row4['id'];
-							 }
+				if(isset($memberId4)){
 
 						 //insert team member 1 into teamUsers table
 						 $teamUser4 = mysqli_query($con, "INSERT INTO teamUsers VALUES(NULL, '$lastId', '$memberId4')");
@@ -357,11 +370,11 @@ else{
 
 					//MEMBER 5 SECTION
 					$getMember5 = mysqli_query($con, "SELECT id  FROM users WHERE username ='$member5'");
-					if($getMember5 == true){
+					while($row5 = mysqli_fetch_array($getMember5)){
+						 $memberId5 = $row5['id'];
+					 }
 
-							while($row5 = mysqli_fetch_array($getMember5)){
-								 $memberId5 = $row5['id'];
-							 }
+				if(isset($memberId5)){
 
 						 //insert team member 1 into teamUsers table
 						 $teamUser5 = mysqli_query($con, "INSERT INTO teamUsers VALUES(NULL, '$lastId', '$memberId5')");

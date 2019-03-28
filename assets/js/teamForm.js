@@ -36,21 +36,56 @@ $(function(){
            'member5': member5
          }
 
-
-
-
-        console.log(formData);
-
-
       $.ajax({
         method: 'POST',
         url: 'includes/rest/processTeamForm.php',
         data: formData,
-        success: function (response) {
-          console.log(response);
-        }
-      });
+      //  success: function (response)
+    }).done(function(data){
 
-    });
+      $('input[type="text"], textarea').val('');//reset form input to an epty value
+
+      console.log(data); //test if data is being called back
+
+     //return same data entered in JSON
+      var response = JSON.parse(data);
+
+      if(response.success == true){
+         //alert a success message in task jumbotron
+           alertFlash("#team-alert-flash", "success","Success! Team has been created.");
+         //add to the project to nav
+         var menuTeamHtml = "<div class='navItem nav-link'>";
+             menuTeamHtml += "<div role='link' tabindex='0' onclick=\"showDropdownMenu(this, 'team-projects-"+response.team_id+"')\" id='team-id-"+ response.team_id +"' class=''>"+ response.team_name +"</div>";
+             menuTeamHtml += "</div>";
+             menuTeamHtml +="<div class='' id='team-projects-"+response.team_id+"' data-collapsed='false' style='display: none;'>";
+             menuTeamHtml +="<div class='bordertop' style='margin-top:10px;'></div>";
+             menuTeamHtml +=" <div class='m-left-10' style='margin-left:10px;' id='team-projects-menu-items-"+response.team_id+"'>";
+             menuTeamHtml +="</div>";
+             menuTeamHtml +="</div>";
+             //if personal project add to user projects menu else add to teams
+             $("#team-menu-inner").append(menuTeamHtml)
+
+
+             var projectTeamHtml = "<option value='"+ response.team_id +"' id='project-team-"+ response.team_id +"'>"+response.team_name+"</option>"
+
+             $("#project_team_input").append(projectTeamHtml)
+
+         //load project
+
+      }
+      else if(response.success == false){
+         alertFlash("#team-alert-flash", "danger","ERROR! Form did not submit!");
+
+         //IF ERRORS - DISPLAY TO USER
+         // displayErrors("#project_title_group", response.errors.title);
+         // displayErrors("#project_description_group", response.errors.description);
+         // displayErrors("#project_team_group", response.errors.team);
+         // displayErrors("#project_type_group", response.errors.type);
+
+      }
+
+    });// END DONE
+
+  }); //END SUBMIT BLOCK
 
 });
