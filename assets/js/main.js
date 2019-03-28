@@ -781,23 +781,26 @@ function eraseCookie(name) {
 function deleteProject(id) {
   //alert("Are you sure you want to delete the project ?");
   console.log("delete project: "+ id);
+  var confirmDelete = confirm("Are you sure you want to delete project ?");
 
-  $.post('includes/rest/deleteProject.php', {
-    projectId: id
-  }).done(function(data) {
-    console.log(data);
-    var jsonData = JSON.parse(data);
-    console.log(jsonData.success);
+  if(confirmDelete == true){
+    $.post('includes/rest/deleteProject.php', {
+      projectId: id
+    }).done(function(data) {
+      console.log(data);
+      var jsonData = JSON.parse(data);
+      console.log(jsonData.success);
 
-    if(jsonData.success == true){
-        console.log("in sucess true delete project");
-        $("#sidebar-project-wrap-"+id).remove();
-        openTasks(userId, 'user_id');
-    }
-    else if(jsonData.success == false){
-      console.error(data);
-    }
+      if(jsonData.success == true){
+          console.log("in sucess true delete project");
+          $("#sidebar-project-wrap-"+id).remove();
+          openTasks(userId, 'user_id');
+      }
+      else if(jsonData.success == false){
+        console.error(data);
+      }
 
-  });
+    });
+  }
 
 }

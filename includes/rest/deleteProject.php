@@ -30,7 +30,8 @@ $data = array();      // array to pass back data
       $projectId = $_POST['projectId'];
 
 
-      $todoQuery = mysqli_query($con, "DELETE FROM tasks WHERE id = '$projectId'");
+      //$taskQuery = mysqli_query($con, "DELETE FROM tasks WHERE project_id = '$projectId'");
+      $projectQuery = mysqli_query($con, "DELETE FROM projects WHERE id = '$projectId'");
 
       // show a message of success and provide a true success variable
       $data['success'] = true;
