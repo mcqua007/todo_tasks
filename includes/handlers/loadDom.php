@@ -39,7 +39,7 @@ while ($row = mysqli_fetch_array($taskTodoQuery)) {
 // used to be class on first line class='input-group mb-3', removed mb-3
 
    var htmlInput = "<div class='input-group' id='todo-input-group-" + response.id +"'  style='padding:10px;'><input type='text' class='form-control' placeholder='Add to do here...' id='todo-input-" + response.id +"' aria-describedby='button-addon2'><div class='input-group-append'><button class='btn btn-outline-secondary' type='button' id='todo-button-" + response.id +"' onclick='addToDo(" + response.id + ", )'><i class='fa fa-plus'></i></button></div></div>";
-   htmlInput += "<div style='color: #ccc;padding-left: 5px; padding-right: 5px; padding-bottom: 5px; margin-right: 9px;font-style: italic; font-size:12px; position: relative; text-align:right;'>Assigned To: "+ response.assigned_to +"</div>";
+   htmlInput += "<div style='color: #ccc;padding-left: 5px; padding-right: 5px; padding-bottom: 5px; margin-right: 9px;font-style: italic; font-size:12px; position: relative; text-align:right;' id='assigned-"+ response.id +"'>Assigned To: "+ response.assigned_to +"</div>";
 
    var menuButton ="<div class='btn-group'>";
      menuButton += "<button class='btn btn-outline-secondary dropdown-toggle' type='button' id='btnGroupDrop1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> more </button>";
