@@ -1,3 +1,16 @@
+<style>
+.team-delete-icon{
+visibility: hidden;
+}
+
+.team-name:hover .team-delete-icon{
+  visibility: visible;
+  color:red;
+  font-size:19px;
+  float:right;
+  padding-left:1px;
+}
+</style>
 
 <div class="sidebar-nav-closed" style="margin-top: -11px;">
    <nav class="nav flex-column" id="menu-list" style="display:none;">
@@ -36,8 +49,10 @@
 
                  while($row2 = mysqli_fetch_array($teams_query )){
                 ?>
-                <div class="navItem nav-link">
-                  <div role="link" tabindex="0" onclick="showDropdownMenu(this, 'team-projects-<?php echo $row2['id']; ?>')"  id="team-id-<?php echo $row2['id']; ?>" class=""><?php echo $row2['name']; ?></div>
+                <div class="navItem nav-link" id="team-nav-link-<?php echo $row2['id']; ?>">
+                  <div role="link" tabindex="0" onclick="showDropdownMenu(this, 'team-projects-<?php echo $row2['id']; ?>')"  id="team-id-<?php echo $row2['id']; ?>" class="team-name"><?php echo $row2['name']; ?> <i class="fa fa-trash team-delete-icon"
+                    onclick="deleteTeam(<?php echo $row2['id']; ?>, '<?php echo $row2['name']; ?>')">
+                  </i></div>
                   <div class="" id="team-projects-<?php echo $row2['id']; ?>" data-collapsed="false" style="display:none;">
                     <div class="bordertop" style="margin-top:10px;"></div>
                        <div class="m-left-10" style="margin-left:10px;" id="team-projects-menu-items-<?php echo $row2['id']; ?>">

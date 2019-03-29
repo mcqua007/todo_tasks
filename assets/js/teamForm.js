@@ -54,8 +54,9 @@ $(function(){
          //alert a success message in task jumbotron
            alertFlash("#team-alert-flash", "success","Success! Team has been created.");
          //add to the project to nav
-         var menuTeamHtml = "<div class='navItem nav-link'>";
-             menuTeamHtml += "<div role='link' tabindex='0' onclick=\"showDropdownMenu(this, 'team-projects-"+response.team_id+"')\" id='team-id-"+ response.team_id +"' class=''>"+ response.team_name +"</div>";
+         var menuTeamHtml = "<div class='navItem nav-link' id='team-nav-link-'"+response.team_id+">";
+             menuTeamHtml += "<div role='link' tabindex='0' onclick=\"showDropdownMenu(this, 'team-projects-"+response.team_id+"')\" id='team-id-"+ response.team_id +"' class='team-name'>"+ response.team_name +"<i class='fa fa-trash team-delete-icon' onclick='deleteTeam("+response.team_id+","+response.team_name+")'>";
+             menuTeamHtml += "</i></div>";
              menuTeamHtml += "</div>";
              menuTeamHtml +="<div class='' id='team-projects-"+response.team_id+"' data-collapsed='false' style='display: none;'>";
              menuTeamHtml +="<div class='bordertop' style='margin-top:10px;'></div>";
@@ -89,3 +90,20 @@ $(function(){
   }); //END SUBMIT BLOCK
 
 });
+
+function deleteTeam(id, teamName){
+  //alert("Are you sure you want to delete the project ?");
+  console.log("delete project: "+ id);
+  var confirmDelete = confirm("Are you sure you want to delete "+teamName+", and all of its projects?");
+
+  if(confirmDelete == true){
+    $.post('includes/rest/deleteTeam.php', {
+      teamId: id,
+    }).done(function(data) {
+       console.log(data)
+
+       //remove from dom
+       $("#team-nav-link-"+id).remove();
+    });
+  }
+}
