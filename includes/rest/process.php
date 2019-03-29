@@ -52,7 +52,7 @@ $data = array();      // array to pass back data
       $getIdQuery = mysqli_query($con, "SELECT * FROM tasks");
 
       if($taskQuery === false) {
-          $data['sql_error'] = "Query failed: " . mysql_error($con);
+          $data['sql_error'] = "Query failed: " . mysqli_error($con);
       }
 
       // show a message of success and provide a true success variable
