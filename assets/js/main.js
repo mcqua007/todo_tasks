@@ -1,6 +1,5 @@
 $(function(){
 
-
    $("#sidebar-username").append(userLoggedIn);
     console.log("user: "+ userLoggedIn);
     console.log("user id: "+ userId);
@@ -227,11 +226,15 @@ function reopenTask(id) {
 
 }
 
-
-
-function addToDo(id) {
+function addToDo(id, el) {
   // need to post to php and then grab id that way
   var todoInput = $("#todo-input-" + id).val();
+  var task_id = $(el).attr('data-task-id');
+
+  var total_todos = $("#todo-"+ task_id).attr("data-total-todos");
+  console.log("total todos: ", total_todos);
+  total_todos = parseInt(total_todos); //change to number 
+
 
   $.post('includes/rest/addToDo.php', {
     data: todoInput,
@@ -245,8 +248,17 @@ function addToDo(id) {
         var todoHtml = "<div style='width:100%;' id='todo-row-" + data.id + "'><div class='form-check'><input type='checkbox' data-checked='false' data-task-id='" + id + "' id='todo-checkbox-" + data.id + "' onchange='setCheckBox(" + data.id + ")' class='form-check-input'><label class='form-check-label' id='todo-label-" + data.id + "'>" + todoInput + "</label></div></div>";
         $("#todo-" + id).append(todoHtml);
         $('input[type="text"], textarea').val(''); //reset form input to an empty value
+        
+        console.log("Total Todos: ", total_todos);
+        if(total_todos == 0){
+          $("#number-completed-todos-"+ task_id).text(0);
+          $("#todo-completed-amount-text-"+task_id).show();
+          $("#no-todo-text-"+task_id).hide();
+        }
+        $("#number-total-todos-"+ task_id ).text(total_todos+1);
+        $("#todo-"+task_id).attr("data-total-todos", total_todos+1);
     }
-    if(data.success == false){
+    else if(data.success == false){
       console.error(data);
       var errorText = "<div class='error-todo-text animated fadeIn'>"+ data.errors.todo + "</div>";
 
@@ -263,9 +275,16 @@ function addToDo(id) {
 }
 
 function setCheckBox(id) {
+  console.log("IN SET TODOS");
   var checked = $("#todo-checkbox-" + id).attr("data-checked");
+  var task_id = $("#todo-checkbox-"+id).attr("data-task-id");
 
-  //!!!!!somehow unseting or unchecking is noe unseting in database and returning success false
+  var completed_todos = $("#todo-"+ task_id).attr("data-completed-todos");
+  completed_todos = parseInt(completed_todos);
+
+  
+
+  //somehow unseting or unchecking is noe unseting in database and returning success false
   if(checked == "true"){
       console.log(checked);
      $("#todo-checkbox-" + id).attr("data-checked", "false");
@@ -282,6 +301,9 @@ function setCheckBox(id) {
          console.error(data);
        }
        else{
+         
+        $("#number-completed-todos-"+ task_id).text(completed_todos-1);
+        $("#todo-"+task_id).attr("data-completed-todos", completed_todos-1);
          console.log(data);
        }
      });
@@ -302,7 +324,8 @@ function setCheckBox(id) {
         console.error(data);
       }
       else{
-        console.log(data);
+        $("#number-completed-todos-"+ task_id).text(completed_todos+1);
+        $("#todo-"+ task_id).attr("data-completed-todos", completed_todos+1);
       }
 
     });
@@ -438,7 +461,7 @@ function buildCard(returnData){
      // END CONDITIONAL ===================================
 
 
-     var htmlInput = "<div class='input-group mb-3' id='todo-input-group-" + response.id +"'  style='padding:10px;'><input type='text' class='form-control' placeholder='Add to do here...' id='todo-input-" + response.id +"' aria-describedby='button-addon2'><div class='input-group-append'><button class='btn btn-outline-secondary' type='button' id='todo-button-" + response.id +"' onclick='addToDo(" + response.id + ", )'><i class='fa fa-plus'></i></button></div></div>";
+     var htmlInput = "<div class='input-group mb-3' id='todo-input-group-" + response.id +"'  style='padding:10px;'><input type='text' class='form-control' placeholder='Add to do here...' id='todo-input-" + response.id +"' aria-describedby='button-addon2'><div class='input-group-append'><button class='btn btn-outline-secondary' type='button' id='todo-button-" + response.id +"' data-task-id='"+response.id+"' onclick='addToDo(" + response.id + ", this)'><i class='fa fa-plus'></i></button></div></div>";
          htmlInput += "<div style='color: #ccc;padding-left: 5px; padding-right: 5px; padding-bottom: 5px; margin-right: 9px;font-style: italic; font-size:12px; position: relative; text-align:right;' id='assigned-"+ response.id +"'>Assigned To: "+ response.assigned_to +"</div>";
 
      var menuButton ="<div class='btn-group'>";
@@ -463,7 +486,9 @@ function buildCard(returnData){
      html += "<div class='col-xs-12 card-set-down card card-shadow' id='todo-card-"+ response.id +"'>" + htmlButtonGroup + "<div style='width:100%; padding:10px;'  id='todo-title-wrap-" + response.id +"' >";
      html += "<span class='card-title' style='width:70%; margin:10px; font-weight:700; font-size:16px; text-transform:uppercase;' id='task-title-"+ response.id +"'>" + response.title + "</span>" + htmlBadge + "</div>";
      html += "<div class='card-body'><p class='card-subtitle mb-2 text-muted' id='task-desc-" + response.id + "'>" + response.description + "</p><hr id='todo-hr-" + response.id + "'/>";
-     html += "<div id='todo-" + response.id +"'></div>";
+     html += "<div class='card-completed-todos card-todos-amount-text' id='todo-completed-amount-text-"+response.id+"' style='display:none; color: #777;'><span id='number-completed-todos-"+response.id+"'></span>/<span id='number-total-todos-"+response.id+"'></span> completed</div>";
+     html += "<div class='card-no-todos card-todos-amount-text' id='no-todo-text-"+response.id+"' style='color: #777;'> No todos yet!</div>";
+     html += "<div id='todo-" + response.id +"' data-total-todos='0' data-completed-todos='0'></div>";
      html += "</div>" + htmlInput;
      html += "<div id='todo-card-back-"+ response.id +"' class='' style='display:none;'>";
      html += " </div>";
