@@ -38,7 +38,7 @@ while ($row = mysqli_fetch_array($taskTodoQuery)) {
 
 // used to be class on first line class='input-group mb-3', removed mb-3
 
-   var htmlInput = "<div class='input-group' id='todo-input-group-" + response.id +"'  style='padding:10px;'><input type='text' class='form-control' placeholder='Add to do here...' id='todo-input-" + response.id +"' aria-describedby='button-addon2'><div class='input-group-append'><button class='btn btn-outline-secondary' type='button' id='todo-button-" + response.id +"' onclick='addToDo(" + response.id + ", )'><i class='fa fa-plus'></i></button></div></div>";
+   var htmlInput = "<div class='input-group' id='todo-input-group-" + response.id +"'  style='padding:10px;'><input type='text' class='form-control' placeholder='Add to do here...' id='todo-input-" + response.id +"' aria-describedby='button-addon2'><div class='input-group-append'><button class='btn btn-outline-secondary' type='button' id='todo-button-" + response.id +"' data-task-id='"+response.id+"' onclick='addToDo(" + response.id + ", this)'><i class='fa fa-plus'></i></button></div></div>";
    htmlInput += "<div style='color: #ccc;padding-left: 5px; padding-right: 5px; padding-bottom: 5px; margin-right: 9px;font-style: italic; font-size:12px; position: relative; text-align:right;' id='assigned-"+ response.id +"'>Assigned To: "+ response.assigned_to +"</div>";
 
    var menuButton ="<div class='btn-group'>";
@@ -63,7 +63,9 @@ while ($row = mysqli_fetch_array($taskTodoQuery)) {
    html += "<div class='col-xs-12 card-set-down card card-shadow' id='todo-card-"+ response.id +"'>" + htmlButtonGroup + "<div style='width:100%; padding:10px;'  id='todo-title-wrap-" + response.id +"' >";
    html += "<span class='card-title' style='width:70%; margin:10px; font-weight:700; font-size:16px; text-transform:uppercase;' id='task-title-"+ response.id +"'>" + response.title + "</span>" + htmlBadge + "</div>";
    html += "<div class='card-body'><p class='card-subtitle mb-2 text-muted' id='task-desc-"+ response.id +"'>"+ response.description + "</p><hr id='todo-hr-"+ response.id +"'/>";
-   html += "<div id='todo-" + response.id +"'></div>";
+   html += "<div class='card-completed-todos card-todos-amount-text' id='todo-completed-amount-text-"+response.id+"' style='color: #777;'><span id='number-completed-todos-"+response.id+"'></span>/<span id='number-total-todos-"+response.id+"'></span> completed</div>";
+   html += "<div class='card-no-todos card-todos-amount-text' id='no-todo-text-"+response.id+"' style='display:none; color: #777;'> No todos yet!</div>";
+   html += "<div id='todo-" + response.id +"' data-total-todos='0' data-completed-todos='0'></div>";
    html += "</div>" + htmlInput;
    html += "<div id='todo-card-back-"+ response.id +"' class='' style='display:none;'>";
    html += " </div>";
@@ -93,7 +95,10 @@ while ($row = mysqli_fetch_array($taskTodoQuery)) {
     $todoQuery = mysqli_query($con, "SELECT * FROM todos where taskId = '$taskId'");
 
     $todoData = array();
-
+ ?>
+ var todo_count = 0;
+ var completed_todo_count = 0;
+ <?php
     while ($row2 = mysqli_fetch_array($todoQuery)) {
         $todoData['id'] = $row2['id'];
         $todoData['todo'] = $row2['todo'];
@@ -103,12 +108,14 @@ while ($row = mysqli_fetch_array($taskTodoQuery)) {
 
   var data = <?php echo $data; ?>;
   console.log(data);
-
+     todo_count++;
+  
      var todoHtml = "<div style='width:100%; margin-top: 5px;' id='todo-row-" + data.id + "'><div class='form-check'><input type='checkbox'";
      if(data.completed == 0){
         todoHtml += "data-checked='false' data-task-id='" + response.id + "' id='todo-checkbox-" + data.id + "' onchange='setCheckBox(" + data.id + ")' class='form-check-input'><label class='form-check-label'";
      }
      if(data.completed == 1){
+         completed_todo_count++;
          todoHtml += "data-checked='true' data-task-id='" + response.id + "' id='todo-checkbox-" + data.id + "' onchange='setCheckBox(" + data.id + ")' class='form-check-input' checked><label class='form-check-label grey'";
      }
      todoHtml += "id='todo-label-" + data.id + "'>" + data.todo + "</label></div></div>";
@@ -116,7 +123,18 @@ while ($row = mysqli_fetch_array($taskTodoQuery)) {
   <?php
     } ?>
    //=============================================
-
+   
+   if(todo_count == 0){
+     $("#todo-completed-amount-text-"+response.id).hide();
+     $("#no-todo-text-"+response.id).show();
+   }
+   else{
+     $("#todo-"+ response.id).attr("data-total-todos", todo_count);
+    $("#todo-"+ response.id).attr("data-completed-todos", completed_todo_count);
+    $("#number-completed-todos-"+ response.id).text(completed_todo_count);
+    $("#number-total-todos-"+ response.id).text(todo_count);
+   }
+   
    //remove fadeIn right after its done animating so it wont animate when sorting
    setTimeout(function(){
      $("#todo-card-wrap-"+ response.id).removeClass("fadeInRight");
