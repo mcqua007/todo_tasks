@@ -9,5 +9,4 @@
 <script src="assets/js/register.js"></script>
 <script src="assets/js/projectForm.js"></script>
 <script src="assets/js/teamForm.js"></script>
-
 </html>
